@@ -1,0 +1,51 @@
+   body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+       margin: 24px; 
+       background-color: #253649;
+       background-color: #0d0d0d;
+        color:white}
+   ::placeholder { color:#91d1fe; }
+   header { display:flex; align-items:center; gap:12px; background-color: #435B7C; margin-bottom:20px; border:1px solid #eee;}
+   .container { display:flex; height:100vh; width:100%; }
+   .sidebar { width:15%; height:100%; box-sizing:border-box; background-color: #435B7C;background-color: #0d0d0d;font-size: 16px; padding:12px; }
+   .content { width:85%; height:100%; box-sizing:border-box; padding:12px; }
+
+    .providers { display:flex; flex-wrap:wrap; gap:12px; justify-content:flex-start; margin-top:12px; margin-bottom:12px; }
+
+   .provider_card { background-color: #435B7C; border:1px solid #eee; padding:12px; border-radius:8px; display:flex; flex-direction:column; gap:8px; height:100px;width:100px; justify-content:center; align-items:center; text-align:center; transition: background-color 0.3s ease; cursor: pointer; }
+   .provider_card:hover { background-color: #4e6a8c; }
+
+
+
+   .sidebar a { display:block;
+      width: 100%;
+       padding:12px; 
+       color:white; 
+       text-decoration:none; 
+       border-bottom:1px solid #eee; 
+       transition: background-color 0.3s ease; }
+
+   .sidebar ul { list-style:none; padding:0; margin:0; }
+   .sidebar li {width:100%; display: flex; align-items: center; transition: background-color 0.3s ease; gap:10px; }
+   .sidebar li:hover {background-color: #1a1b1e; cursor: pointer; }
+   /* .sidebar a:hover { background-color: #4e6a8c; } */
+
+   button {background-color: #253649; border: 1px #435B7C solid; border-radius: 8px ; color: white; padding: 10px 20px; text-align: center; display: flex; align-items: center; gap:10px;}
+
+   button:hover { background-color: #4e6a8c; border: 2px #fff solid}
+
+   dialog {
+      min-height: 100px;
+      width: 60%;
+      background-color: #435B7C;
+      color: white;
+      font-size: 18px;
+      box-sizing: border-box;
+      padding: 10px;
+      gap:10px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #435B7C;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+   }
