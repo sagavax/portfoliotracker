@@ -129,8 +129,6 @@
                                         } else {
                                             echo "<td><button type='button' class='button' name='add_entry_price'><i class='fa fa-plus'></i> Add price</button></td>";
                                         }
-                                        
-                                        echo "<td><div class='price'>$transaction_entry_price</div></td>";
                                         $tp_display = ($transaction_tp == 0.0) ? "TP" : $transaction_tp;
                                         $sl_display = ($transaction_sl == 0.0) ? "SL" : $transaction_sl;
                                         echo "<td style='display: flex; gap: 10px;'><button type='button' class='button'>".$tp_display."</button> / <button type='button' class='button'>".$sl_display."</button></td>";
