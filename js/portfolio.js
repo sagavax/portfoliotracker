@@ -92,12 +92,16 @@ transactionList.addEventListener('click', function(e) {
             
         }else if (e.target.name ==="currency") {
             
-        } else if(e.target.classList.contains("long")||e.target.classList.contains("short")) {
-            
+        } else if(e.target.name ==="long_short") {
+            document.getElementById("LongShortModal").showModal();            
         } else if (e.target.name ==="delete_transaction") {
             
         } else if (e.target.name ==="add_note"){
 
+        } else if (e.target.name ==="add_quantity") {
+            document.getElementById("modalQuantity").showModal();
+        } else if (e.target.name ==="add_entry_price") {
+            document.getElementById("modalPrice").showModal();
         }
     }
 })
@@ -186,7 +190,7 @@ modalQuantityInput.addEventListener('keydown', function(e) {
         if(!quantity) return;
         const existing = document.querySelector(".new_transaction [data-type='quantity']");
         if(existing) {
-            existing.textContent = price;
+            existing.textContent = quantity;
         } else {
             document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-type='quantity'>"+quantity+"</button>";
         }
