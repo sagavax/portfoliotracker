@@ -10,8 +10,10 @@ const modalPrice = document.getElementById('modalPrice');
 const modalPriceInput = document.querySelector('#modalPrice input');
 const modalQuantityInput = document.querySelector('#modalQuantity input');
 const modalCurrency = document.getElementById('modalCurrency');
+const modalCategory = document.getElementById('modalCategory');
 const transactionList = document.querySelector('.transactions');
 const new_transaction_actions_wrapper = document.querySelector('.new_transaction_actions_wrapper');
+
 
 
 const MODAL_TICKER_MODES = {
@@ -24,9 +26,18 @@ const MODAL_PROVIDER_MODES = {
   EDIT: "editProvider",
 };
 
+const MODAL_CATEGORY_MODES = {
+  INSERT: "insertCategory",
+  EDIT: "editCategory",
+};
 
-//let modalTickerMode = MODAL_TICKER_MODES.INSERT;
+
+
+let modalTickerMode;
 let modalProviderMode;
+let modalCategoryMode;
+
+
 
 new_transaction_actions_wrapper.addEventListener('click', function(e) {
     if(e.target && e.target.tagName === "BUTTON") {
@@ -44,6 +55,7 @@ new_transaction_actions_wrapper.addEventListener('click', function(e) {
         }
     }
 })
+
 
 
 transactionList.addEventListener('click', function(e) {
@@ -64,11 +76,19 @@ transactionList.addEventListener('click', function(e) {
             const transactionId = e.target.closest('.transaction').dataset.id;
             console.log("transaction id:", transactionId);
             sessionStorage.setItem("currentTransactionId", transactionId);
-            modalProviderMode = MODAL_PROVIDER_MODES.EDIT;
+            const modalProviderMode = "editProvider";
+            console.log("modal provider mode:", modalProviderMode);
             document.getElementById("ProviderModal").showModal();
             GetProviders();
             
         } else if (e.target.name ==="category") {
+            const transactionId = e.target.closest('.transaction').dataset.id;
+            console.log("transaction id:", transactionId);
+            sessionStorage.setItem("currentTransactionId", transactionId);
+            modalCategoryMode = "editCategory";
+            console.log("modal category mode:", modalCategoryMode);
+            document.getElementById("AssetCategoryModal").showModal();
+            //GetAssetCategories();
             
         }else if (e.target.name ==="currency") {
             
@@ -95,6 +115,37 @@ btnAddTransaction.addEventListener('click', function(e) {
     createTransaction()
 })
 
+
+/* modalAssetCategory.addEventListener('click', function(e) {
+    if(e.target.tagName === "BUTTON") {
+        const category = e.target.getAttribute("data-filter");
+        document.getElementById("AssetCategoryModal").close();
+        const existing = document.querySelector(".new_transaction [data-type='category']");
+        if(existing) {
+            existing.textContent = category;
+        } else {
+            document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-type='category'>"+category+"</button>";
+        }
+    }
+}) */
+
+if(assetCategoryModal){
+    AssetCategoryModal.addEventListener('click', function(e) {
+        document.getElementById("AssetCategoryModal").close();
+        if(modalCategoryMode === "insertCategory") {
+        document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button'>"+e.target.getAttribute("data-filter")+"</div>";
+        } else if (modalCategoryMode === "editCategory") {
+            const existing = document.querySelector(".new_transaction [data-type='category']");
+            if(existing) {
+                existing.textContent = e.target.getAttribute("data-filter");
+            } else {
+                const currTransaction = sessionStorage.getItem("currentTransactionId");
+                console.log("current transaction:", currTransaction);
+                document.querySelector("tr[data-id='"+currTransaction+"'] button[name='category']").innerHTML = e.target.getAttribute("data-filter");
+                updateTransactionCategory(currTransaction,e.target.getAttribute("data-filter"));
+            }
+        }
+    })}
 
 modalCurrency.addEventListener("click", function(e) {
     e.preventDefault();
@@ -166,6 +217,7 @@ create_transaction_wrapper.addEventListener('click', function(e) {
         } else if (e.target.name==="long_short") {
             document.getElementById("LongShortModal").showModal();
         } else if (e.target.name==="add_asset_category") {
+            modalCategoryMode = MODAL_CATEGORY_MODES.INSERT;
             document.getElementById("AssetCategoryModal").showModal();
         } else if (e.target.name==="add_entry_price") {
             document.getElementById("modalPrice").showModal();
@@ -233,11 +285,7 @@ if(providerModal){
 
 }
 
-if(assetCategoryModal){
-    AssetCategoryModal.addEventListener('click', function(e) {
-        document.getElementById("AssetCategoryModal").close();
-        document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button'>"+e.target.getAttribute("data-filter")+"</div>"; 
-    })}
+
 
 if(longShortModal){
     longShortModal.addEventListener('click', function(e) {
@@ -375,4 +423,21 @@ function updateTransactionProvider(id, provider){
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`transaction_id=${id}+&provider=${provider}`);
     
+}
+
+function updateTransactionCategory(id, category){
+    console.log("update category:", id, category);
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            alert("Transaction category updated successfully!");
+            //document.getElementById("newTransactionContent").innerHTML = this.responseText;
+            /* const tickers = JSON.parse(this.responseText);
+            console.log(tickers); */
+        }
+    }
+    xhttp.open("POST", "transaction_update_category.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`transaction_id=${id}+&category=${category}`);    
 }

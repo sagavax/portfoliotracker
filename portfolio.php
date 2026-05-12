@@ -115,7 +115,13 @@
                                     echo "<tr class='transaction' data-id='$transaction_id'>";
                                         echo "<td><button type='button' class='button' name='ticker'>$transaction_ticker</button></td>";
                                         echo "<td><button type='button' class='button' name='provider'>$transaction_provider</button></td>";
-                                        echo "<td><button type='button' class='button' name='category'>$transaction_category</button></td>";
+                                        
+                                        if($transaction_category) {
+                                            echo "<td><button type='button' class='button' name='category'>$transaction_category</button></td>";
+                                        } else {
+                                            echo "<td><button type='button' class='button' name='category'><i class='fa fa-plus'></i> Add category</button></td>";
+                                        }
+                                        
                                         echo "<td><button type='button' class='button' name='currency'>$transaction_currency</button>";
                                         
                                         if($transaction_quantity != 0) {
@@ -153,9 +159,11 @@
         <h3>Asset category</h3>
         <div id="assetCategoryDetailsContent">
             <button type="button" class="buton" data-filter="stocks">Akcie</button>
-            <button type="button" class="button" data-filter="crypto">Kryptoměny</button>
+            <button type="button" class="button" data-filter="crypto">Kryptomeny</button>
             <button type="button" class="button" data-filter="etf">ETF</button>
-            <button type="button" class="button" data-filter="other">Ostatní</button>
+            <button type="button" class="button" data-filter="options">Opcie</button>
+            <button type="button" class="button" data-filter="bonds">Dlhopis(y)</button>
+            <button type="button" class="button" data-filter="forex">Forex</button>
             <button type="button" class="button" id="assetModalClose" >Zatvoriť</button>
         </div>        
     </div>
