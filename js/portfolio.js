@@ -31,8 +31,13 @@ const MODAL_CATEGORY_MODES = {
   EDIT: "editCategory",
 };
 
+const LONG_SHORT_MODES = {
+    INSERT: "insertLongShort",
+    EDIT: "editLongShort"
+}
 
 
+let modalLongShortMode;
 let modalTickerMode;
 let modalProviderMode;
 let modalCategoryMode;
@@ -93,6 +98,8 @@ transactionList.addEventListener('click', function(e) {
         }else if (e.target.name ==="currency") {
             
         } else if(e.target.name ==="long_short") {
+            modalLongShortMode = LONG_SHORT_MODES.EDIT;
+            console.log("modal long short mode:", modalLongShortMode);
             document.getElementById("LongShortModal").showModal();            
         } else if (e.target.name ==="delete_transaction") {
             
@@ -219,6 +226,8 @@ create_transaction_wrapper.addEventListener('click', function(e) {
            document.getElementById("ProviderModal").showModal();
            GetProviders();
         } else if (e.target.name==="long_short") {
+            modalLongShortMode = LONG_SHORT_MODES.INSERT;
+            console.log("modal long short mode:", modalLongShortMode);
             document.getElementById("LongShortModal").showModal();
         } else if (e.target.name==="add_asset_category") {
             modalCategoryMode = MODAL_CATEGORY_MODES.INSERT;
@@ -293,19 +302,19 @@ if(providerModal){
 
 if(longShortModal){
     longShortModal.addEventListener('click', function(e) {
-        document.getElementById("LongShortModal").close();
-        const id = e.target.getAttribute("id");
-        let longShort;
-        if(id === "add_long") {
-            longShort = "Long";
-        } else if (id === "add_short") {
-            longShort = "Short";
-        }
-        const existing = document.querySelector(".new_transaction [data-type='long_short']");
-        if(existing) {
-            existing.textContent = longShort;
-        } else {
-            document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-type='long_short'>"+longShort+"</button>";
+        if(e.target.tagName === "BUTTON" && (e.target.name === "add_long" || e.target.name === "add_short")) {
+            document.getElementById("LongShortModal").close();
+            const value = e.target.name === "add_long" ? "BUY" : "SELL";
+            const cssClass = e.target.name === "add_long" ? "long" : "short";
+            if(modalLongShortMode === LONG_SHORT_MODES.INSERT) {
+                document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button " + cssClass + "' name='long_short'>" + value + "</button>";
+            } else if(modalLongShortMode === LONG_SHORT_MODES.EDIT) {
+                const currTransaction = sessionStorage.getItem("currentTransactionId");
+                const btn = document.querySelector("tr[data-id='"+currTransaction+"'] button[name='long_short']");
+                btn.innerHTML = value;
+                btn.className = "button " + cssClass;
+                updateTransactionLongShort(currTransaction, value);
+            }
         }
     })
 }
@@ -443,5 +452,18 @@ function updateTransactionCategory(id, category){
     }
     xhttp.open("POST", "transaction_update_category.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send(`transaction_id=${id}+&category=${category}`);    
+    xhttp.send(`transaction_id=${id}+&category=${category}`);
+}
+
+function updateTransactionLongShort(id, longShort){
+    console.log("update long_short:", id, longShort);
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+        }
+    }
+    xhttp.open("POST", "transaction_update_long_short.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`transaction_id=${id}&long_short=${longShort}`);
 }
