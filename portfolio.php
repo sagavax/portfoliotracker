@@ -137,7 +137,7 @@
                                         }
                                         $tp_display = ($transaction_tp == 0.0) ? "TP" : $transaction_tp;
                                         $sl_display = ($transaction_sl == 0.0) ? "SL" : $transaction_sl;
-                                        echo "<td style='display: flex; gap: 10px;'><button type='button' class='button'>".$tp_display."</button> / <button type='button' class='button'>".$sl_display."</button></td>";
+                                        echo "<td style='display: flex; gap: 10px;'><button type='button' class='button' name='take_profit'>".$tp_display."</button> / <button type='button' class='button' name='stop_loss'>".$sl_display."</button></td>";
                                         $ls_class = ($transaction_long_short === "BUY") ? "long" : (($transaction_long_short === "SELL") ? "short" : "");
                                         echo "<td><button type='button' class='button ".$ls_class."' name='long_short'>".$transaction_long_short."</button></td>";
                                         echo "<td><button type='button' class='button' name='add_note'><i class='fa fa-plus'></i> Add note</button></td>";
@@ -153,6 +153,19 @@
         </div><!--container-->  
   </body>
 </html>
+
+
+<dialog id="modalTakeProfit">
+  <div class="modal-container">
+    <div id="modalTakeProfitContent"><input type="text" placeholder="Take profit" autocomplete="off"></div>
+  </div>
+</dialog>
+
+<dialog id="modalStopLoss">
+  <div class="modal-container">
+    <div id="modalStopLossContent"><input type="text" placeholder="Stop loss" autocomplete="off"></div>
+  </div>
+</dialog>
 
 <dialog id="AssetCategoryModal">
     <div class="modal-container">
