@@ -13,7 +13,8 @@ const modalCurrency = document.getElementById('modalCurrency');
 const modalCategory = document.getElementById('modalCategory');
 const transactionList = document.querySelector('.transactions');
 const new_transaction_actions_wrapper = document.querySelector('.new_transaction_actions_wrapper');
-
+const modalTakeProfit = document.getElementById('modalTakeProfit');
+const modalStopLoss = document.getElementById('modalStopLoss');
 
 
 const MODAL_TICKER_MODES = {
@@ -109,6 +110,10 @@ transactionList.addEventListener('click', function(e) {
             document.getElementById("modalQuantity").showModal();
         } else if (e.target.name ==="add_entry_price") {
             document.getElementById("modalPrice").showModal();
+        } else if (e.target.name==="take_profit" ) {
+            modalTakeProfit.showModal();
+        } else if (e.target.name === "stop_loss") {
+            modalStopLoss.showModal();
         }
     }
 })
