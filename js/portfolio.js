@@ -118,6 +118,26 @@ transactionList.addEventListener('click', function(e) {
     }
 })
 
+
+modalTakeProfit.addEventListener('keydown', function(e) {
+    currTransaction = sessionStorage.getItem("currentTransactionId");
+    if(e.key === "Enter") {
+        e.preventDefault();
+        updateTakeProfit(currTransaction, e.target.value);
+        modalTakeProfit.close();
+    }
+})
+
+modalStopLoss.addEventListener('keydown', function(e) {
+    currTransaction = sessionStorage.getItem("currentTransactionId");
+    if(e.key === "Enter") {
+        e.preventDefault();
+        updateStopLoss(currTransaction, e.target.value);
+        modalStopLoss.close();
+    }
+})
+
+
 search_in_ticker.addEventListener('input', function(e) {
     FindTicker(e.target.value);    
 })
@@ -472,3 +492,30 @@ function updateTransactionLongShort(id, longShort){
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`transaction_id=${id}&long_short=${longShort}`);
 }
+
+
+function updateTakeProfit(id, takeProfit) {
+    console.log("update take profit:", id, takeProfit);
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+        }
+    }
+    xhttp.open("POST", "transaction_update_take_profit.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`transaction_id=${id}&take_profit=${takeProfit}`);
+}
+
+function updateStopLoss(id, stopLoss) {
+    console.log("update stop loss:", id, stopLoss);
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+        }
+    }
+    xhttp.open("POST", "transaction_update_stop_loss.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`transaction_id=${id}&stop_loss=${stopLoss}`);
+}   
