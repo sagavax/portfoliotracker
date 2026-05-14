@@ -141,7 +141,7 @@
                                         $ls_class = ($transaction_long_short === "BUY") ? "long" : (($transaction_long_short === "SELL") ? "short" : "");
                                         echo "<td><button type='button' class='button ".$ls_class."' name='long_short'>".$transaction_long_short."</button></td>";
                                         echo "<td><button type='button' class='button' name='add_note'><i class='fa fa-plus'></i> Add note</button></td>";
-                                        echo "<td><button type='button' class='button' name='delete_transaction' data-id='$transaction_id'><i class='fa fa-times'></i></button></td>";
+                                        echo "<td><button type='button' class='button' name='close_transaction' data-id='$transaction_id'><i class='fa fa-times'></i></button></td>";
                                     echo "</tr>";
                                 }
                                 

@@ -15,7 +15,7 @@ const transactionList = document.querySelector('.transactions');
 const new_transaction_actions_wrapper = document.querySelector('.new_transaction_actions_wrapper');
 const modalTakeProfit = document.getElementById('modalTakeProfit');
 const modalStopLoss = document.getElementById('modalStopLoss');
-
+const btnCloseTransaction = document.querySelector('.button[name="close_transaction"]');
 
 const MODAL_TICKER_MODES = {
   INSERT: "insertTicker",
@@ -102,8 +102,9 @@ transactionList.addEventListener('click', function(e) {
             modalLongShortMode = LONG_SHORT_MODES.EDIT;
             console.log("modal long short mode:", modalLongShortMode);
             document.getElementById("LongShortModal").showModal();            
-        } else if (e.target.name ==="delete_transaction") {
-            
+        } else if (e.target.name ==="close_transaction") {
+            const transactionId = e.target.closest('.transaction').dataset.id;
+            closeTransaction(transactionId);
         } else if (e.target.name ==="add_note"){
 
         } else if (e.target.name ==="add_quantity") {
@@ -519,3 +520,20 @@ function updateStopLoss(id, stopLoss) {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`transaction_id=${id}&stop_loss=${stopLoss}`);
 }   
+
+
+function closeTransaction(id) {
+    console.log("close transaction:", id);
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            //remove transaction from transaction list
+            document.querySelector(`.transaction[data-id="${id}"]`).remove();
+            alert("Transaction closed successfully!");
+            console.log(this.responseText);
+        }
+    }
+    xhttp.open("POST", "transaction_close.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`transaction_id=${id}`);
+}
