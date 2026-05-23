@@ -219,6 +219,8 @@ modalQuantityInput.addEventListener('keydown', function(e) {
             existing.textContent = quantity;
         } else {
             document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-type='quantity'>"+quantity+"</button>";
+            updateTransactionQuantity(sessionStorage.getItem("currentTransactionId"), quantity);
+            modalQuantity.close();
         }
         modalQuantity.close();
     }
@@ -527,3 +529,16 @@ function updateTransactionEntryPrice(id, entryPrice) {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`transaction_id=${id}&entry_price=${entryPrice}`);
 }
+
+function updateTransactionQuantity(id, quantity) {
+    console.log("update quantity:", id, quantity);
+    const xhttp = new XMLHttpRequest();    
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+        }    
+    }
+    xhttp.open("POST", "transaction_update_quantity.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`transaction_id=${id}&quantity=${quantity}`);
+    }
