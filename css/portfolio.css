@@ -65,6 +65,11 @@
     color: white;
 }
 
+
+.transactions table tr:first-child {
+    border-top: 1px solid #435B7C;
+}
+
 #modalPrice, #modalQuantity {
     width:40%;
 }

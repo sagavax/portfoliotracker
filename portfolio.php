@@ -67,6 +67,8 @@
                     <button type="button" class="filter_button" data-filter="crypto">Kryptoměny</button>
                     <button type="button" class="filter_button" data-filter="etf">ETF</button>
                     <button type="button" class="filter_button" data-filter="other">Ostatní</button>
+                    <button type="button" class="filter_button" data-filter="active">Aktivní</button>
+                    <button type="button" class="filter_button" data-filter="closed">Uzavřené</button>                    
                     <button type="button" name="add_transation" class="button small_button" id="btnAddNewtransaction"><i class="fa fa-plus"></i> Přidat transakci</button>
                     
                     <div class="create_transaction_wrapper">
