@@ -240,10 +240,12 @@ create_transaction_wrapper.addEventListener('click', function(e) {
         if(e.target.name === "close") {
             document.querySelector('.create_transaction_wrapper').style.display = 'none';
         } else if (e.target.name ==="add_ticker") {
+            modalTickerMode = MODAL_TICKER_MODES.INSERT;
             document.querySelector('#TickerModal').showModal();
             GetTickers();
         } else if (e.target.name==="add_provider") {
-            let modalProviderMode = MODAL_PROVIDER_MODES.INSERT;
+            //modalProviderMode = MODAL_PROVIDER_MODES.INSERT;
+            modalProviderMode = "insertProvider";
             document.getElementById("ProviderModal").showModal();
            GetProviders();
         } else if (e.target.name==="long_short") {
@@ -268,29 +270,20 @@ create_transaction_wrapper.addEventListener('click', function(e) {
 if(tickerModal) {
     tickerModal.addEventListener('click', function(e) {
         if(e.target.tagName === "BUTTON") {
-            if(e.target.name === "close") {
-                document.getElementById("TickerModal").close();
-            } else if (e.target.getAttribute("data-ticker")) {
+             if (modalTickerMode === MODAL_TICKER_MODES.INSERT) {
+                console.log(modalTickerMode);                 
                 const ticker = e.target.getAttribute("data-ticker");
-                console.log(ticker);
-                document.getElementById("TickerModal").close();
-                if (modalTickerMode === MODAL_TICKER_MODES.INSERT) {
-                                   document.querySelector(".new_transaction").innerHTML += "<button class='ticker' data-ticker="+ticker+">"+ticker+"</button>"; //document.querySelector(".new_transaction").appendChild(ticker);")
- 
-                } else if (modalTickerMode === MODAL_TICKER_MODES.EDIT) {
-                    const existing = document.querySelector(".new_transaction [data-ticker="+ticker+"]");
-                    if(existing) {
-                        existing.textContent = ticker;
-                    } else {
-                       const currTransaction = sessionStorage.getItem("currentTransactionId");
-                       console.log("current transaction:", currTransaction);
-                       document.querySelector("tr[data-id='"+currTransaction+"'] button[name='ticker']").innerHTML = ticker;
-                       updateTransactionTicker(currTransaction,ticker);
-                        /* document.querySelector(".new_transaction").innerHTML += "<button class='ticker' data-ticker="+e.target.innerHTML+">"+e.target.innerHTML+"</button>"; */
-                    }
-
-                }
-                //AssignTicker(ticker);
+                document.querySelector(".new_transaction").innerHTML += "<button class='ticker' data-ticker="+ticker+">"+ticker+"</button>"; //document.querySelector(".new_transaction").appendChild(ticker);") 
+                const currTransaction = sessionStorage.getItem("currentTransactionId");                
+                updateTransactionTicker(currTransaction,ticker);
+                tickerModal.close();
+            } else if (modalTickerMode === MODAL_TICKER_MODES.EDIT) {
+                const ticker = e.target.getAttribute("data-ticker");
+                const currTransaction = sessionStorage.getItem("currentTransactionId");
+                console.log("current transaction:", currTransaction);
+                document.querySelector("tr[data-id='"+currTransaction+"'] button[name='ticker']").innerHTML = ticker;
+                updateTransactionTicker(currTransaction,ticker);    
+                tickerModal.close();                
             }
         }
     })
@@ -304,8 +297,8 @@ if(providerModal){
         if(modalProviderMode === "insertProvider") {
             console.log("insert provider:", e.target.getAttribute("data-name"));
             console.log("current transaction:", currTransaction);
-            //document.querySelector(".new_transaction").innerHTML += "<div class='provider_card' data-id-"+e.target.getAttribute("data-id")+">"+e.target.getAttribute("data-name")+"</div>"; 
             document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-id-"+e.target.getAttribute("data-id")+">"+e.target.getAttribute("data-name")+"</button>";                    
+            //document.querySelector(".new_transaction").appendChild("<button type='button' class='button' data-id-"+e.target.getAttribute("data-id")+">"+e.target.getAttribute("data-name")+"</button>");
             updateTransactionProvider(currTransaction,e.target.getAttribute("data-name"));
             document.getElementById("ProviderModal").close();
         } else if(modalProviderMode === "editProvider") {  
