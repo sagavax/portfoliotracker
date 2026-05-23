@@ -154,24 +154,15 @@ btnAddTransaction.addEventListener('click', function(e) {
 })
 
 
-/* modalAssetCategory.addEventListener('click', function(e) {
-    if(e.target.tagName === "BUTTON") {
-        const category = e.target.getAttribute("data-filter");
-        document.getElementById("AssetCategoryModal").close();
-        const existing = document.querySelector(".new_transaction [data-type='category']");
-        if(existing) {
-            existing.textContent = category;
-        } else {
-            document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-type='category'>"+category+"</button>";
-        }
-    }
-}) */
 
 if(assetCategoryModal){
     AssetCategoryModal.addEventListener('click', function(e) {
         document.getElementById("AssetCategoryModal").close();
+        console.log(modalCategoryMode);
         if(modalCategoryMode === "insertCategory") {
-        document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button'>"+e.target.getAttribute("data-filter")+"</div>";
+            const currTransaction = sessionStorage.getItem("currentTransactionId");
+            document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button'>"+e.target.getAttribute("data-filter")+"</div>";
+            updateTransactionCategory(currTransaction,e.target.getAttribute("data-filter"));
         } else if (modalCategoryMode === "editCategory") {
             const existing = document.querySelector(".new_transaction [data-type='category']");
             if(existing) {
@@ -212,6 +203,7 @@ modalPriceInput.addEventListener('keydown', function(e) {
             existing.textContent = price;
         } else {
             document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-type='price'>"+price+"</button>";
+            updateTransactionEntryPrice(sessionStorage.getItem("currentTransactionId"), price);
         }
         modalPrice.close();
     }
@@ -249,11 +241,10 @@ create_transaction_wrapper.addEventListener('click', function(e) {
             document.getElementById("ProviderModal").showModal();
            GetProviders();
         } else if (e.target.name==="long_short") {
-            let modalLongShortMode = LONG_SHORT_MODES.INSERT;
-            console.log("modal long short mode:", modalLongShortMode);
+            modalLongShortMode = "insertLongShort";
             document.getElementById("LongShortModal").showModal();
         } else if (e.target.name==="add_asset_category") {
-            let modalCategoryMode = MODAL_CATEGORY_MODES.INSERT;
+            modalCategoryMode = "insertCategory";
             document.getElementById("AssetCategoryModal").showModal();
         } else if (e.target.name==="add_entry_price") {
             document.getElementById("modalPrice").showModal();
@@ -319,9 +310,9 @@ if(longShortModal){
             document.getElementById("LongShortModal").close();
             const value = e.target.name === "add_long" ? "BUY" : "SELL";
             const cssClass = e.target.name === "add_long" ? "long" : "short";
-            if(modalLongShortMode === LONG_SHORT_MODES.INSERT) {
+            if(modalLongShortMode === "insertLongShort") {
                 document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button " + cssClass + "' name='long_short'>" + value + "</button>";
-            } else if(modalLongShortMode === LONG_SHORT_MODES.EDIT) {
+            } else if(modalLongShortMode === "editLongShort") {
                 const currTransaction = sessionStorage.getItem("currentTransactionId");
                 const btn = document.querySelector("tr[data-id='"+currTransaction+"'] button[name='long_short']");
                 btn.innerHTML = value;
@@ -521,4 +512,18 @@ function closeTransaction(id) {
     xhttp.open("POST", "transaction_close.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`transaction_id=${id}`);
+}
+
+
+function updateTransactionEntryPrice(id, entryPrice) {
+    console.log("update entry price:", id, entryPrice);
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+        }
+    }
+    xhttp.open("POST", "transaction_update_entry_price.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`transaction_id=${id}&entry_price=${entryPrice}`);
 }
