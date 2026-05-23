@@ -114,7 +114,13 @@
 
                                     echo "<tr class='transaction' data-id='$transaction_id'>";
                                         echo "<td><button type='button' class='button' name='ticker'>$transaction_ticker</button></td>";
-                                        echo "<td><button type='button' class='button' name='provider'>$transaction_provider</button></td>";
+                                        
+                                        if($transaction_provider) {
+                                            echo "<td><button type='button' class='button' name='provider'>$transaction_provider</button></td>";
+                                        } else {
+                                            echo "<td><button type='button' class='button' name='provider'><i class='fa fa-plus'></i> Add provider</button></td>";
+                                        }
+                                        
                                         
                                         if($transaction_category) {
                                             echo "<td><button type='button' class='button' name='category'>$transaction_category</button></td>";
@@ -135,11 +141,20 @@
                                         } else {
                                             echo "<td><button type='button' class='button' name='add_entry_price'><i class='fa fa-plus'></i> Add price</button></td>";
                                         }
+                                        
                                         $tp_display = ($transaction_tp == 0.0) ? "TP" : $transaction_tp;
                                         $sl_display = ($transaction_sl == 0.0) ? "SL" : $transaction_sl;
                                         echo "<td style='display: flex; gap: 10px;'><button type='button' class='button' name='take_profit'>".$tp_display."</button> / <button type='button' class='button' name='stop_loss'>".$sl_display."</button></td>";
-                                        $ls_class = ($transaction_long_short === "BUY") ? "long" : (($transaction_long_short === "SELL") ? "short" : "");
-                                        echo "<td><button type='button' class='button ".$ls_class."' name='long_short'>".$transaction_long_short."</button></td>";
+                                        
+                                        
+                                        if($transaction_long_short) {
+                                            $ls_class = ($transaction_long_short === "BUY") ? "long" : (($transaction_long_short === "SELL") ? "short" : "");
+                                            echo "<td><button type='button' class='button ".$ls_class."' name='long_short'>".$transaction_long_short."</button></td>";
+                                        } else {
+                                            echo "<td><button type='button' class='button' name='long_short'><i class='fa fa-plus'></i> Long/Short</button></td>";
+                                        }
+                                        
+                                        
                                         echo "<td><button type='button' class='button' name='add_note'><i class='fa fa-plus'></i> Add note</button></td>";
                                         echo "<td><button type='button' class='button' name='close_transaction' data-id='$transaction_id'><i class='fa fa-times'></i></button></td>";
                                     echo "</tr>";

@@ -155,10 +155,3 @@
     </div>
   </div>
 </dialog>
-
-<dialog id="modalPrice" class="modal-overlay">
-  <div class="modal-container">
-    <div id="modalPirceContent"><input type="number" placeholder="Cena" autocomplete="off"></div>
-    <button id="modalPriceClose" class="secondary">Zatvoriť</button>
-  </div>
-</dialog>

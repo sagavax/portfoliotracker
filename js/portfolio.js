@@ -80,16 +80,16 @@ transactionList.addEventListener('click', function(e) {
             
         } else if (e.target.name ==="provider") {
             const transactionId = e.target.closest('.transaction').dataset.id;
-            console.log("transaction id:", transactionId);
             sessionStorage.setItem("currentTransactionId", transactionId);
-            const modalProviderMode = "editProvider";
-            console.log("modal provider mode:", modalProviderMode);
+            console.log("transaction id:", transactionId);
+            //let modalProviderMode = MODAL_PROVIDER_MODES.EDIT
+            modalProviderMode = "editProvider";
             document.getElementById("ProviderModal").showModal();
             GetProviders();
             
         } else if (e.target.name ==="category") {
             const transactionId = e.target.closest('.transaction').dataset.id;
-            console.log("transaction id:", transactionId);
+            //console.log("transaction id:", transactionId);
             sessionStorage.setItem("currentTransactionId", transactionId);
             modalCategoryMode = "editCategory";
             console.log("modal category mode:", modalCategoryMode);
@@ -97,7 +97,7 @@ transactionList.addEventListener('click', function(e) {
             //GetAssetCategories();
             
         }else if (e.target.name ==="currency") {
-            
+            alert("currency");
         } else if(e.target.name ==="long_short") {
             modalLongShortMode = LONG_SHORT_MODES.EDIT;
             console.log("modal long short mode:", modalLongShortMode);
@@ -106,7 +106,7 @@ transactionList.addEventListener('click', function(e) {
             const transactionId = e.target.closest('.transaction').dataset.id;
             closeTransaction(transactionId);
         } else if (e.target.name ==="add_note"){
-
+            alert("add note");
         } else if (e.target.name ==="add_quantity") {
             document.getElementById("modalQuantity").showModal();
         } else if (e.target.name ==="add_entry_price") {
@@ -144,6 +144,7 @@ search_in_ticker.addEventListener('input', function(e) {
 })
 
 
+//add new transaction
 btnAddTransaction.addEventListener('click', function(e) {
     console.log('click');
     document.querySelector('.create_transaction_wrapper').style.display = 'flex';
@@ -232,10 +233,8 @@ modalQuantityInput.addEventListener('keydown', function(e) {
 })
 
 
-/* add_provider.addEventListener('click', function(e) {
-    document.getElementById("ProviderModal").showModal();
-}); */
 
+//create new transaction
 create_transaction_wrapper.addEventListener('click', function(e) {
     if(e.target && e.target.tagName === "BUTTON") {
         if(e.target.name === "close") {
@@ -243,20 +242,16 @@ create_transaction_wrapper.addEventListener('click', function(e) {
         } else if (e.target.name ==="add_ticker") {
             document.querySelector('#TickerModal').showModal();
             GetTickers();
-        } else if (e.target.name==="ticker") {
-            const ticker = e.target.textContent;
-            AssignTcker(ticker);
         } else if (e.target.name==="add_provider") {
-           modalProviderMode = MODAL_PROVIDER_MODES.INSERT;
-           console.log("modal provider mode:", modalProviderMode);
-           document.getElementById("ProviderModal").showModal();
+            let modalProviderMode = MODAL_PROVIDER_MODES.INSERT;
+            document.getElementById("ProviderModal").showModal();
            GetProviders();
         } else if (e.target.name==="long_short") {
-            modalLongShortMode = LONG_SHORT_MODES.INSERT;
+            let modalLongShortMode = LONG_SHORT_MODES.INSERT;
             console.log("modal long short mode:", modalLongShortMode);
             document.getElementById("LongShortModal").showModal();
         } else if (e.target.name==="add_asset_category") {
-            modalCategoryMode = MODAL_CATEGORY_MODES.INSERT;
+            let modalCategoryMode = MODAL_CATEGORY_MODES.INSERT;
             document.getElementById("AssetCategoryModal").showModal();
         } else if (e.target.name==="add_entry_price") {
             document.getElementById("modalPrice").showModal();
@@ -303,26 +298,25 @@ if(tickerModal) {
 
 if(providerModal){
     providerModal.addEventListener('click', function(e) {
-              console.log(modalProviderMode);
-              document.getElementById("ProviderModal").close();
-                if(modalProviderMode === MODAL_PROVIDER_MODES.INSERT) {
-                    
-                    //document.querySelector(".new_transaction").innerHTML += "<div class='provider_card' data-id-"+e.target.getAttribute("data-id")+">"+e.target.getAttribute("data-name")+"</div>"; 
-                    document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-id-"+e.target.getAttribute("data-id")+">"+e.target.getAttribute("data-name")+"</button>";
-                } else if(modalProviderMode === MODAL_PROVIDER_MODES.EDIT) {
-                    const existing = document.querySelector(".new_transaction [data-id-"+e.target.getAttribute("data-id")+"]");
-                    if(existing) {
-                        existing.textContent = e.target.getAttribute("data-name");
-                    } else {
-                        const currTransaction = sessionStorage.getItem("currentTransactionId");
-                        console.log("current transaction:", currTransaction);
-                        document.querySelector("tr[data-id='"+currTransaction+"'] button[name='provider']").innerHTML = e.target.getAttribute("data-name");
-                        updateTransactionProvider(currTransaction,e.target.getAttribute("data-name"));
-                    }
-                }
-    })
-
-}
+        console.log(e.target.getAttribute("data-name"));
+        console.log(modalProviderMode);
+        const currTransaction = sessionStorage.getItem("currentTransactionId");
+        if(modalProviderMode === "insertProvider") {
+            console.log("insert provider:", e.target.getAttribute("data-name"));
+            console.log("current transaction:", currTransaction);
+            //document.querySelector(".new_transaction").innerHTML += "<div class='provider_card' data-id-"+e.target.getAttribute("data-id")+">"+e.target.getAttribute("data-name")+"</div>"; 
+            document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-id-"+e.target.getAttribute("data-id")+">"+e.target.getAttribute("data-name")+"</button>";                    
+            updateTransactionProvider(currTransaction,e.target.getAttribute("data-name"));
+            document.getElementById("ProviderModal").close();
+        } else if(modalProviderMode === "editProvider") {  
+            console.log("current transaction:", currTransaction);
+            console.log("edit provider:", e.target.getAttribute("data-name"));
+            document.querySelector("tr[data-id='"+currTransaction+"'] button[name='provider']").innerHTML = e.target.getAttribute("data-name");
+            updateTransactionProvider(currTransaction,e.target.getAttribute("data-name"));
+            document.getElementById("ProviderModal").close();                    
+        }
+        }) 
+    }
 
 
 
@@ -420,9 +414,7 @@ function getLastestTransaction(){
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
-            //document.getElementById("newTransactionContent").innerHTML = this.responseText;
-            /* const tickers = JSON.parse(this.responseText);
-            console.log(tickers); */
+            sessionStorage.setItem("currentTransactionId", this.responseText);
         }
     }
     xhttp.open("GET", "transaction_latest.php", true);
