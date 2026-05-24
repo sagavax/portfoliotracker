@@ -256,6 +256,10 @@ create_transaction_wrapper.addEventListener('click', function(e) {
             document.getElementById("modalQuantity").showModal();   
         } else if (e.target.name==="add_currency") {
             document.getElementById("modalCurrency").showModal();
+        } else if (e.target.name === "add_tp") {
+            modalTakeProfit.showModal();
+        } else if (e.target.name === "add_sl") {
+            modalStopLoss.showModal();
         }
     }
 })
