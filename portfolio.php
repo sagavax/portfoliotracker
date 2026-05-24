@@ -71,6 +71,7 @@
                     <button type="button" class="filter_button" data-filter="closed">Uzavřené</button>                    
                     <button type="button" name="add_transation" class="button small_button" id="btnAddNewtransaction"><i class="fa fa-plus"></i> Přidat transakci</button>
                     
+                   <!-- create new transaction -->
                     <div class="create_transaction_wrapper">
                         <button type="button" name="add_ticker" class="button small_button" id="add_ticker"><i class="fa fa-plus"></i> Add ticker</button>
                         <button type="button" name="add_provider" class="button small_button" id="add_provider"><i class="fa fa-plus"></i> Add provider</button>
@@ -98,8 +99,8 @@
                         </thead>
                         <tbody>
                             <?php
-                            //list of transactions
-                                $get_transations = "SELECT * FROM transactions ORDER BY created_at DESC and is_closed = 0 ASC   ";
+                            //list of transactions  
+                                $get_transations = "SELECT * FROM transactions WHERE is_closed = 0 ORDER BY created_at DESC";
                                 $result = mysqli_query($link, $get_transations) or die("MySQL ERROR: " . mysqli_error($link));
                                 while ($row = mysqli_fetch_array($result)) {
                                     $transaction_id = $row['id'];
@@ -273,5 +274,12 @@
         <button type="button" name="HKD" class="secondary">HKD</button>
         <button type="button" name="SEK" class="secondary">SEK</button>
     </div>
+  </div>
+</dialog>
+
+<dialog id="modalAddNote">
+  <div class="modal-container">
+    <div id="modalAddNoteContent"><textarea placeholder="Add note" autocomplete="off"></textarea></div>
+    <button id="saveNote" class="secondary">Save</button>
   </div>
 </dialog>

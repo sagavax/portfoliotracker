@@ -93,7 +93,7 @@
 }
 
 
-#tickerDetailsContent, #providerDetailsContent,#longShortDetailsContent, #assetCategoryDetailsContent, #modalPriceContent,#modalCurrencyContent, #modalTakeProfitContent, #modalStopLossContent {
+#tickerDetailsContent, #providerDetailsContent,#longShortDetailsContent, #assetCategoryDetailsContent, #modalPriceContent,#modalCurrencyContent, #modalTakeProfitContent, #modalStopLossContent, #modalAddNoteContent {
     display:flex;
     gap: 10px;
     align-items: center;
@@ -115,11 +115,49 @@
     font-size: 18px;
 }
 
+#modalAddNoteContent textarea {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    color: white;
+    background-color: #253649;
+    font-size: 18px;
+}
+
 #AssetCategoryModal {
     left:10%;
     width:30%
 }
 
+#modalAddNote {
+    left:10%;
+    width:50%;
+    height:50%;
+}
+
+#modalAddNote button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    margin-top: 10px;
+    width: 100px;
+    height:50px;
+}
+
+#modalAddNote .modal-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#modalAddNoteContent {
+    flex: 1;
+    min-height: 0;
+}
 
 .long {
     background-color: #00b070;

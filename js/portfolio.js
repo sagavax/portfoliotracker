@@ -16,6 +16,10 @@ const new_transaction_actions_wrapper = document.querySelector('.new_transaction
 const modalTakeProfit = document.getElementById('modalTakeProfit');
 const modalStopLoss = document.getElementById('modalStopLoss');
 const btnCloseTransaction = document.querySelector('.button[name="close_transaction"]');
+const btnAddNote = document.querySelector('.button[name="add_note"]');
+const modalAddNote = document.getElementById('modalAddNote');
+
+
 
 const MODAL_TICKER_MODES = {
   INSERT: "insertTicker",
@@ -43,6 +47,11 @@ let modalTickerMode;
 let modalProviderMode;
 let modalCategoryMode;
 
+
+
+btnAddNote.addEventListener('click', function() {
+    modalAddNote.showModal();
+})
 
 
 new_transaction_actions_wrapper.addEventListener('click', function(e) {
@@ -106,7 +115,7 @@ transactionList.addEventListener('click', function(e) {
             const transactionId = e.target.closest('.transaction').dataset.id;
             closeTransaction(transactionId);
         } else if (e.target.name ==="add_note"){
-            alert("add note");
+            modalAddNote.showModal();
         } else if (e.target.name ==="add_quantity") {
             document.getElementById("modalQuantity").showModal();
         } else if (e.target.name ==="add_entry_price") {
@@ -119,6 +128,23 @@ transactionList.addEventListener('click', function(e) {
     }
 })
 
+
+
+if(modalAddNote) {
+    modalAddNote.addEventListener('click', function(e) {
+        if(e.target && e.target.tagName === "BUTTON" && e.target.id === "saveNote") {
+            const textarea = modalAddNote.querySelector('textarea');
+            const noteText = textarea.value.trim();
+            if(!noteText) {
+                alert("Note cannot be empty!");
+                return;
+            }
+            const transactionId = sessionStorage.getItem("currentTransactionId");
+            updateTransactionNote(transactionId, noteText);
+            modalAddNote.close();
+        }
+    })
+}
 
 modalTakeProfit.addEventListener('keydown', function(e) {
     currTransaction = sessionStorage.getItem("currentTransactionId");
@@ -539,13 +565,25 @@ function updateTransactionEntryPrice(id, entryPrice) {
 
 function updateTransactionQuantity(id, quantity) {
     console.log("update quantity:", id, quantity);
-    const xhttp = new XMLHttpRequest();    
+    const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
-        }    
+        }
     }
     xhttp.open("POST", "transaction_update_quantity.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`transaction_id=${id}&quantity=${quantity}`);
+}
+
+function updateTransactionNote(id, note) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+        }
     }
+    xhttp.open("POST", "transaction_update_note.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`transaction_id=${id}&note=${encodeURIComponent(note)}`);
+}
