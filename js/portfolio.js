@@ -65,6 +65,11 @@ new_transaction_actions_wrapper.addEventListener('click', function(e) {
         } else if (e.target.name ==="new_transaction_reset") {
             //remove all added item - remove all buttons with data-type attribute
             const buttons = document.querySelectorAll(".new_transaction button[data-type]");
+            //check if there is any button to remove
+            if(buttons.length === 0) {
+                alert("No item to reset!");
+                return;
+            }
             buttons.forEach(button => button.remove());
             
         } else if (e.target.name ==="new_transaction_create"){
@@ -601,3 +606,20 @@ function updateTransactionNote(id, note) {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`transaction_id=${id}&note=${encodeURIComponent(note)}`);
 }
+
+
+function removeTransaction(id) {
+    console.log("remove transaction:", id);
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            //remove transaction from transaction list
+            document.querySelector(`.transaction[data-id="${id}"]`).remove();
+            alert("Transaction removed successfully!");
+            console.log(this.responseText);
+        }
+    }
+    xhttp.open("POST", "transaction_delete.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`transaction_id=${id}`);
+}   
