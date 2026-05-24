@@ -13,6 +13,6 @@ deploy_production:
                  --exclude-glob .git*
                  --exclude-glob .gitlab-ci.yml
                  --exclude-glob README.md
-                 ./ tmisura.sk/sub/Portfoliotracker/"
+                 ./tmisura.sk/sub/Portfoliotracker/"
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
