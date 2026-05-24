@@ -99,7 +99,7 @@
                         <tbody>
                             <?php
                             //list of transactions
-                                $get_transations = "SELECT * FROM transactions ORDER BY created_at DESC";
+                                $get_transations = "SELECT * FROM transactions ORDER BY created_at DESC and is_closed = 0 ASC   ";
                                 $result = mysqli_query($link, $get_transations) or die("MySQL ERROR: " . mysqli_error($link));
                                 while ($row = mysqli_fetch_array($result)) {
                                     $transaction_id = $row['id'];
