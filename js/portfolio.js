@@ -318,6 +318,9 @@ if(longShortModal){
             const cssClass = e.target.name === "add_long" ? "long" : "short";
             if(modalLongShortMode === "insertLongShort") {
                 document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button " + cssClass + "' name='long_short'>" + value + "</button>";
+            const currTransaction = sessionStorage.getItem("currentTransactionId");
+            updateTransactionLongShort(currTransaction, value);
+            
             } else if(modalLongShortMode === "editLongShort") {
                 const currTransaction = sessionStorage.getItem("currentTransactionId");
                 const btn = document.querySelector("tr[data-id='"+currTransaction+"'] button[name='long_short']");
