@@ -58,14 +58,25 @@ new_transaction_actions_wrapper.addEventListener('click', function(e) {
     if(e.target && e.target.tagName === "BUTTON") {
         if(e.target.name === "new_transaction_close") {
             document.querySelector('.create_transaction_wrapper').style.display = 'none';
-            const lastestTransaction = getLastestTransaction();
-            removeTransaction(LastestTransaction);
+            const lastestTransaction = sessionStorage.getItem("currentTransactionId");
+            removeTransaction(lastestTransaction);
+            alert("New transaction cancelled!");
         } else if (e.target.name ==="new_transaction_reset") {
-            //remove all added item
+            //remove all added item - remove all buttons with data-type attribute
+            const buttons = document.querySelectorAll(".new_transaction button[data-type]");
+            buttons.forEach(button => button.remove());
             
         } else if (e.target.name ==="new_transaction_create"){
             //remove new transaction div "new_transaction"
             //check if therre is any ticker
+            const tickerBtn = document.querySelector(".new_transaction button[name='ticker']");
+            if(!tickerBtn) {
+                alert("Ticker is required!");
+                return;
+            } else {
+                 document.querySelector('.create_transaction_wrapper').style.display = 'none';
+            }
+
             //add created transaction to transaction list
         }
     }
