@@ -57,6 +57,7 @@ btnAddNote.addEventListener('click', function() {
 new_transaction_actions_wrapper.addEventListener('click', function(e) {
     if(e.target && e.target.tagName === "BUTTON") {
         if(e.target.name === "new_transaction_close") {
+            document.querySelector('.new_transaction').style.display = 'none';
             document.querySelector('.create_transaction_wrapper').style.display = 'none';
             const lastestTransaction = sessionStorage.getItem("currentTransactionId");
             removeTransaction(lastestTransaction);
