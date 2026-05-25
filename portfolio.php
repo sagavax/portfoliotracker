@@ -26,6 +26,7 @@
         <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
         <script src="js/clock.js?<?php echo time() ?>" defer></script>
         <script src="js/portfolio.js?<?php echo time() ?>" defer></script>
+        <script src="js/messsage.js?<?php echo time() ?> defer"></script>
         <!-- <script src="js/worldclock.js?<?php echo time() ?>"></script> -->
         
     </head>
@@ -82,13 +83,14 @@
                         <button type="button" name="add_sl" class="button small_button"><i class="fa fa-plus"></i> Add SL</button>
                         <button type="button" name="long_short"><i class="fa fa-plus"></i> Long/Short</button>
                         <button type="button" name="add_currency"><i class="fa fa-plus"></i> Currency</button> 
+                        <button type="button" name="spot_perpetual" class="button small_button" id="spot_perpetual"><i class="fa fa-plus"></i> Spot/Perpetual</button>
                         <button type="button" name="add_note" class="button small_button" id="add_note"><i class="fa fa-plus"></i> Add note</button>
                     </div><!--new_transaction-->
                     <div class="new_transaction">
                         <div class="new_transaction_actions_wrapper">
                             <button name="new_transaction_create" class="secondary">Create</button>
                             <button name="new_transaction_reset" class="secondary">Reset</button>
-                            <button name="new_transaction_close" class="secondary">Close</button>
+                            <button name="new_transaction_cancel" class="secondary">Cancel</button>
                         </div>   
                     </div>    
                  </div>
@@ -114,6 +116,7 @@
                                     $transaction_sl = $row['sl_price'];
                                     $transaction_long_short = $row['type'];
                                     $transaction_created_at = $row['created_at'];
+                                    $transaction_spot_perpetual = $row['spot_perpetual'];
 
                                     echo "<tr class='transaction' data-id='$transaction_id'>";
                                         echo "<td><button type='button' class='button' name='ticker'>$transaction_ticker</button></td>";
@@ -157,8 +160,17 @@
                                             echo "<td><button type='button' class='button' name='long_short'><i class='fa fa-plus'></i> Long/Short</button></td>";
                                         }
                                         
+                                        if($transaction_spot_perpetual) {
+                                            $sp_class = ($transaction_spot_perpetual === "Spot") ? "green" : (($transaction_spot_perpetual === "Perpetual") ? "blue" : "");
+                                            echo "<td><button type='button' class='button ".$sp_class."' name='spot_perpetual'>".$transaction_spot_perpetual."</button></td>";
+                                        } else {
+                                            echo "<td><button type='button' class='button' name='spot_perpetual'><i class='fa fa-plus'></i> Spot / Perpetual</button></td>";
+                                        }
                                         
                                         echo "<td><button type='button' class='button' name='add_note'><i class='fa fa-plus'></i> Add note</button></td>";
+                                        
+                                        echo "<td><button type='button' class='button' name='see_transaction' data-id='$transaction_id'><i class='fa fa-eye'></i> See transaction</button></td>";
+
                                         echo "<td><button type='button' class='button' name='close_transaction' data-id='$transaction_id'><i class='fa fa-times'></i></button></td>";
                                     echo "</tr>";
                                 }
@@ -236,6 +248,18 @@
         </div>
         
         <button id="longShortModalClose" class="secondary">Zatvoriť</button>
+    </div>
+</dialog>
+
+<dialog id="SpotPerpetualModal">
+    <div class="modal-container">
+        <h3>Spot/Perpetual details</h3>
+        <div id="spotPerpetualDetailsContent">
+            <button type="button" name="add_spot" class="button small_button green" id="add_spot"><i class="fa fa-plus"></i> Add Spot</button>
+            <button type="button" name="add_perpetual" class="button small_button blue" id="add_perpetual"><i class="fa fa-plus"></i> Add Perpetual</button>
+        </div>
+        
+        <button id="spotPerpetualModalClose" class="secondary">Zatvoriť</button>
     </div>
 </dialog>
 

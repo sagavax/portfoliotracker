@@ -18,7 +18,8 @@ const modalStopLoss = document.getElementById('modalStopLoss');
 const btnCloseTransaction = document.querySelector('.button[name="close_transaction"]');
 const btnAddNote = document.querySelector('.button[name="add_note"]');
 const modalAddNote = document.getElementById('modalAddNote');
-
+const spotPerpetualBtn = document.querySelector('.button[name="spot_perpetual"]');
+const modalSpotPerpetual = document.getElementById('SpotPerpetualModal');
 
 
 const MODAL_TICKER_MODES = {
@@ -46,8 +47,22 @@ let modalLongShortMode;
 let modalTickerMode;
 let modalProviderMode;
 let modalCategoryMode;
+let modalSpotPerpetualMode;
 
 
+
+spotPerpetualBtn.addEventListener('click', function() {
+    modalSpotPerpetual.showModal();
+})
+
+modalSpotPerpetual.addEventListener('click', function(e) {
+    if(e.target.tagName === "BUTTON") {
+        const value = e.target.name === "add_spot" ? "SPOT" : "PERPETUAL";
+        const transactionId = sessionStorage.getItem("currentTransactionId");
+        updateSpotPerpetual(transactionId, value);
+        modalSpotPerpetual.close();
+    }
+})
 
 btnAddNote.addEventListener('click', function() {
     modalAddNote.showModal();
@@ -56,7 +71,7 @@ btnAddNote.addEventListener('click', function() {
 
 new_transaction_actions_wrapper.addEventListener('click', function(e) {
     if(e.target && e.target.tagName === "BUTTON") {
-        if(e.target.name === "new_transaction_close") {
+        if(e.target.name === "new_transaction_cancel") {
             document.querySelector('.new_transaction').style.display = 'none';
             document.querySelector('.create_transaction_wrapper').style.display = 'none';
             const lastestTransaction = sessionStorage.getItem("currentTransactionId");
@@ -141,6 +156,12 @@ transactionList.addEventListener('click', function(e) {
             modalTakeProfit.showModal();
         } else if (e.target.name === "stop_loss") {
             modalStopLoss.showModal();
+        } else if (e.target.name === "see_transaction") {
+            const transactionId = e.target.closest('.transaction').dataset.id;
+            window.location.href = "transaction_details.php?transaction_id="+transactionId;
+        } else if (e.target.name === "spot_perpetual") {
+            modalSpotPerpetualMode = "editSpotPerpetual";
+            document.getElementById("SpotPerpetualModal").showModal();
         }
     }
 })
@@ -622,4 +643,18 @@ function removeTransaction(id) {
     xhttp.open("POST", "transaction_delete.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`transaction_id=${id}`);
+}   
+
+
+function updateSpotPerpetual(id, value) {
+    console.log("update spot/perpetual:", id, value);
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+        }
+    }
+    xhttp.open("POST", "transaction_update_spot_perpetual.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`transaction_id=${id}&spot_perpetual=${value}`);
 }   

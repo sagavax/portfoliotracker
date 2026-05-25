@@ -93,7 +93,7 @@
 }
 
 
-#tickerDetailsContent, #providerDetailsContent,#longShortDetailsContent, #assetCategoryDetailsContent, #modalPriceContent,#modalCurrencyContent, #modalTakeProfitContent, #modalStopLossContent, #modalAddNoteContent {
+#tickerDetailsContent, #providerDetailsContent,#longShortDetailsContent, #assetCategoryDetailsContent, #modalPriceContent,#modalCurrencyContent, #modalTakeProfitContent, #modalStopLossContent, #modalAddNoteContent, #spotPerpetualDetailsContent {
     display:flex;
     gap: 10px;
     align-items: center;
@@ -101,6 +101,10 @@
     flex-wrap: wrap;
     margin-bottom: 12px;
     margin-top: 12px;
+}
+
+#spotPerpetualDetailsContent {
+    justify-content: center;
 }
 
 #modalPriceContent input, #modalQuantityContent input, #modalTakeProfitContent input, #modalStopLossContent input {
@@ -206,7 +210,7 @@
     background-color: #1a1b1e;
 }
 
-#LongShortModal {
+#LongShortModal, #SpotPerpetualModal {
     width: 350px;
 }
 

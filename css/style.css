@@ -11,10 +11,10 @@
 
     .providers { display:flex; flex-wrap:wrap; gap:12px; justify-content:flex-start; margin-top:12px; margin-bottom:12px; }
 
-   .provider_card { background-color: #435B7C; border:1px solid #eee; padding:12px; border-radius:8px; display:flex; flex-direction:column; gap:8px; height:100px;width:100px; justify-content:center; align-items:center; text-align:center; transition: background-color 0.3s ease; cursor: pointer; }
+   .provider_card {background-color: #253649; border:1px solid #eee; padding:6px; border-radius:8px; display:flex; flex-direction:column; gap:8px; height:60px;width:100px; justify-content:center; align-items:center; text-align:center; transition: background-color 0.3s ease; cursor: pointer; }
    .provider_card:hover { background-color: #4e6a8c; }
 
-
+  .provider_card[data-name="new_provider"] { flex-direction: row;  padding: 5px; width:150px; gap:5px; justify-content: center; align-items: center; }
 
    .sidebar a { display:block;
       width: 100%;
