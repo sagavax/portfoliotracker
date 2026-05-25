@@ -1,18 +1,81 @@
-.create_transaction_wrapper {
+/* ── Transaction column buttons ───────────────── */
+button[name="long_short"],
+button[name="currency"],
+button[name="category"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button[name="provider"],
+button[name="ticker"],
+button[name="asset_category"],
+button[name="long_short"],
+button[name="category"] {
+    width: 150px;
+}
+
+button[name="spot_perpetual"] {
+    width: 160px;
+}
+
+button[name="currency"] {
+    width: 140px;
+}
+
+/* ── Flex row base ────────────────────────────── */
+.transactions_filters,
+.transactions_filter,
+.filter_tickers {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.transactions_filters {
+    margin-bottom: 12px;
+    width: 100%;
+    height: 80px;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 15px;
+}
+
+.filters h3 {
+    margin: 0;
+    font-size: 18px;
+    color: white;
+    padding: 0;
+}
+
+.transactions_filter {
+    margin-bottom: 12px;
+    margin-top: 12px;
+}
+
+.filter_tickers {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+/* ── New transaction card ─────────────────────── */
+.create_transaction_wrapper,
+.new_transaction {
     display: none;
-    width:100%;
-    height:80px;
-    /* background-color: #435B7C; */
+    width: 100%;
+    height: 80px;
     background-color: #1a1b1e;
     color: white;
     font-size: 18px;
     box-sizing: border-box;
-    padding:15px;
-    gap:10px;
+    padding: 15px;
+    gap: 10px;
     align-items: center;
     justify-content: flex-start;
     border: 1px solid #435B7C;
-    
     border-radius: 5px;
     transition: background-color 0.3s ease;
     cursor: pointer;
@@ -20,31 +83,7 @@
 }
 
 .new_transaction {
-    width:100%;
-    display: none;
-    gap: 10px;
-    align-items: center;
-    justify-content: flex-end;
     flex-wrap: wrap;
-    margin-bottom: 5px;
-    margin-top:5px;
-    height:80px;
-    /* border: 1px solid #435B7C; */
-   /*  border:1px solid #1a1b1e; */
-    background-color: #1a1b1e;
-    color: white;
-    font-size: 18px;
-    box-sizing: border-box;
-    padding:15px;
-    gap:10px;
-    align-items: center;
-    justify-content: flex-start;
-    border: 1px solid #435B7C;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-    margin-top: 20px;
-   
 }
 
 .new_transaction_actions_wrapper {
@@ -54,16 +93,7 @@
     gap: 10px;
 }
 
-.transactions_filter {
-    display:flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    margin-bottom: 12px;
-    margin-top: 12px;
-}
-
+/* ── Transaction list ─────────────────────────── */
 .transactions {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -75,26 +105,94 @@
     color: white;
 }
 
-
 .transactions table tr:first-child {
     border-top: 1px solid #435B7C;
 }
 
+.transaction {
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid #435B7C;
+    height: 60px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-left: 10px;
+}
+
+.transaction td {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+}
+
+.transaction:hover {
+    background-color: #1a1b1e;
+}
+
+/* ── Color variants ───────────────────────────── */
+.long {
+    background-color: #00b070;
+    border: 1px solid #00b070;
+}
+
+.long:hover,
+button[name="new_transaction_create"]:hover {
+    background-color: #00b070;
+    border: 1px solid #00b070;
+    cursor: pointer;
+}
+
+.short {
+    background-color: #ff7152;
+    border: 1px solid #ff7152;
+}
+
+.short:hover,
+button[name="close_transaction"]:hover,
+button[name="new_transaction_cancel"]:hover {
+    background-color: #ff7152;
+    border: 1px solid #ff7152;
+    cursor: pointer;
+}
+
+/* ── Modal sizes ──────────────────────────────── */
 #modalPrice, #modalQuantity {
-    width:40%;
+    width: 40%;
 }
 
 #modalCurrency {
-    width:50%;
+    width: 50%;
 }
 
 #modalTakeProfit, #modalStopLoss {
-    width:15%;
+    width: 15%;
 }
 
+#AssetCategoryModal {
+    left: 10%;
+    width: 30%;
+}
 
-#tickerDetailsContent, #providerDetailsContent,#longShortDetailsContent, #assetCategoryDetailsContent, #modalPriceContent,#modalCurrencyContent, #modalTakeProfitContent, #modalStopLossContent, #modalAddNoteContent, #spotPerpetualDetailsContent {
-    display:flex;
+#LongShortModal, #SpotPerpetualModal {
+    width: 350px;
+}
+
+#modalAddNote {
+    left: 10%;
+    width: 50%;
+    height: 50%;
+}
+
+/* ── Modal content containers ─────────────────── */
+#tickerDetailsContent, #providerDetailsContent, #longShortDetailsContent,
+#assetCategoryDetailsContent, #modalPriceContent, #modalCurrencyContent,
+#modalTakeProfitContent, #modalStopLossContent, #modalAddNoteContent,
+#spotPerpetualDetailsContent {
+    display: flex;
     gap: 10px;
     align-items: center;
     justify-content: flex-start;
@@ -103,13 +201,16 @@
     margin-top: 12px;
 }
 
+#longShortDetailsContent,
 #spotPerpetualDetailsContent {
     justify-content: center;
 }
 
-#modalPriceContent input, #modalQuantityContent input, #modalTakeProfitContent input, #modalStopLossContent input {
+/* ── Modal inputs ─────────────────────────────── */
+#modalPriceContent input, #modalQuantityContent input,
+#modalTakeProfitContent input, #modalStopLossContent input {
     width: 100%;
-    height:55px;
+    height: 55px;
     padding: 10px;
     box-sizing: border-box;
     border: 1px solid #435B7C;
@@ -131,27 +232,6 @@
     font-size: 18px;
 }
 
-#AssetCategoryModal {
-    left:10%;
-    width:30%
-}
-
-#modalAddNote {
-    left:10%;
-    width:50%;
-    height:50%;
-}
-
-#modalAddNote button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-self: flex-end;
-    margin-top: 10px;
-    width: 100px;
-    height:50px;
-}
-
 #modalAddNote .modal-container {
     height: 100%;
     display: flex;
@@ -163,78 +243,17 @@
     min-height: 0;
 }
 
-.long  {
-    background-color: #00b070;
-    border: #00b070 1px solid;
-}
-
-.long:hover,button[name="new_transaction_create"]:hover {
-    background-color: #00b070;
-    border: #00b070 1px solid;
-    cursor: pointer;
-}
-
-.short {
-    background-color: #ff7152;
-    border: #ff7152 1px solid;
-}
-
-.short:hover {
-    background-color: #ff7152;
-    border: #ff7152 1px solid;
-    cursor: pointer;
-}
-
-.transaction {
-    width:100%;
-    display: flex;
-    border-bottom: 1px solid #435B7C;
-    height:60px;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
-    margin-bottom: 5px;
-    margin-top:5px;
-    padding-left:10px;
-}
-
-.transaction td {
-    flex: 1;
-    min-width: 0;
+#modalAddNote button {
     display: flex;
     align-items: center;
-}
-
-.transaction:hover {
-    background-color: #6283b3;
-    background-color: #1a1b1e;
-}
-
-#LongShortModal, #SpotPerpetualModal {
-    width: 350px;
-}
-
-#longShortDetailsContent {
     justify-content: center;
+    align-self: flex-end;
+    margin-top: 10px;
+    width: 100px;
+    height: 50px;
 }
 
-button[name="close_transaction"]:hover, button[name="new_transaction_close"]:hover {
-    background-color: #ff7152;
-    border: #ff7152 1px solid;
-    cursor: pointer;
-
-}
-
-.filter_tickers {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    margin-bottom: 5px;
-    margin-top:5px;
-}
-
+/* ── Search ───────────────────────────────────── */
 .search_wrapper {
     width: 100%;
     display: flex;
@@ -242,8 +261,8 @@ button[name="close_transaction"]:hover, button[name="new_transaction_close"]:hov
     justify-content: flex-start;
     flex-wrap: wrap;
     margin-bottom: 5px;
-    margin-top:5px;
-    height:60%;
+    margin-top: 5px;
+    height: 60%;
 }
 
 .search_wrapper input {
@@ -255,4 +274,3 @@ button[name="close_transaction"]:hover, button[name="new_transaction_close"]:hov
     color: white;
     background-color: #253649;
 }
-
