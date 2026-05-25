@@ -67,6 +67,15 @@
                     <button type="button" class="filter_button" data-filter="stocks">Akcie</button>
                     <button type="button" class="filter_button" data-filter="crypto">Kryptoměny</button>
                     <button type="button" class="filter_button" data-filter="etf">ETF</button>
+                    <button type="button" class="filter_button" data-filter="options">Opcie</button>
+                    <button type="button" class="filter_button" data-filter="bonds">Dlhopis(y)</button>
+                    <button type="button" class="filter_button" data-filter="forex">Forex</button>
+                    <button type="button" class="filter_button" data-filter="commodities">Komoditý</button>
+                    <button type="button" class="filter_button" data-filter="indices">Indexy</button>
+                    <button type="button" class="filter_button" data-filter="spot">Spot</button>
+                    <button type="button" class="filter_button" data-filter="perpetual">Perpetual</button>
+                    <button type="button" class="filter_button" data-filter="manual">Manual</button>
+                    <button type="button" class="filter_button" data-filter="bot">Bot</button>
                     <button type="button" class="filter_button" data-filter="other">Ostatní</button>
                     <button type="button" class="filter_button" data-filter="active">Aktivní</button>
                     <button type="button" class="filter_button" data-filter="closed">Uzavřené</button>                    
@@ -117,6 +126,7 @@
                                     $transaction_long_short = $row['type'];
                                     $transaction_created_at = $row['created_at'];
                                     $transaction_spot_perpetual = $row['spot_perpetual'];
+                                    $transaction_manual_bot = $row['manual_bot'];
 
                                     echo "<tr class='transaction' data-id='$transaction_id'>";
                                         echo "<td><button type='button' class='button' name='ticker'>$transaction_ticker</button></td>";
@@ -167,6 +177,13 @@
                                             echo "<td><button type='button' class='button' name='spot_perpetual'><i class='fa fa-plus'></i> Spot / Perpetual</button></td>";
                                         }
                                         
+                                        if($transaction_manual_bot) {
+                                            $mb_class = ($transaction_manual_bot === "MANUAL") ? "green" : (($transaction_manual_bot === "BOT") ? "blue" : "");
+                                            echo "<td><button type='button' class='button ".$mb_class."' name='manual_bot'>".$transaction_manual_bot."</button></td>";
+                                        } else {
+                                            echo "<td><button type='button' class='button' name='manual_bot'><i class='fa fa-plus'></i> Manual / Bot</button></td>";
+                                        }
+
                                         echo "<td><button type='button' class='button' name='add_note'><i class='fa fa-plus'></i> Add note</button></td>";
                                         
                                         echo "<td><button type='button' class='button' name='see_transaction' data-id='$transaction_id'><i class='fa fa-eye'></i> See transaction</button></td>";
@@ -306,4 +323,15 @@
     <div id="modalAddNoteContent"><textarea placeholder="Add note" autocomplete="off"></textarea></div>
     <button id="saveNote" class="secondary">Save</button>
   </div>
+</dialog>
+
+<dialog id="manualBotModal">
+    <div class="modal-container">
+        <h3>Manual bot</h3>
+        <div id="manualBotDetailsContent">
+            <button type="button" name="manual_bot_on" class="button small_button green" id="manual_bot_on"><i class="fa fa-plus"></i> Manual</button>
+            <button type="button" name="manual_bot_off" class="button small_button red" id="manual_bot_off"><i class="fa fa-plus"></i> Bot</button>
+        </div>
+        <button id="manualBotModalClose" class="secondary">Close</button>
+    </div>
 </dialog>

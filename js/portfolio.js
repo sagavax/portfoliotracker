@@ -59,6 +59,7 @@ modalSpotPerpetual.addEventListener('click', function(e) {
     if(e.target.tagName === "BUTTON") {
         const value = e.target.name === "add_spot" ? "SPOT" : "PERPETUAL";
         const transactionId = sessionStorage.getItem("currentTransactionId");
+        document.querySelector('tr[data-id="'+transactionId+'"] .button[name="spot_perpetual"]').textContent = value;
         updateSpotPerpetual(transactionId, value);
         modalSpotPerpetual.close();
     }
