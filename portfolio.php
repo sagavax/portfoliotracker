@@ -50,19 +50,11 @@
                 </nav>
             </div>
             <div class="content">
-                <h1>Vitajte v Portfolio Tracker Notes</h1>
-                <p>Tu můžete přidávat poznámky k jednotlivým transakcím.</p>
+                <h1>Vitajte v Portfolio Tracker</h1>
+                <p>Zoznam jednotlivych transakci.</p>
                 
                 
-                <div class="filter_active_providers">
-                    <h3>Aktivní poskytovatelia:</h3>
-                    <?php
-                     //list of providets where is
-                    
-                    ?>
-                 </div>
-                
-                 <div class="transactions_filter">
+                 <div class="transactions_filters">
                     <button type="button" class="filter_button" data-filter="all">Vše</button>
                     <button type="button" class="filter_button" data-filter="stocks">Akcie</button>
                     <button type="button" class="filter_button" data-filter="crypto">Kryptoměny</button>
@@ -80,7 +72,7 @@
                     <button type="button" class="filter_button" data-filter="active">Aktivní</button>
                     <button type="button" class="filter_button" data-filter="closed">Uzavřené</button>                    
                     <button type="button" name="add_transation" class="button small_button" id="btnAddNewtransaction"><i class="fa fa-plus"></i> Přidat transakci</button>
-                    
+                 </div>    
                    <!-- create new transaction -->
                     <div class="create_transaction_wrapper">
                         <button type="button" name="add_ticker" class="button small_button" id="add_ticker"><i class="fa fa-plus"></i> Add ticker</button>
@@ -95,6 +87,7 @@
                         <button type="button" name="spot_perpetual" class="button small_button" id="spot_perpetual"><i class="fa fa-plus"></i> Spot/Perpetual</button>
                         <button type="button" name="add_note" class="button small_button" id="add_note"><i class="fa fa-plus"></i> Add note</button>
                     </div><!--new_transaction-->
+
                     <div class="new_transaction">
                         <div class="new_transaction_actions_wrapper">
                             <button name="new_transaction_create" class="secondary">Create</button>
@@ -102,7 +95,6 @@
                             <button name="new_transaction_cancel" class="secondary">Cancel</button>
                         </div>   
                     </div>    
-                 </div>
                 <div class="transactions">
                     <table>
                         <thead>
@@ -214,7 +206,7 @@
   </div>
 </dialog>
 
-<dialog id="AssetCategoryModal">
+<dialog id="modalAssetCategory">
     <div class="modal-container">
         <h3>Asset category</h3>
         <div id="assetCategoryDetailsContent">
@@ -229,7 +221,7 @@
     </div>
 </dialog>
 
-<dialog id="ProviderModal">
+<dialog id="modalProvider">
     <div class="modal-container">
         <h3>Provider details</h3>
         <div id="providerDetailsContent"></div>
@@ -238,7 +230,7 @@
 </dialog>
 
 
-<dialog id="TickerModal">
+<dialog id="modalTicker">
     <div class="modal-container">
         <h3>Ticker details</h3>
         <div class="filter_tickers">
@@ -256,7 +248,7 @@
     </div>
 </dialog>
 
-<dialog id="LongShortModal">
+<dialog id="modalLongShort">
     <div class="modal-container">
         <h3>Long/Short details</h3>
         <div id="longShortDetailsContent">
@@ -268,7 +260,7 @@
     </div>
 </dialog>
 
-<dialog id="SpotPerpetualModal">
+<dialog id="modalSpotPerpetualModal">
     <div class="modal-container">
         <h3>Spot/Perpetual details</h3>
         <div id="spotPerpetualDetailsContent">
@@ -280,7 +272,7 @@
     </div>
 </dialog>
 
-<dialog id="NoteModal">
+<dialog id="modelNote">
     <div class="modal-container">
         <h3>Note details</h3>
         <div id="noteDetailsContent"><textarea id="note_text"></textarea></div>
