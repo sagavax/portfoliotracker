@@ -21,7 +21,6 @@ const modalAddNote = document.getElementById('modalAddNote');
 const spotPerpetualBtn = document.querySelector('.button[name="spot_perpetual"]');
 const modalSpotPerpetual = document.getElementById('modalSpotPerpetualModal');
 
-
 const MODAL_TICKER_MODES = {
   INSERT: "insertTicker",
   EDIT: "editTicker",
@@ -50,6 +49,19 @@ let modalCategoryMode;
 let modalSpotPerpetualMode;
 
 
+
+document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Enter') return;
+    if (e.target.classList.contains('price')) {
+        e.preventDefault();
+        const transactionId = e.target.closest('.transaction').dataset.id;
+        updateTransactionEntryPrice(transactionId, e.target.textContent.trim());
+    } else if (e.target.classList.contains('quantity')) {
+        e.preventDefault();
+        const transactionId = e.target.closest('.transaction').dataset.id;
+        updateTransactionQuantity(transactionId, e.target.textContent.trim());
+    }
+});
 
 spotPerpetualBtn.addEventListener('click', function() {
     modalSpotPerpetual.showModal();
@@ -659,3 +671,5 @@ function updateSpotPerpetual(id, value) {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`transaction_id=${id}&spot_perpetual=${value}`);
 }   
+
+
