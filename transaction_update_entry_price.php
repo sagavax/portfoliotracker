@@ -9,6 +9,7 @@
 
 
     $update_entry_price = "UPDATE transactions SET entry_price='$entry_price' WHERE id='$transaction_id'";
+    ///echo $update_entry_price;
     $result = mysqli_query($link, $update_entry_price) or die(mysqli_error($link));
 
     echo json_encode(["status" => "success", "message" => "Transaction entry price updated successfully"]);

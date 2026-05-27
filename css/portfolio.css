@@ -125,38 +125,43 @@ button[name="currency"] {
 .transaction td {
     flex: 1;
     min-width: 0;
+    height: 100%;
     display: flex;
     align-items: center;
-}
-
-.transaction:hover {
-    background-color: #1a1b1e;
 }
 
 /* ── Color variants ───────────────────────────── */
 .long {
     background-color: #00b070;
     border: 1px solid #00b070;
+        height: 80%;
+        border-radius: 6px;
 }
 
 .long:hover,
 button[name="new_transaction_create"]:hover {
-    background-color: #00b070;
-    border: 1px solid #00b070;
+    opacity: 0.8;
     cursor: pointer;
 }
 
 .short {
     background-color: #ff7152;
     border: 1px solid #ff7152;
+    height: 80%;
+    border-radius: 6px;
 }
 
 .short:hover,
 button[name="close_transaction"]:hover,
 button[name="new_transaction_cancel"]:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+button[name="close_transaction"]:hover,
+button[name="new_transaction_cancel"]:hover {
     background-color: #ff7152;
     border: 1px solid #ff7152;
-    cursor: pointer;
 }
 
 /* ── Modal sizes ──────────────────────────────── */
@@ -273,4 +278,28 @@ button[name="new_transaction_cancel"]:hover {
     border-radius: 5px;
     color: white;
     background-color: #253649;
+}
+
+.quantity,
+.price {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity[contenteditable="true"]:hover,
+.price[contenteditable="true"]:hover {
+    background-color: #1a1b1e;
+    border:0px;
+    cursor: pointer;
+    outline: none;
+}
+
+.quantity[contenteditable="true"]:focus,
+.price[contenteditable="true"]:focus {
+outline: none;
 }

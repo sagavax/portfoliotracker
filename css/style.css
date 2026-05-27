@@ -11,10 +11,10 @@
 
     .providers { display:flex; flex-wrap:wrap; gap:12px; justify-content:flex-start; margin-top:12px; margin-bottom:12px; }
 
-   .provider_card {background-color: #253649; border:1px solid #eee; padding:6px; border-radius:8px; display:flex; flex-direction:column; gap:8px; height:60px;width:100px; justify-content:center; align-items:center; text-align:center; transition: background-color 0.3s ease; cursor: pointer; }
+   .provider_card {background-color: #253649; padding: 10px 12px;border:1px solid #eee; border-radius:8px; display:flex; flex-direction:column; gap:8px; justify-content:center; align-items:center; text-align:center; transition: background-color 0.3s ease; cursor: pointer; }
    .provider_card:hover { background-color: #4e6a8c; }
 
-  .provider_card[data-name="new_provider"] { flex-direction: row;  padding: 5px; width:150px; gap:5px; justify-content: center; align-items: center; }
+  .provider_card[data-name="new_provider"] { flex-direction: row;  padding: 10px 12px; width:150px; gap:5px; justify-content: center; align-items: center; }
 
    .sidebar a { display:block;
       width: 100%;
@@ -29,9 +29,13 @@
    .sidebar li:hover {background-color: #1a1b1e; cursor: pointer; }
    /* .sidebar a:hover { background-color: #4e6a8c; } */
 
-   button {background-color: #253649; border: 1px #435B7C solid; border-radius: 8px ; color: white; padding: 10px 20px; text-align: center; display: flex; align-items: center; gap:10px;}
+   button {background-color: #253649; border: 1px #435B7C solid; border-radius: 6px ; color: white; padding: 10px 20px; text-align: center; display: flex; align-items: center; gap:10px;}
 
    button:hover { background-color: #4e6a8c; border: 2px #fff solid}
+
+   .transaction_button {background-color: #0d0d0d;color: white; padding: 10px 20px; display: flex; align-items: center; justify-content: center; gap:10px; height:100%; border:1px solid #0d0d0d;border-radius:0}   
+
+   .transaction_button:hover { background-color: #1a1b1e; border:1px solid #1a1b1e; cursor: pointer; }
 
    dialog {
       min-height: 100px;
