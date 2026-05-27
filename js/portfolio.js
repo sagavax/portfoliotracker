@@ -56,10 +56,16 @@ document.addEventListener('keydown', function(e) {
         e.preventDefault();
         const transactionId = e.target.closest('.transaction').dataset.id;
         updateTransactionEntryPrice(transactionId, e.target.textContent.trim());
+        if (e.target.textContent.trim() === "") {
+            e.target.outerHTML = "<button type='button' class='button' name='add_entry_price'><i class='fa fa-plus'></i> Add price</button>";
+        }
     } else if (e.target.classList.contains('quantity')) {
         e.preventDefault();
         const transactionId = e.target.closest('.transaction').dataset.id;
         updateTransactionQuantity(transactionId, e.target.textContent.trim());
+        if (e.target.textContent.trim() === "") {
+            e.target.outerHTML = "<button type='button' class='button' name='add_quantity'><i class='fa fa-plus'></i> Add quantity</button>";
+        }
     }
 });
 
