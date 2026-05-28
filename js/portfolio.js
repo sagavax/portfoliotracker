@@ -371,16 +371,20 @@ if(tickerModal) {
                 updateTransactionTicker(currTransaction,ticker);
                 tickerModal.close();
             } else if (modalTickerMode === MODAL_TICKER_MODES.EDIT) {
-                if(e.target.name="letterButton") {
-                    filterTickers(e.target.textContent);
+                if(e.target.getAttribute("data-letter")) {
+                    GetTickers(e.target.getAttribute("data-letter"));
                     return;
-                }
-                const ticker = e.target.getAttribute("data-ticker");
-                const currTransaction = sessionStorage.getItem("currentTransactionId");
-                console.log("current transaction:", currTransaction);
-                document.querySelector("tr[data-id='"+currTransaction+"'] button[name='ticker']").innerHTML = ticker;
-                updateTransactionTicker(currTransaction,ticker);    
-                tickerModal.close();                
+                } else if (e.target.getAttribute("data-ticker")) {
+                    console.log(e.target.getAttribute("data-ticker"));
+                    //clicked on ticker button but not on letter button
+                    const ticker = e.target.getAttribute("data-ticker");
+                    const currTransaction = sessionStorage.getItem("currentTransactionId");
+                    console.log("current transaction:", currTransaction);
+                    document.querySelector("tr[data-id='"+currTransaction+"'] button[name='ticker']").innerHTML = ticker;
+                    updateTransactionTicker(currTransaction,ticker);    
+                    tickerModal.close();                
+                }               
+                
             }
         }
     })
@@ -433,7 +437,7 @@ if(longShortModal){
 }
 
 
-function GetTickers(letter){
+function GetTickers(letter = ''){
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
