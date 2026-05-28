@@ -1,3 +1,5 @@
+
+
 /* ── Transaction column buttons ───────────────── */
 button[name="long_short"],
 button[name="currency"],
@@ -21,6 +23,10 @@ button[name="spot_perpetual"] {
 
 button[name="currency"] {
     width: 140px;
+}
+
+button[name="add_entry_price"] {
+    width: 100%;
 }
 
 /* ── Flex row base ────────────────────────────── */
@@ -62,6 +68,19 @@ button[name="currency"] {
 }
 
 /* ── New transaction card ─────────────────────── */
+.transaction_filters_buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.create_transaction_action_wrapper {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
 .create_transaction_wrapper,
 .new_transaction {
     display: none;
@@ -140,7 +159,8 @@ button[name="currency"] {
 
 .long:hover,
 button[name="new_transaction_create"]:hover {
-    opacity: 0.8;
+    background-color: #00b070;
+    border: 1px solid #00b070;
     cursor: pointer;
 }
 
@@ -165,8 +185,8 @@ button[name="new_transaction_cancel"]:hover {
 }
 
 /* ── Modal sizes ──────────────────────────────── */
-#modalPrice, #modalQuantity {
-    width: 40%;
+#modalPrice, #modalQuantity, #modalLongShort {
+    width: 20%;
 }
 
 #modalCurrency {
@@ -301,5 +321,5 @@ button[name="new_transaction_cancel"]:hover {
 
 .quantity[contenteditable="true"]:focus,
 .price[contenteditable="true"]:focus {
-outline: none;
+    outline: none;
 }
