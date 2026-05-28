@@ -121,7 +121,7 @@ new_transaction.addEventListener('click', function(e) {
         } else if (e.target.name ==="new_transaction_create"){
             //remove new transaction div "new_transaction"
             //check if therre is any ticker
-            const tickerBtn = document.querySelector(".new_transaction button[name='ticker']");
+            const tickerBtn = document.querySelector(".new_transaction button[data-ticker]");
             if(!tickerBtn) {
                 alert("Ticker is required!");
                 return;
@@ -223,7 +223,6 @@ search_in_ticker.addEventListener('input', function(e) {
 
 //add new transaction
 btnAddTransaction.addEventListener('click', function(e) {
-    console.log('click');
     document.querySelector('.create_transaction_wrapper').style.display = 'flex';
     document.querySelector('.new_transaction').style.display = 'flex';
     //create a new transaction in db
@@ -372,6 +371,10 @@ if(tickerModal) {
                 updateTransactionTicker(currTransaction,ticker);
                 tickerModal.close();
             } else if (modalTickerMode === MODAL_TICKER_MODES.EDIT) {
+                if(e.target.name="letterButton") {
+                    filterTickers(e.target.textContent);
+                    return;
+                }
                 const ticker = e.target.getAttribute("data-ticker");
                 const currTransaction = sessionStorage.getItem("currentTransactionId");
                 console.log("current transaction:", currTransaction);
@@ -430,7 +433,7 @@ if(longShortModal){
 }
 
 
-function GetTickers(){
+function GetTickers(letter){
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -439,7 +442,7 @@ function GetTickers(){
             console.log(tickers); */
         }
     }
-    xhttp.open("GET", "tickers_get.php", true);
+    xhttp.open("GET", "tickers_get.php?letter="+letter, true);
     xhttp.send();
 }
 
@@ -693,3 +696,15 @@ function updateSpotPerpetual(id, value) {
 }   
 
 
+function filterTickers(letter) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            document.getElementById("newTransactionContent").innerHTML = this.responseText;
+        }
+    }
+    xhttp.open("POST", "transaction_filter_tickers.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`letter=${letter}`);
+}
