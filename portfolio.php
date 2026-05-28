@@ -55,24 +55,29 @@
                 
                 
                  <div class="transactions_filters">
-                    <button type="button" class="filter_button" data-filter="all">Vše</button>
-                    <button type="button" class="filter_button" data-filter="stocks">Akcie</button>
-                    <button type="button" class="filter_button" data-filter="crypto">Kryptoměny</button>
-                    <button type="button" class="filter_button" data-filter="etf">ETF</button>
-                    <button type="button" class="filter_button" data-filter="options">Opcie</button>
-                    <button type="button" class="filter_button" data-filter="bonds">Dlhopis(y)</button>
-                    <button type="button" class="filter_button" data-filter="forex">Forex</button>
-                    <button type="button" class="filter_button" data-filter="commodities">Komoditý</button>
-                    <button type="button" class="filter_button" data-filter="indices">Indexy</button>
-                    <button type="button" class="filter_button" data-filter="spot">Spot</button>
-                    <button type="button" class="filter_button" data-filter="perpetual">Perpetual</button>
-                    <button type="button" class="filter_button" data-filter="manual">Manual</button>
-                    <button type="button" class="filter_button" data-filter="bot">Bot</button>
-                    <button type="button" class="filter_button" data-filter="other">Ostatní</button>
-                    <button type="button" class="filter_button" data-filter="active">Aktivní</button>
-                    <button type="button" class="filter_button" data-filter="closed">Uzavřené</button>                    
-                    <button type="button" name="add_transation" class="button small_button" id="btnAddNewtransaction"><i class="fa fa-plus"></i> Přidat transakci</button>
-                 </div>    
+                    <div class="transaction_filters_buttons">
+                        <button type="button" class="filter_button" data-filter="all">Vše</button>
+                        <button type="button" class="filter_button" data-filter="stocks">Akcie</button>
+                        <button type="button" class="filter_button" data-filter="crypto">Kryptoměny</button>
+                        <button type="button" class="filter_button" data-filter="etf">ETF</button>
+                        <button type="button" class="filter_button" data-filter="options">Opcie</button>
+                        <button type="button" class="filter_button" data-filter="bonds">Dlhopis(y)</button>
+                        <button type="button" class="filter_button" data-filter="forex">Forex</button>
+                        <button type="button" class="filter_button" data-filter="commodities">Komoditý</button>
+                        <button type="button" class="filter_button" data-filter="indices">Indexy</button>
+                        <button type="button" class="filter_button" data-filter="spot">Spot</button>
+                        <button type="button" class="filter_button" data-filter="perpetual">Perpetual</button>
+                        <button type="button" class="filter_button" data-filter="manual">Manual</button>
+                        <button type="button" class="filter_button" data-filter="bot">Bot</button>
+                        <button type="button" class="filter_button" data-filter="other">Ostatní</button>
+                        <button type="button" class="filter_button" data-filter="active">Aktivní</button>
+                        <button type="button" class="filter_button" data-filter="closed">Uzavřené</button>                    
+                    </div><!-- transaction_filters_buttons -->
+                    <div class="create_transaction_action_wrapper">
+                        <button type="button" name="add_transation" class="button small_button" id="btnAddNewtransaction"><i class="fa fa-plus"></i> Přidat transakci</button>
+                    </div><!-- create_transaction_action_wrapper -->
+
+                 </div><!-- transactions_filters -->    
                    <!-- create new transaction -->
                     <div class="create_transaction_wrapper">
                         <button type="button" name="add_ticker" class="button small_button" id="add_ticker"><i class="fa fa-plus"></i> Add ticker</button>
@@ -121,7 +126,12 @@
                                     $transaction_manual_bot = $row['manual_bot'];
 
                                     echo "<tr class='transaction' data-id='$transaction_id'>";
-                                        echo "<td><button type='button' class='transaction_button' name='ticker'>$transaction_ticker</button></td>";
+                                     
+                                        if($transaction_ticker) {
+                                            echo "<td><button type='button' class='transaction_button' name='ticker'>$transaction_ticker</button></td>";
+                                        } else {
+                                            echo "<td><button type='button' class='transaction_button' name='ticker'><i class='fa fa-plus'></i> Add ticker</button></td>";
+                                        }
                                         
                                         if($transaction_provider) {
                                             echo "<td><button type='button' class='transaction_button' name='provider'>$transaction_provider</button></td>";
