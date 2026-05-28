@@ -12,13 +12,10 @@ const modalQuantityInput = document.querySelector('#modalQuantity input');
 const modalCurrency = document.getElementById('modalCurrency');
 const modalCategory = document.getElementById('modalCategory');
 const transactionList = document.querySelector('.transactions');
-const new_transaction_actions_wrapper = document.querySelector('.new_transaction_actions_wrapper');
+const new_transaction = document.querySelector('.new_transaction');
 const modalTakeProfit = document.getElementById('modalTakeProfit');
 const modalStopLoss = document.getElementById('modalStopLoss');
-const btnCloseTransaction = document.querySelector('.button[name="close_transaction"]');
-const btnAddNote = document.querySelector('.button[name="add_note"]');
 const modalAddNote = document.getElementById('modalAddNote');
-const spotPerpetualBtn = document.querySelector('.button[name="spot_perpetual"]');
 const modalSpotPerpetual = document.getElementById('modalSpotPerpetualModal');
 
 const MODAL_TICKER_MODES = {
@@ -50,7 +47,7 @@ let modalSpotPerpetualMode;
 
 
 
-document.addEventListener('keydown', function(e) {
+/* document.addEventListener('keydown', function(e) {
     if (e.key !== 'Enter') return;
     if (e.target.classList.contains('price')) {
         e.preventDefault();
@@ -67,11 +64,31 @@ document.addEventListener('keydown', function(e) {
             e.target.outerHTML = "<button type='button' class='button' name='add_quantity'><i class='fa fa-plus'></i> Add quantity</button>";
         }
     }
-});
+}); */
 
-spotPerpetualBtn.addEventListener('click', function() {
-    modalSpotPerpetual.showModal();
-})
+document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Enter') return;
+    
+    const isPrice = e.target.classList.contains('price');
+    const isQuantity = e.target.classList.contains('quantity');
+    if (!isPrice && !isQuantity) return;
+    
+    e.preventDefault();
+    const transactionId = e.target.closest('.transaction').dataset.id;
+    const value = e.target.textContent.trim();
+    
+    if (isPrice) {
+        updateTransactionEntryPrice(transactionId, value);
+        if (value === "") {
+            e.target.outerHTML = "<button type='button' class='button' name='add_entry_price'><i class='fa fa-plus'></i> Add price</button>";
+        }
+    } else {
+        updateTransactionQuantity(transactionId, value);
+        if (value === "") {
+            e.target.outerHTML = "<button type='button' class='button' name='add_quantity'><i class='fa fa-plus'></i> Add quantity</button>";
+        }
+    }
+});
 
 modalSpotPerpetual.addEventListener('click', function(e) {
     if(e.target.tagName === "BUTTON") {
@@ -83,12 +100,7 @@ modalSpotPerpetual.addEventListener('click', function(e) {
     }
 })
 
-btnAddNote.addEventListener('click', function() {
-    modalAddNote.showModal();
-})
-
-
-new_transaction_actions_wrapper.addEventListener('click', function(e) {
+new_transaction.addEventListener('click', function(e) {
     if(e.target && e.target.tagName === "BUTTON") {
         if(e.target.name === "new_transaction_cancel") {
             document.querySelector('.new_transaction').style.display = 'none';
@@ -125,63 +137,45 @@ new_transaction_actions_wrapper.addEventListener('click', function(e) {
 
 
 transactionList.addEventListener('click', function(e) {
-    if(e.target && e.target.tagName === "BUTTON") {
-        //get current transaction id
-        const transactionId = e.target.closest('.transaction').dataset.id;
-        console.log("transaction id:", transactionId);
-        sessionStorage.setItem("currentTransactionId", transactionId);
-        if(e.target.name === "ticker") {
-            if(e.target.innerHTML===""){
-                console.log("no ticker");
-                tickerModal.showModal();
-                modalTickerMode = "editTicker";
-                GetTickers();
-            } 
-            
-        } else if (e.target.name ==="provider") {
-            const transactionId = e.target.closest('.transaction').dataset.id;
-            sessionStorage.setItem("currentTransactionId", transactionId);
-            console.log("transaction id:", transactionId);
-            //let modalProviderMode = MODAL_PROVIDER_MODES.EDIT
-            modalProviderMode = "editProvider";
-            document.getElementById("modalProvider").showModal();
-            GetProviders();
-            
-        } else if (e.target.name ==="category") {
-            const transactionId = e.target.closest('.transaction').dataset.id;
-            //console.log("transaction id:", transactionId);
-            sessionStorage.setItem("currentTransactionId", transactionId);
-            modalCategoryMode = "editCategory";
-            console.log("modal category mode:", modalCategoryMode);
-            document.getElementById("modalAssetCategory").showModal();
-            //GetAssetCategories();
-            
-        }else if (e.target.name ==="currency") {
-            alert("currency");
-        } else if(e.target.name ==="long_short") {
-            modalLongShortMode = LONG_SHORT_MODES.EDIT;
-            console.log("modal long short mode:", modalLongShortMode);
-            document.getElementById("modalLongShort").showModal();            
-        } else if (e.target.name ==="close_transaction") {
-            const transactionId = e.target.closest('.transaction').dataset.id;
-            closeTransaction(transactionId);
-        } else if (e.target.name ==="add_note"){
-            modalAddNote.showModal();
-        } else if (e.target.name ==="add_quantity") {
-            document.getElementById("modalQuantity").showModal();
-        } else if (e.target.name ==="add_entry_price") {
-            document.getElementById("modalPrice").showModal();
-        } else if (e.target.name==="take_profit" ) {
-            modalTakeProfit.showModal();
-        } else if (e.target.name === "stop_loss") {
-            modalStopLoss.showModal();
-        } else if (e.target.name === "see_transaction") {
-            const transactionId = e.target.closest('.transaction').dataset.id;
-            window.location.href = "transaction_details.php?transaction_id="+transactionId;
-        } else if (e.target.name === "spot_perpetual") {
-            modalSpotPerpetualMode = "editSpotPerpetual";
-            document.getElementById("modalSpotPerpetualModal").showModal();
-        }
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    const transactionId = btn.closest('.transaction').dataset.id;
+    console.log("transaction id:", transactionId + " name: " + btn.name);
+    sessionStorage.setItem("currentTransactionId", transactionId);
+
+    if (btn.name === "ticker") {
+        tickerModal.showModal();
+        modalTickerMode = "editTicker";
+        GetTickers();
+    } else if (btn.name === "provider") {
+        modalProviderMode = "editProvider";
+        document.getElementById("modalProvider").showModal();
+        GetProviders();
+    } else if (btn.name === "category") {
+        modalCategoryMode = "editCategory";
+        document.getElementById("modalAssetCategory").showModal();
+    } else if (btn.name === "currency") {
+        alert("currency");
+    } else if (btn.name === "long_short") {
+        modalLongShortMode = LONG_SHORT_MODES.EDIT;
+        document.getElementById("modalLongShort").showModal();
+    } else if (btn.name === "close_transaction") {
+        closeTransaction(transactionId);
+    } else if (btn.name === "add_note") {
+        modalAddNote.showModal();
+    } else if (btn.name === "add_quantity") {
+        document.getElementById("modalQuantity").showModal();
+    } else if (btn.name === "add_entry_price") {
+        document.getElementById("modalPrice").showModal();
+    } else if (btn.name === "take_profit") {
+        modalTakeProfit.showModal();
+    } else if (btn.name === "stop_loss") {
+        modalStopLoss.showModal();
+    } else if (btn.name === "see_transaction") {
+        window.location.href = "transaction_details.php?transaction_id=" + transactionId;
+    } else if (btn.name === "spot_perpetual") {
+        modalSpotPerpetualMode = "editSpotPerpetual";
+        document.getElementById("modalSpotPerpetualModal").showModal();
     }
 })
 
@@ -277,37 +271,57 @@ modalPriceInput.addEventListener('input', function(e) {
 })
 
 modalPriceInput.addEventListener('keydown', function(e) {
-    if(e.key === "Enter") {
-        e.preventDefault();
-        const price = e.target.value.trim();
-        if(!price) return;
-        const existing = document.querySelector(".new_transaction [data-type='price']");
-        if(existing) {
-            existing.textContent = price;
-        } else {
-            document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-type='price'>"+price+"</button>";
-            updateTransactionEntryPrice(sessionStorage.getItem("currentTransactionId"), price);
-        }
-        modalPrice.close();
-    }
-})
+    if (e.key !== "Enter") return;
+    e.preventDefault();
+    
+    const price = e.target.value.trim();
+    if (!price) return;
+    
+    const transactionId = sessionStorage.getItem("currentTransactionId");
+    //const transaction = document.querySelector(`.tdtransaction[data-id="${transactionId}"]`);
+    
+    if (!transaction) return;
+    
+    const existing = transaction.querySelector("[data-type='price']");
+    if (existing) {
+        existing.textContent = price;
+    } else {
+        //transaction.insertAdjacentHTML('beforeend',
+        //    `<button type='button' class='button' data-type='price'>${price}</button>`
+        const transaction = document.querySelector("tr[data-id='"+transactionId+"'] button[name='add_entry_price']");
+        transaction.outerHTML="<div class='quantity' contenteditable='true'>"+price+"</div>";
+     }
+    
+    updateTransactionEntryPrice(transactionId, price);
+    modalPrice.close();
+});
+
 
 modalQuantityInput.addEventListener('keydown', function(e) {
-    if(e.key === "Enter") {
-        e.preventDefault();
-        const quantity = e.target.value.trim();
-        if(!quantity) return;
-        const existing = document.querySelector(".new_transaction [data-type='quantity']");
-        if(existing) {
-            existing.textContent = quantity;
-        } else {
-            document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-type='quantity'>"+quantity+"</button>";
-            updateTransactionQuantity(sessionStorage.getItem("currentTransactionId"), quantity);
-            modalQuantity.close();
-        }
-        modalQuantity.close();
-    }
-})
+    if (e.key !== "Enter") return;
+    e.preventDefault();
+    
+    const quantity = e.target.value.trim();
+    if (!quantity) return;
+    
+    const transactionId = sessionStorage.getItem("currentTransactionId");
+    //const transaction = document.querySelector(`.transaction[data-id="${transactionId}"]`);
+    const transaction = document.querySelector("tr[data-id='"+transactionId+"'] button[name='add_quantity']");
+    if (!transaction) return;
+    
+    const existing = transaction.querySelector("[data-type='quantity']");
+    if (existing) {
+        existing.textContent = quantity;
+    } else {
+        //transaction.insertAdjacentHTML('beforeend',
+        //    `<button type='button' class='button' data-type='quantity'>${quantity}</button>`
+
+        transaction.outerHTML="<div class='quantity' contenteditable='true'>"+quantity+"</div>";
+            }
+    
+    updateTransactionQuantity(transactionId, quantity);
+    modalQuantity.close();
+});
 
 
 
