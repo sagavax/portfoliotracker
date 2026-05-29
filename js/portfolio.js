@@ -18,6 +18,7 @@ const modalStopLoss = document.getElementById('modalStopLoss');
 const modalAddNote = document.getElementById('modalAddNote');
 const modalSpotPerpetual = document.getElementById('modalSpotPerpetualModal');
 const transactions_filters = document.querySelector('.transactions_filters');
+const selectCurrency = document.getElementById('currency');
 
 
 const MODAL_TICKER_MODES = {
@@ -46,20 +47,22 @@ let modalTickerMode;
 let modalProviderMode;
 let modalCategoryMode;
 let modalSpotPerpetualMode;
+let modalCurrencyMode;
 
-
+currency.addEventListener('change', function(e) {
+    const selectedCurrency = e.target.value;
+    filterTransactionsByCurrency(selectedCurrency);
+}); 
 
 transactions_filters.addEventListener('click', function(e) {
     if(e.target.tagName === "BUTTON") {
     if (e.target && e.target.getAttribute("data-filter")) {
         const filterName = e.target.getAttribute("data-filter");
         filterTransactions(filterName);
-        }
-    } else if(e.target.tagName ==="SELECT") {
-        const filterName = e.target.value;
-        filterTransactions(filterName);
+     }
     }
 });
+
 
 
 /* document.addEventListener('keydown', function(e) {
@@ -170,7 +173,8 @@ transactionList.addEventListener('click', function(e) {
         modalCategoryMode = "editCategory";
         document.getElementById("modalAssetCategory").showModal();
     } else if (btn.name === "currency") {
-        alert("currency");
+        modalCurrencyMode = "editCurrency";
+        modalCurrency.showModal();
     } else if (btn.name === "long_short") {
         modalLongShortMode = LONG_SHORT_MODES.EDIT;
         document.getElementById("modalLongShort").showModal();
@@ -193,6 +197,9 @@ transactionList.addEventListener('click', function(e) {
         document.getElementById("modalSpotPerpetualModal").showModal();
     }
 })
+
+
+
 
 
 
@@ -268,14 +275,24 @@ if(assetCategoryModal){
     })}
 
 modalCurrency.addEventListener("click", function(e) {
+    const btn = e.target.closest('button[data-currency]');
+    if (!btn) return;
     e.preventDefault();
-    const currency = e.target.name
-    const existing = document.querySelector(".new_transaction [data-type='currency']");
-    if(existing) {
-        existing.textContent = currency;
-    } else {
-        document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-type='currency'>"+currency+"</button>";
+    const currency = btn.getAttribute('data-currency');
+    const currTransaction = sessionStorage.getItem("currentTransactionId");
+
+    if (modalCurrencyMode === "insertCurrency") {
+        const existing = document.querySelector(".new_transaction [data-type='currency']");
+        if (existing) {
+            existing.textContent = currency;
+        } else {
+            document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-type='currency'>" + currency + "</button>";
+        }
+    } else if (modalCurrencyMode === "editCurrency") {
+        document.querySelector("tr[data-id='" + currTransaction + "'] button[name='currency']").textContent = currency;
+        updateTransactionCurrency(currTransaction, currency);
     }
+
     modalCurrency.close();
 })
 
@@ -366,6 +383,7 @@ create_transaction_wrapper.addEventListener('click', function(e) {
         } else if (e.target.name==="add_quantity") {
             document.getElementById("modalQuantity").showModal();   
         } else if (e.target.name==="add_currency") {
+            modalCurrencyMode = "insertCurrency";
             document.getElementById("modalCurrency").showModal();
         } else if (e.target.name === "add_tp") {
             modalTakeProfit.showModal();
@@ -599,6 +617,18 @@ function updateTransactionLongShort(id, longShort){
 }
 
 
+function updateTransactionCurrency(id, currency) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+        }
+    }
+    xhttp.open("POST", "transaction_update_currency.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`transaction_id=${id}&currency=${currency}`);
+}
+
 function updateTakeProfit(id, takeProfit) {
     console.log("update take profit:", id, takeProfit);
     const xhttp = new XMLHttpRequest();
@@ -739,4 +769,17 @@ function filterTransactions(filterName) {
     xhttp.open("POST", "transactions_filter.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`filter_name=${filterName}`);
+}
+
+function filterTransactionsByCurrency(currency) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            document.querySelector(".transactions").innerHTML = this.responseText;
+        }
+    }
+    xhttp.open("POST", "transactions_filter_by_currency.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`currency=${currency}`);
 }

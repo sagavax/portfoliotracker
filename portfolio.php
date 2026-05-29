@@ -71,6 +71,7 @@
                         
                         <div class="filter_currency">
                             <select name="currency" id="currency">
+                               <option value="all">All</option>     
                             <?php
                                 $get_currencies = "SELECT currency FROM transactions GROUP BY currency ORDER BY currency ASC";
                                 $result = mysqli_query($link, $get_currencies) or die("MySQL ERROR: " . mysqli_error($link));
@@ -345,16 +346,16 @@
 <dialog id="modalCurrency">
   <div class="modal-container">
     <div id="modalCurrencyContent">
-        <button type="button" name="EUR" class="secondary">EUR</button>
-        <button type="button" name="USD" class="secondary">USD</button>
-        <button type="button" name="CZK" class="secondary">CZK</button>
-        <button type="button" name="GBP" class="secondary">GBP</button>
-        <button type="button" name="JPY" class="secondary">JPY</button>
-        <button type="button" name="CHF" class="secondary">CHF</button>
-        <button type="button" name="CAD" class="secondary">CAD</button>
-        <button type="button" name="AUD" class="secondary">AUD</button>
-        <button type="button" name="HKD" class="secondary">HKD</button>
-        <button type="button" name="SEK" class="secondary">SEK</button>
+        <button type="button" data-currency="EUR" class="secondary">EUR</button>
+        <button type="button" data-currency="USD" class="secondary">USD</button>
+        <button type="button" data-currency="CZK" class="secondary">CZK</button>
+        <button type="button" data-currency="GBP" class="secondary">GBP</button>
+        <button type="button" data-currency="JPY" class="secondary">JPY</button>
+        <button type="button" data-currency="CHF" class="secondary">CHF</button>
+        <button type="button" data-currency="CAD" class="secondary">CAD</button>
+        <button type="button" data-currency="AUD" class="secondary">AUD</button>
+        <button type="button" data-currency="HKD" class="secondary">HKD</button>
+        <button type="button" data-currency="SEK" class="secondary">SEK</button>
     </div>
   </div>
 </dialog>
