@@ -4,9 +4,12 @@
     include_once 'includes/functions.php';
 
     //if is ticker set
-    if(isset($_GET['ticker'])) {
-        $search = mysqli_real_escape_string($link, $_GET['ticker']);
-        $get_ticker = "SELECT ticker, company_name FROM tickers WHERE ticker LIKE '%$search%' ORDER BY ticker ASC LIMIT 100";
+    if (isset($_GET['ticker'])) {
+    $search = mysqli_real_escape_string($link, $_GET['ticker']);
+    $get_ticker = "SELECT ticker, company_name FROM tickers WHERE ticker LIKE '%$search%' ORDER BY ticker ASC LIMIT 100";
+    } elseif (isset($_GET['letter'])) {
+        $letter = mysqli_real_escape_string($link, $_GET['letter']);
+        $get_ticker = "SELECT ticker, company_name FROM tickers WHERE ticker LIKE '$letter%' ORDER BY ticker ASC LIMIT 100";
     } else {
         $get_ticker = "SELECT ticker, company_name FROM tickers ORDER BY ticker ASC LIMIT 50";
     }

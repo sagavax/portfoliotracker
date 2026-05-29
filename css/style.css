@@ -1,8 +1,11 @@
-   body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
        margin: 24px; 
        background-color: #253649;
        background-color: #0d0d0d;
-        color:white}
+        color:white;
+         outline: none;
+      }
    ::placeholder { color:#91d1fe; }
    header { display:flex; align-items:center; gap:12px; background-color: #435B7C; margin-bottom:20px; border:1px solid #eee;}
    .container { display:flex; height:100vh; width:100%; }
@@ -16,13 +19,17 @@
 
   .provider_card[data-name="new_provider"] { flex-direction: row;  padding: 10px 12px; width:150px; gap:5px; justify-content: center; align-items: center; }
 
-   .sidebar a { display:block;
-      width: 100%;
-       padding:12px; 
-       color:white; 
-       text-decoration:none; 
-       border-bottom:1px solid #eee; 
-       transition: background-color 0.3s ease; }
+   .sidebar a { display: flex;
+    width: 100%;
+    padding: 12px;
+    height: 35px;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+    align-items: center;
+    gap: 10px;
+    }
 
    .sidebar ul { list-style:none; padding:0; margin:0; }
    .sidebar li {width:100%; display: flex; align-items: center; transition: background-color 0.3s ease; gap:10px; }

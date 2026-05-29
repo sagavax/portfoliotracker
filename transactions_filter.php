@@ -18,18 +18,20 @@ if($filter_name == "active") {
 }
 
 if($filter_name == "long") {
-    $get_transactions = "SELECT * FROM transactions WHERE position_type='long' ORDER BY transaction_date DESC";
+    $get_transactions = "SELECT * FROM transactions WHERE position_type='BUY' ORDER BY transaction_date DESC";
 } elseif ($filter_name == "short") {
-    $get_transactions = "SELECT * FROM transactions WHERE position_type='short' ORDER BY transaction_date DESC";
+    $get_transactions = "SELECT * FROM transactions WHERE position_type='SELL' ORDER BY transaction_date DESC";
 }
 
-
+echo "<table>";
+    echo "<thead>";
+    echo "</thead>";
 $result = mysqli_query($link, $get_transactions) or die("MySQL ERROR: " . mysqli_error($link));
     while ($row = mysqli_fetch_array($result)) {
         $transaction_id = $row['id'];
         $transaction_ticker = $row['symbol'];
         $transaction_provider = $row['provider'];
-        $transaction_category = $row['category'];
+        $transaction_category = $row['asset_category'];
         $transaction_currency = $row['currency'];
         $transaction_quantity = $row['quantity'];
         $transaction_entry_price = $row['entry_price'];
@@ -108,5 +110,5 @@ $result = mysqli_query($link, $get_transactions) or die("MySQL ERROR: " . mysqli
             echo "<td><button type='button' class='transaction_button' name='close_transaction' data-id='$transaction_id'><i class='fa fa-times'></i></button></td>";
         echo "</tr>";
     }
-        
+   echo "</table>";     
 ?>

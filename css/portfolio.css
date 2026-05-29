@@ -346,3 +346,12 @@ button[name="new_transaction_cancel"]:hover {
     outline: none;
 }
 
+#currency {
+    width:150px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    color: white;
+    background-color: #253649;
+}

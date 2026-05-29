@@ -69,6 +69,20 @@
                             <button type="button" class="filter_button" data-filter="indices">Indexy</button>
                         </div><!-- filter_asset_category -->
                         
+                        <div class="filter_currency">
+                            <select name="currency" id="currency">
+                            <?php
+                                $get_currencies = "SELECT currency FROM transactions GROUP BY currency ORDER BY currency ASC";
+                                $result = mysqli_query($link, $get_currencies) or die("MySQL ERROR: " . mysqli_error($link));
+                                while ($row = mysqli_fetch_array($result)) {
+                                    $currency = $row['currency'];
+                                    echo "<option value='$currency'>$currency</option>";
+                                }
+                            ?>
+                            </select>
+                        </div><!-- filter_currency -->
+
+
                         <div class="filter_spot_perpetual">
                             <button type="button" class="filter_button" data-filter="spot">Spot</button>
                             <button type="button" class="filter_button" data-filter="perpetual">Perpetual</button>
@@ -139,13 +153,13 @@
                                     $transaction_id = $row['id'];
                                     $transaction_ticker = $row['symbol'];
                                     $transaction_provider = $row['provider'];
-                                    $transaction_category = $row['category'];
+                                    $transaction_category = $row['asset_category'];
                                     $transaction_currency = $row['currency'];
                                     $transaction_quantity = $row['quantity'];
                                     $transaction_entry_price = $row['entry_price'];
                                     $transaction_tp = $row['tp_price'];
                                     $transaction_sl = $row['sl_price'];
-                                    $transaction_long_short = $row['type'];
+                                    $transaction_long_short = $row['position_type'];
                                     $transaction_created_at = $row['created_at'];
                                     $transaction_spot_perpetual = $row['spot_perpetual'];
                                     $transaction_manual_bot = $row['manual_bot'];

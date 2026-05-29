@@ -17,6 +17,8 @@ const modalTakeProfit = document.getElementById('modalTakeProfit');
 const modalStopLoss = document.getElementById('modalStopLoss');
 const modalAddNote = document.getElementById('modalAddNote');
 const modalSpotPerpetual = document.getElementById('modalSpotPerpetualModal');
+const transactions_filters = document.querySelector('.transactions_filters');
+
 
 const MODAL_TICKER_MODES = {
   INSERT: "insertTicker",
@@ -45,6 +47,19 @@ let modalProviderMode;
 let modalCategoryMode;
 let modalSpotPerpetualMode;
 
+
+
+transactions_filters.addEventListener('click', function(e) {
+    if(e.target.tagName === "BUTTON") {
+    if (e.target && e.target.getAttribute("data-filter")) {
+        const filterName = e.target.getAttribute("data-filter");
+        filterTransactions(filterName);
+        }
+    } else if(e.target.tagName ==="SELECT") {
+        const filterName = e.target.value;
+        filterTransactions(filterName);
+    }
+});
 
 
 /* document.addEventListener('keydown', function(e) {
@@ -711,4 +726,17 @@ function filterTickers(letter) {
     xhttp.open("POST", "transaction_filter_tickers.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`letter=${letter}`);
+}
+
+function filterTransactions(filterName) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            document.querySelector(".transactions").innerHTML = this.responseText;
+        }
+    }
+    xhttp.open("POST", "transactions_filter.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`filter_name=${filterName}`);
 }
