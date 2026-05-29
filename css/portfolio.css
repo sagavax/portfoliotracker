@@ -29,6 +29,14 @@ button[name="add_entry_price"] {
     width: 100%;
 }
 
+.create_transaction_wrapper button {
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 /* ── Flex row base ────────────────────────────── */
 .transactions_filters,
 .transactions_filter,
@@ -57,6 +65,14 @@ button[name="add_entry_price"] {
     padding: 0;
 }
 
+div[class^="filter_"] {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+
+}
+
 .transactions_filter {
     margin-bottom: 12px;
     margin-top: 12px;
@@ -70,7 +86,7 @@ button[name="add_entry_price"] {
 /* ── New transaction card ─────────────────────── */
 .transaction_filters_buttons {
     display: flex;
-    gap: 10px;
+    gap: 30px;
     align-items: center;
     justify-content: flex-start;
 }
@@ -124,6 +140,10 @@ button[name="add_entry_price"] {
     color: white;
 }
 
+.transactions button {
+
+}
+
 .transactions table tr:first-child {
     border-top: 1px solid #435B7C;
 }
@@ -155,6 +175,7 @@ button[name="add_entry_price"] {
     border: 1px solid #00b070;
         height: 80%;
         border-radius: 6px;
+        font-size: 16px;
 }
 
 .long:hover,
@@ -169,6 +190,7 @@ button[name="new_transaction_create"]:hover {
     border: 1px solid #ff7152;
     height: 80%;
     border-radius: 6px;
+     font-size: 16px;
 }
 
 .short:hover,
@@ -323,3 +345,4 @@ button[name="new_transaction_cancel"]:hover {
 .price[contenteditable="true"]:focus {
     outline: none;
 }
+
