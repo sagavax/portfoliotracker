@@ -1,0 +1,28 @@
+.dashboard {
+    height:100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;     
+}
+
+
+.dashboard-item {
+    height:300px;
+    width:300px;
+    border:1px #d1d1d1 solid;
+    border-radius: 6px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #435B7C;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: bold;
+    color: white;
+    font-size: 24px;
+}
+
+.dashboard-item:hover {
+    background-color: #253649;
+}

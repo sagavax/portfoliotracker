@@ -60,3 +60,26 @@ body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       transition: background-color 0.3s ease;
       cursor: pointer;
    }
+
+   .search_wrapper {
+      margin-top:50px;
+      height: 55px;
+      border: 1px solid #435B7C;
+      box-sizing: border-box;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-radius: 5px;
+      gap: 10px;
+      margin-bottom: 10px;
+   }
+
+   .search_wrapper input {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: white;
+      font-size: 18px;
+      width: 100%;
+   }

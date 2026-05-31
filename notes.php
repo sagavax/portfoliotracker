@@ -19,12 +19,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Portforlio Tracker</title>
         <link rel="stylesheet" href="css/style.css?<?php echo time() ?>" />
-        <!-- <link rel="stylesheet" href="css/message.css?<?php echo time() ?>" /> -->
+        <link rel="stylesheet" href="css/notes.css?<?php echo time() ?>" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-        <link rel="icon" type="image/png" sizes="32x32" href="investment.png">
-        <script type="module" src="js/main.js?<?php echo time() ?> defer"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+        <link rel="icon" type="image/svg+xml" sizes="32x32" href="investment.png">
+        <script type="module" src="js/notes.js?<?php echo time() ?> defer"></script>
         <script src="js/clock.js?<?php echo time() ?>" defer></script>
         <!-- <script src="js/worldclock.js?<?php echo time() ?>"></script> -->
         
@@ -56,15 +55,18 @@
                     <input type="text" name="search_notes" id="search_notes" placeholder="Hledat poznámky...">
                 </div>
 
-                <div class="note_action">
-                        <textarea name="noteText" id="noteText" placeholder="Zadajte text poznámy"></textarea>
-                        <button id="addNote">Pridat poznamu</button>
-                </div>    
-                
+              
                 <div class="notes">
+                    <div class="notes_header">  
+                        <h3>Poznámky</h3><button type="button" name="add_note">Pridat poznamku</button>
+                    </div>
+
+                    
+                    <div class="loader">Loading notes...</div>
+                    
                     <?php
                     // Example: Fetch notes from database and display them
-                    $get_notes_sql = "SELECT id, text, created_at, modified_at FROM transaction_notes  ORDER BY created_at DESC";
+                    $get_notes_sql = "SELECT id, note_text, created_at, modified_at FROM transaction_notes  ORDER BY created_at DESC";
                     $get_notes_result = mysqli_query($link, $get_notes_sql);
                     while($row = mysqli_fetch_assoc($get_notes_result)) {
                         echo "<div class='note' data-note-id='" . $row['id'] . "'>";
@@ -78,4 +80,15 @@
             </div>  
         </div><!--container-->  
   </body>
+    
+    <dialog id="modalAddNote">
+        <div class="modal-container">
+            <textarea name="noteText" id="noteText" placeholder="Zadajte text poznámy"></textarea>
+            <div class="modal_note_actions">
+                <button id="btnaddNote" type="button">Pridat poznamu</button>
+                <button id="btnClodeModal" type="button">Zatvoriť</button>
+            </div>
+        </div>    
+    </dialog>    
+                
 </html>

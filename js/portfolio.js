@@ -19,7 +19,7 @@ const modalAddNote = document.getElementById('modalAddNote');
 const modalSpotPerpetual = document.getElementById('modalSpotPerpetualModal');
 const transactions_filters = document.querySelector('.transactions_filters');
 const selectCurrency = document.getElementById('currency');
-
+const modalNote = document.getElementById('modalNote');
 
 const MODAL_TICKER_MODES = {
   INSERT: "insertTicker",
@@ -48,6 +48,25 @@ let modalProviderMode;
 let modalCategoryMode;
 let modalSpotPerpetualMode;
 let modalCurrencyMode;
+
+
+
+
+
+modalNote.addEventListener('click', function(e) {
+    if(e.target && e.target.tagName === "BUTTON" && e.target.id === "noteSave") {
+        const note_text = document.getElementById("note_text");
+        const noteText = note_text.value.trim();
+        if(!noteText) {
+            alert("Note cannot be empty!");
+            return;
+        }
+        const transactionId = sessionStorage.getItem("currentTransactionId");
+        updateTransactionNote(transactionId, noteText);
+        modalAddNote.close();
+    }
+})
+
 
 currency.addEventListener('change', function(e) {
     const selectedCurrency = e.target.value;
@@ -181,7 +200,7 @@ transactionList.addEventListener('click', function(e) {
     } else if (btn.name === "close_transaction") {
         closeTransaction(transactionId);
     } else if (btn.name === "add_note") {
-        modalAddNote.showModal();
+        modalNote.showModal();
     } else if (btn.name === "add_quantity") {
         document.getElementById("modalQuantity").showModal();
     } else if (btn.name === "add_entry_price") {
@@ -783,3 +802,33 @@ function filterTransactionsByCurrency(currency) {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`currency=${currency}`);
 }
+
+function createTransactionNote(id, note) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.querySelector("#modalAddNote textarea").value = "";
+            alert("Transaction note updated successfully!");
+            console.log(this.responseText);
+        }
+    }
+    xhttp.open("POST", "transaction_create_note.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`transaction_id=${id}&note=${encodeURIComponent(note)}`);
+}
+
+function updateTransactionNote(id, note) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.querySelector("#modalAddNote textarea").value = "";
+            alert("Transaction note updated successfully!");
+            console.log(this.responseText);
+            modalNote.close();
+        }
+    }
+    xhttp.open("POST", "transaction_update_note.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`transaction_id=${id}&note=${encodeURIComponent(note)}`);
+}
+

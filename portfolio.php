@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="css/portfolio.css?<?php echo time() ?>" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-        <link rel="icon" type="image/png" sizes="32x32" href="investment.png">
+        <link rel="icon" type="image/svg+xml" sizes="32x32" href="investment.png">
         <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
         <script src="js/clock.js?<?php echo time() ?>" defer></script>
         <script src="js/portfolio.js?<?php echo time() ?>" defer></script>
@@ -230,7 +230,7 @@
                                         
                                         echo "<td><button type='button' class='transaction_button' name='see_transaction' data-id='$transaction_id'><i class='fa fa-eye'></i> See transaction</button></td>";
 
-                                        echo "<td><button type='button' class='transaction_button' name='close_transaction' data-id='$transaction_id'><i class='fa fa-times'></i></button></td>";
+                                        echo "<td><div class='close_transaction_wrapper' data-id='$transaction_id'><button type='button' class='transaction_button' name='close_transaction' data-id='$transaction_id'><i class='fa fa-times'></i></button></div></td>";
                                     echo "</tr>";
                                 }
                                 
@@ -322,12 +322,15 @@
     </div>
 </dialog>
 
-<dialog id="modelNote">
+<dialog id="modalNote">
     <div class="modal-container">
         <h3>Note details</h3>
         <div id="noteDetailsContent"><textarea id="note_text"></textarea></div>
-        <button id="noteModalSave" class="secondary">Uložiť</button>
-        <button id="noteModalClose" class="secondary">Zatvoriť</button>
+        <div class="modal_note_actions">
+            <button id="noteSave" class="secondary">Uložiť</button>
+            <button id="noteClose" class="secondary">Zatvoriť</button>
+        </div>
+        
     </div>
 </dialog>
 

@@ -15,12 +15,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Portforlio Tracker</title>
         <link rel="stylesheet" href="css/style.css?<?php echo time() ?>" />
+        <link rel="stylesheet" href="css/index.css?<?php echo time() ?>" />
         <!-- <link rel="stylesheet" href="css/message.css?<?php echo time() ?>" /> -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
         <link rel="icon" type="image/png" sizes="32x32" href="investment.png">
-        <script type="module" src="js/main.js?<?php echo time() ?> defer"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+         <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
         <script src="js/clock.js?<?php echo time() ?>" defer></script>
         <!-- <script src="js/worldclock.js?<?php echo time() ?>"></script> -->
         
@@ -47,6 +47,14 @@
             <div class="content">
                 <h1>Vitajte v Portfolio Tracker</h1>
                 <p>Tu môžete sledovat svoje investície, spravovat portfólio a získavať novinky z finančného sveta.</p>
+                <div class=dashboard>
+                    <div class="dashboard-item">Portfolio</div>
+                    <div class="dashboard-item">Poskytovatelia</div>
+                    <div class="dashboard-item">Influencers</div>
+                    <div class="dashboard-item">Novinky</div>
+                    <div class="dashboard-item">Poznámky</div>
+                    <div class="dashboard-item">Nastavenia</div>
+                </div>                    
             </div>  
         </div><!--container-->  
   </body>
