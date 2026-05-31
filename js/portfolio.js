@@ -20,6 +20,8 @@ const modalSpotPerpetual = document.getElementById('modalSpotPerpetualModal');
 const transactions_filters = document.querySelector('.transactions_filters');
 const selectCurrency = document.getElementById('currency');
 const modalNote = document.getElementById('modalNote');
+const modalNotes = document.getElementById('modalNotes');
+
 
 const MODAL_TICKER_MODES = {
   INSERT: "insertTicker",
@@ -82,26 +84,6 @@ transactions_filters.addEventListener('click', function(e) {
     }
 });
 
-
-
-/* document.addEventListener('keydown', function(e) {
-    if (e.key !== 'Enter') return;
-    if (e.target.classList.contains('price')) {
-        e.preventDefault();
-        const transactionId = e.target.closest('.transaction').dataset.id;
-        updateTransactionEntryPrice(transactionId, e.target.textContent.trim());
-        if (e.target.textContent.trim() === "") {
-            e.target.outerHTML = "<button type='button' class='button' name='add_entry_price'><i class='fa fa-plus'></i> Add price</button>";
-        }
-    } else if (e.target.classList.contains('quantity')) {
-        e.preventDefault();
-        const transactionId = e.target.closest('.transaction').dataset.id;
-        updateTransactionQuantity(transactionId, e.target.textContent.trim());
-        if (e.target.textContent.trim() === "") {
-            e.target.outerHTML = "<button type='button' class='button' name='add_quantity'><i class='fa fa-plus'></i> Add quantity</button>";
-        }
-    }
-}); */
 
 document.addEventListener('keydown', function(e) {
     if (e.key !== 'Enter') return;
@@ -201,6 +183,10 @@ transactionList.addEventListener('click', function(e) {
         closeTransaction(transactionId);
     } else if (btn.name === "add_note") {
         modalNote.showModal();
+    } else if(btn.name === "notes") {
+        modalNotes.showModal(); 
+        const transactionId = sessionStorage.getItem("currentTransactionId"); 
+        GetNotes(transactionId);
     } else if (btn.name === "add_quantity") {
         document.getElementById("modalQuantity").showModal();
     } else if (btn.name === "add_entry_price") {
@@ -832,3 +818,15 @@ function updateTransactionNote(id, note) {
     xhttp.send(`transaction_id=${id}&note=${encodeURIComponent(note)}`);
 }
 
+function GetNotes(id) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            document.querySelector("#notesDetailsContent").innerHTML = this.responseText;
+        }
+    }
+    xhttp.open("POST", "transaction_get_notes.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`transaction_id=${id}`);
+}

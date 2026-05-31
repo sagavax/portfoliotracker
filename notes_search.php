@@ -12,8 +12,6 @@
         while($row = mysqli_fetch_assoc($result)) {
             echo "<div class='note' data-note-id='" . $row['id'] . "'>";
             echo "<p>" . $row['note_text'] . "</p>";
-            echo "<small>Created: " . $row['created_at'] . "</small>";
-            echo "<small>Modified: " . $row['modified_at'] . "</small>";
             echo "</div>";
         }
     } else {

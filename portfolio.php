@@ -226,7 +226,12 @@
                                             echo "<td><button type='button' class='transaction_button' name='manual_bot'><i class='fa fa-plus'></i> Manual / Bot</button></td>";
                                         }
 
-                                        echo "<td><button type='button' class='transaction_button' name='add_note'><i class='fa fa-plus'></i> Add note</button></td>";
+                                        $nr_notes = GetCountTransactionNotes($transaction_id);
+                                        if($nr_notes > 0) {
+                                            echo "<td><button type='button' class='transaction_button' name='notes'>$nr_notes</button></td>";
+                                        } else {
+                                            echo "<td><button type='button' class='transaction_button' name='notes'>0</button></td>";
+                                        }
                                         
                                         echo "<td><button type='button' class='transaction_button' name='see_transaction' data-id='$transaction_id'><i class='fa fa-eye'></i> See transaction</button></td>";
 
@@ -333,6 +338,14 @@
         
     </div>
 </dialog>
+
+<dialog id="modalNotes">
+    <div class="modal-container">
+         <div id="notesDetailsContent">
+            Loading...
+         </div>
+    </div>
+</dialog>               
 
 <dialog id="modalPrice" class="modal-overlay">
   <div class="modal-container">
