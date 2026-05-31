@@ -22,7 +22,6 @@ const selectCurrency = document.getElementById('currency');
 const modalNote = document.getElementById('modalNote');
 const modalNotes = document.getElementById('modalNotes');
 
-
 const MODAL_TICKER_MODES = {
   INSERT: "insertTicker",
   EDIT: "editTicker",
@@ -51,8 +50,22 @@ let modalCategoryMode;
 let modalSpotPerpetualMode;
 let modalCurrencyMode;
 
+modalNotes.addEventListener("keyup", function(e) {
+    if(!e.target.classList.contains('note')) return;
+    const saveBtn = modalNotes.querySelector("button[name='save_note']");
+    if(saveBtn) {
+        saveBtn.style.display = e.target.textContent.trim().length > 0 ? "block" : "none";
+    }
+})
 
 
+
+modalNotes.addEventListener('click', function(e) {
+    if(e.target && e.target.tagName === "BUTTON" && e.target.name === "add_note") {
+        const notes_wrapper = document.querySelector('.notes_wrapper');
+        notes_wrapper.insertAdjacentHTML('afterbegin', "<div class='note'data-status='draft' contenteditable='true'></div>");
+    }
+})
 
 
 modalNote.addEventListener('click', function(e) {
