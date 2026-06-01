@@ -385,6 +385,12 @@ button[name="new_transaction_cancel"]:hover {
     width: 100%;
 }
 
+ #modalNote {
+    min-height:200px;
+    top:-20%;
+ }   
+
+
   #modalNote .modal-container {
     height: 100%;
     display: flex;
@@ -444,4 +450,8 @@ button[name="new_transaction_cancel"]:hover {
 
   .notes_header_wrapper button[name="save_note"] {
     display: none;
+  }
+
+  button[name="notes"] {
+    font-size: 18px;
   }
