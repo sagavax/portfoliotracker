@@ -50,22 +50,30 @@ let modalCategoryMode;
 let modalSpotPerpetualMode;
 let modalCurrencyMode;
 
-modalNotes.addEventListener("keyup", function(e) {
+/* modalNotes.addEventListener("keyup", function(e) {
     if(!e.target.classList.contains('note')) return;
     const saveBtn = modalNotes.querySelector("button[name='save_note']");
     if(saveBtn) {
         saveBtn.style.display = e.target.textContent.trim().length > 0 ? "block" : "none";
     }
-})
+}) */
 
 
 
-modalNotes.addEventListener('click', function(e) {
+/* modalNotes.addEventListener('click', function(e) {
     if(e.target && e.target.tagName === "BUTTON" && e.target.name === "add_note") {
         const notes_wrapper = document.querySelector('.notes_wrapper');
         notes_wrapper.insertAdjacentHTML('afterbegin', "<div class='note'data-status='draft' contenteditable='true'></div>");
+    } else if(e.target && e.target.tagName === "BUTTON" && e.target.name === "save_note") {
+        const note = document.querySelector('div.note[data-status="draft"]');
+        const noteText = note.innerHTML.trim();
+        const transactionId = sessionStorage.getItem("currentTransactionId");
+        createTransactionNote(transactionId, noteText);
+        note.removeAttribute("data-status");
+
+        note.setAttribute("contenteditable", false);
     }
-})
+}) */
 
 
 modalNote.addEventListener('click', function(e) {
@@ -197,9 +205,9 @@ transactionList.addEventListener('click', function(e) {
     } else if (btn.name === "add_note") {
         modalNote.showModal();
     } else if(btn.name === "notes") {
-        modalNotes.showModal(); 
+        modalNote.showModal(); 
         const transactionId = sessionStorage.getItem("currentTransactionId"); 
-        GetNotes(transactionId);
+        //GetNotes(transactionId);
     } else if (btn.name === "add_quantity") {
         document.getElementById("modalQuantity").showModal();
     } else if (btn.name === "add_entry_price") {
@@ -717,19 +725,7 @@ function updateTransactionQuantity(id, quantity) {
     xhttp.send(`transaction_id=${id}&quantity=${quantity}`);
 }
 
-function updateTransactionNote(id, note) {
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-           document.querySelector("#modalAddNote textarea").value = "";
-           alert("Transaction note updated successfully!");
-            console.log(this.responseText);
-        }
-    }
-    xhttp.open("POST", "transaction_update_note.php", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send(`transaction_id=${id}&note=${encodeURIComponent(note)}`);
-}
+
 
 
 function removeTransaction(id) {
@@ -807,7 +803,7 @@ function createTransactionNote(id, note) {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             document.querySelector("#modalAddNote textarea").value = "";
-            alert("Transaction note updated successfully!");
+            alert("Transaction note created successfully!");
             console.log(this.responseText);
         }
     }
@@ -820,10 +816,12 @@ function updateTransactionNote(id, note) {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            document.querySelector("#modalAddNote textarea").value = "";
-            alert("Transaction note updated successfully!");
-            console.log(this.responseText);
-            modalNote.close();
+           document.querySelector("#modalAddNote textarea").value = "";
+           alert("Transaction note updated successfully!");
+           const response = JSON.parse(this.responseText);
+           console.log(response.note_count);
+           document.querySelector(`.transaction[data-id="${id}"] button[name="notes"]`).innerText = String(response.note_count);
+           document.querySelector("#modalNote").close();
         }
     }
     xhttp.open("POST", "transaction_update_note.php", true);
