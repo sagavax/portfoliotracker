@@ -277,7 +277,9 @@
 <dialog id="modalProvider">
     <div class="modal-container">
         <h3>Provider details</h3>
-        <div id="providerDetailsContent"></div>
+        <div id="providerDetailsContent">
+            <div class="loader">Loading...</div>
+         </div>
         <button id="providerModalClose" class="secondary">Zatvoriť</button>
     </div>
 </dialog>
