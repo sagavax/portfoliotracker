@@ -166,25 +166,25 @@
                                     echo "<tr class='transaction' data-id='$transaction_id'>";
                                      
                                         if($transaction_ticker) {
-                                            echo "<td><button type='button' class='transaction_button' name='ticker'>$transaction_ticker</button></td>";
+                                            echo "<td><button type='button' class='transaction_button' name='ticker' data-ticker='existing_ticker'>$transaction_ticker</button></td>";
                                         } else {
-                                            echo "<td><button type='button' class='transaction_button' name='ticker'><i class='fa fa-plus'></i> Add ticker</button></td>";
+                                            echo "<td><button type='button' class='transaction_button' name='ticker' data-ticker='add_ticker'><i class='fa fa-plus'></i> Add ticker</button></td>";
                                         }
                                         
                                         if($transaction_provider) {
-                                            echo "<td><button type='button' class='transaction_button' name='provider'>$transaction_provider</button></td>";
+                                            echo "<td><button type='button' class='transaction_button' name='provider' data-provider='existing_provider'>$transaction_provider</button></td>";
                                         } else {
-                                            echo "<td><button type='button' class='transaction_button' name='provider'><i class='fa fa-plus'></i> Add provider</button></td>";
+                                            echo "<td><button type='button' class='transaction_button' name='provider' data-provider='add_provider'><i class='fa fa-plus'></i> Add provider</button></td>";
                                         }
                                         
                                         
                                         if($transaction_category) {
-                                            echo "<td><button type='button' class='transaction_button' name='category'>$transaction_category</button></td>";
+                                            echo "<td><button type='button' class='transaction_button' name='category' data-category='existing_category'>$transaction_category</button></td>";
                                         } else {
-                                            echo "<td><button type='button' class='transaction_button' name='category'><i class='fa fa-plus'></i> Add category</button></td>";
+                                            echo "<td><button type='button' class='transaction_button' name='category' data-category='add_category'><i class='fa fa-plus'></i> Add category</button></td>";
                                         }
                                         
-                                        echo "<td><button type='button' class='transaction_button' name='currency'>$transaction_currency</button>";
+                                        echo "<td><button type='button' class='transaction_button' name='currency' data-currency='existing_currency'>$transaction_currency</button>";
                                         
                                         if($transaction_quantity != 0) {
                                             echo "<td><div class='quantity' contenteditable='true'>$transaction_quantity</div></td>";
