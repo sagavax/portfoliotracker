@@ -451,26 +451,23 @@ if(tickerModal) {
 
 if(providerModal){
     providerModal.addEventListener('click', function(e) {
-        console.log(e.target.getAttribute("data-name"));
-        console.log(modalProviderMode);
-        const currTransaction = sessionStorage.getItem("currentTransactionId");
+        const btn = e.target.closest('button[data-name]');
+        if(btn) {
+              const currTransaction = sessionStorage.getItem("currentTransactionId");
         if(modalProviderMode === "insertProvider") {
-            console.log("insert provider:", e.target.getAttribute("data-name"));
+            console.log("insert provider:", btn.getAttribute("data-name"));
             console.log("current transaction:", currTransaction);
-            document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-id-"+e.target.getAttribute("data-id")+">"+e.target.getAttribute("data-name")+"</button>";                    
-            //document.querySelector(".new_transaction").appendChild("<button type='button' class='button' data-id-"+e.target.getAttribute("data-id")+">"+e.target.getAttribute("data-name")+"</button>");
-            updateTransactionProvider(currTransaction,e.target.getAttribute("data-name"));
+            document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-id-"+btn.getAttribute("data-id")+">"+btn.getAttribute("data-name")+"</button>";
+            updateTransactionProvider(currTransaction, btn.getAttribute("data-name"));
             document.getElementById("modalProvider").close();
-        } else if(modalProviderMode === "editProvider") {  
-            console.log("current transaction:", currTransaction);
-            console.log("edit provider:", e.target.getAttribute("data-name"));
-            document.querySelector("tr[data-id='"+currTransaction+"'] button[name='provider']").innerHTML = e.target.getAttribute("data-name");
-            updateTransactionProvider(currTransaction,e.target.getAttribute("data-name"));
-            document.getElementById("modalProvider").close();                    
-        }
-        }) 
-    }
-
+        } else if(modalProviderMode === "editProvider") {
+            document.querySelector("tr[data-id='"+currTransaction+"'] button[name='provider']").innerHTML = btn.getAttribute("data-name");
+            updateTransactionProvider(currTransaction, btn.getAttribute("data-name"));
+            document.getElementById("modalProvider").close();
+           }
+            }
+        }); 
+    }     
 
 
 if(longShortModal){
