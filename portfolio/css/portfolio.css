@@ -21,6 +21,14 @@ button[name="spot_perpetual"] {
     width: 160px;
 }
 
+button[data-ticker="add_ticker"], 
+button[data-provider="add_provider"],
+button[data-category="add_category"] {
+    background-color: transparent;
+    border: none;
+    color: #97b6dc;   
+}
+
 button[name="currency"] {
     width: 140px;
 }
@@ -454,4 +462,19 @@ button[name="new_transaction_cancel"]:hover {
 
   button[name="notes"] {
     font-size: 18px;
+  }
+
+  input[name="new_provider_name"] {
+    height:47px;
+    display: flex;
+    align-items: center;
+    width: 200px;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    color: white;
+    background-color: #253649;
+    border-radius: 8px;
+    font-size: 16px;
   }
