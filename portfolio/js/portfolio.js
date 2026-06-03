@@ -22,6 +22,7 @@ const selectCurrency = document.getElementById('currency');
 const modalNote = document.getElementById('modalNote');
 const modalNotes = document.getElementById('modalNotes');
 
+
 const MODAL_TICKER_MODES = {
   INSERT: "insertTicker",
   EDIT: "editTicker",
@@ -74,6 +75,7 @@ let modalCurrencyMode;
         note.setAttribute("contenteditable", false);
     }
 }) */
+
 
 
 modalNote.addEventListener('click', function(e) {
@@ -465,6 +467,9 @@ if(providerModal){
                 document.getElementById("modalProvider").close();
             }
         }
+       if(e.target.tagName === "BUTTON" && e.target.id === "providerModalClose") {
+            document.getElementById("modalProvider").close();
+        } 
     })
     providerModal.addEventListener('keydown', function(e) {
         if(e.key === "Enter") {
