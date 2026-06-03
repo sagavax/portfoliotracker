@@ -451,25 +451,33 @@ if(tickerModal) {
 
 if(providerModal){
     providerModal.addEventListener('click', function(e) {
-        console.log(e.target.getAttribute("data-name"));
-        console.log(modalProviderMode);
-        const currTransaction = sessionStorage.getItem("currentTransactionId");
-        if(modalProviderMode === "insertProvider") {
-            console.log("insert provider:", e.target.getAttribute("data-name"));
-            console.log("current transaction:", currTransaction);
-            document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-id-"+e.target.getAttribute("data-id")+">"+e.target.getAttribute("data-name")+"</button>";                    
-            //document.querySelector(".new_transaction").appendChild("<button type='button' class='button' data-id-"+e.target.getAttribute("data-id")+">"+e.target.getAttribute("data-name")+"</button>");
-            updateTransactionProvider(currTransaction,e.target.getAttribute("data-name"));
-            document.getElementById("modalProvider").close();
-        } else if(modalProviderMode === "editProvider") {  
-            console.log("current transaction:", currTransaction);
-            console.log("edit provider:", e.target.getAttribute("data-name"));
-            document.querySelector("tr[data-id='"+currTransaction+"'] button[name='provider']").innerHTML = e.target.getAttribute("data-name");
-            updateTransactionProvider(currTransaction,e.target.getAttribute("data-name"));
-            document.getElementById("modalProvider").close();                    
+        const card = e.target.closest('[data-name]');
+        if(card) {
+            const currTransaction = sessionStorage.getItem("currentTransactionId");
+            if(modalProviderMode === "insertProvider") {
+                console.log("insert provider:", card.getAttribute("data-name"));
+                document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-id-"+card.getAttribute("data-id")+">"+card.getAttribute("data-name")+"</button>";
+                updateTransactionProvider(currTransaction, card.getAttribute("data-name"));
+                document.getElementById("modalProvider").close();
+            } else if(modalProviderMode === "editProvider") {
+                document.querySelector("tr[data-id='"+currTransaction+"'] button[name='provider']").innerHTML = card.getAttribute("data-name");
+                updateTransactionProvider(currTransaction, card.getAttribute("data-name"));
+                document.getElementById("modalProvider").close();
+            }
         }
-        }) 
-    }
+    })
+    providerModal.addEventListener('keydown', function(e) {
+        if(e.key === "Enter") {
+            const provider = providerModal.querySelector("input").value.trim();
+            if(!provider) {
+                alert("Provider cannot be empty!");
+                return;
+            }
+            //const currTransaction = sessionStorage.getItem("currentTransactionId");
+            createNewProvider(provider);
+        }
+    });
+}
 
 
 
@@ -840,4 +848,29 @@ function GetNotes(id) {
     xhttp.open("POST", "transaction_get_notes.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`transaction_id=${id}`);
+}
+
+
+function createNewProvider(provider) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            //add new provider to provider list in modal
+            const response = JSON.parse(this.responseText);
+            if(response.status === "error") {
+                alert(response.message);
+                return;
+            } 
+            const newProvider = document.createElement("div");
+            newProvider.className = "provider_card";
+            newProvider.innerText = provider;
+            newProvider.setAttribute("data-id", response.provider_id);
+            newProvider.setAttribute("data-name", provider);
+            document.querySelector("#modalProvider .providers").appendChild(newProvider);
+        }
+    }
+    xhttp.open("POST", "transaction_provider_create.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`provider=${provider}`);
 }
