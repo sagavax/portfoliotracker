@@ -16,6 +16,6 @@
         echo '<div class="provider_card" data-id="'.$provider_id.'" data-name="'.$provider_name.'">'.$provider_name.'</div>';
     }
 
-     echo '<input name="new_provider_name" id="new_provider_name" type="text" placeholder="New provider name" autocomplete="off"><div class="provider_card" data-name="new_provider"><i class="fa fa-plus"></i> New provider</div>';
-
+        echo '<input name="new_provider_name" id="new_provider_name" type="text" placeholder="New provider name" autocomplete="off">';
+        //echo '<div class="provider_card" data-name="new_provider"><i class="fa fa-plus"></i> New provider</div>';
      echo "</div>";
