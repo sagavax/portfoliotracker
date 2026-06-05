@@ -26,14 +26,19 @@
          <div class="sidebar">
                 <nav>
                     <ul>
-                        <li><a href="index.php"><i class="fas fa-home"></i> Domov</a></li>
-                        <li><a href="portfolio.php"><i class="fas fa-chart-line"></i> Portfólio</a></li>
-                        <li><a href="providers.php"><i class="fas fa-building"></i> Poskytovatelia</a></li>
-                        <li><a href="influencers.php"><i class="fas fa-users"></i> Influencers</a></li>
-                        <li><a href="news.php"><i class="fas fa-newspaper"></i> Novinky</a></li>
-                        <li><a href="notes.php"><i class="fas fa-sticky-note"></i> Poznámky</a></li>
-                        <li><a href="settings.php"><i class="fas fa-cogs"></i> Nastavenia</a></li>
-                        <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Odhlásiť sa</a></li>
+                        <?php
+                            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
+                            $base = $protocol . '://' . $_SERVER['HTTP_HOST'] . '/portfoliotracker/';
+                        ?>
+
+                        <li><a href="<?= $base ?>index.php"><i class="fas fa-home"></i> Domov</a></li>
+                        <li><a href="<?= $base ?>/portfolio/index.php"><i class="fas fa-chart-line"></i> Portfólio</a></li>
+                        <li><a href="<?= $base ?>providers.php"><i class="fas fa-building"></i> Poskytovatelia</a></li>
+                        <li><a href="<?= $base ?>influencers.php"><i class="fas fa-users"></i> Influencers</a></li>
+                        <li><a href="<?= $base ?>news.php"><i class="fas fa-newspaper"></i> Novinky</a></li>
+                        <li><a href="<?= $base ?>settings.php"><i class="fas fa-cogs"></i> Nastavenia</a></li>
+                        <li><a href="<?= $base ?>notes.php"><i class="fas fa-sticky-note"></i> Poznámky</a></li>
+                        <li><a href="<?= $base ?>logout.php"><i class="fas fa-sign-out-alt"></i> Odhlásiť sa</a></li>
                     </ul>
                 </nav>
             </div>
