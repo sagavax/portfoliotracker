@@ -6,19 +6,21 @@ const providerName = document.getElementById('providerName');
 const providerUrl = document.getElementById('providerUrl');
 const providerDescription = document.getElementById('providerDescription');
 const providerList = document.querySelector('.providers');
-const providerDetails = document.querySelector('.provider');
+const providerDetails = document.querySelector('.provider_details');
 
 
 
 
-provider.addEventListener('input', function(e) {
-    if(e.target && e.target.classList.contains('provider_description')) {
-        const providerId = e.target.closest('.provider_details').dataset.id;
-        const updatedDescription = e.target.innerText;
-        //save updated description to database using AJAX
-        updateProviderDescription(providerId, updatedDescription);
-    }
-});
+if (providerDetails) {
+    providerDetails.addEventListener('input', function(e) {
+        if(e.target && e.target.classList.contains('provider_description')) {
+            const providerId = e.target.closest('.provider_details').dataset.id;
+            const updatedDescription = e.target.innerText;
+            //save updated description to database using AJAX
+            updateProviderDescription(providerId, updatedDescription);
+        }
+    });
+}
 
 
 
@@ -30,9 +32,11 @@ providerList.addEventListener('click', function(e) {
 });
 
 
-btnAddNewProvider.addEventListener('click', () => {
-    modalAddNewProvider.showModal();
-});
+if (btnAddNewProvider && modalAddNewProvider) {
+    btnAddNewProvider.addEventListener('click', () => {
+        modalAddNewProvider.showModal();
+    });
+}
 
 if(modalAddNewProvider) {
 modalAddNewProviderClose.addEventListener('click', () => {
@@ -68,7 +72,11 @@ function getProviderDetails(providerId) {
   const xhttp = new XMLHttpRequest();
    xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            document.querySelector(".provider_details").innerHTML = this.responseText;
+            const detailsDiv = document.querySelector(".provider_details");
+            if (detailsDiv) {
+                detailsDiv.innerHTML = this.responseText;
+                detailsDiv.dataset.id = providerId;
+            }
         }
     }
     xhttp.open("GET", "provider_details.php?providerId=" + providerId, true);

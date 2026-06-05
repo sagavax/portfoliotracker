@@ -111,3 +111,58 @@
         }       
 
     }
+
+    function parseProviderLogo($logoData) {
+        if (empty($logoData)) {
+            return '';
+        }
+
+        // 1. If it starts with data:image/, it's already a Data URI
+        if (strpos($logoData, 'data:image/') === 0) {
+            return $logoData;
+        }
+
+        // 2. If it's a URL or standard path (contains slashes or file extension dots)
+        if (filter_var($logoData, FILTER_VALIDATE_URL) || strpos($logoData, '/') !== false || strpos($logoData, '.') !== false) {
+            return $logoData;
+        }
+
+        // 3. Try to decode as raw base64 string
+        $decoded = base64_decode($logoData, true);
+        if ($decoded !== false) {
+            $mimeType = 'image/png'; // fallback
+            if (class_exists('finfo')) {
+                $finfo = new finfo(FILEINFO_MIME_TYPE);
+                $detectedMime = @$finfo->buffer($decoded);
+                if ($detectedMime && strpos($detectedMime, 'image/') === 0) {
+                    $mimeType = $detectedMime;
+                }
+            } else {
+                $signatures = [
+                    "\x89PNG\r\n\x1a\n" => 'image/png',
+                    'GIF87a' => 'image/gif',
+                    'GIF89a' => 'image/gif',
+                    "\xff\xd8\xff" => 'image/jpeg',
+                    'RIFF' => 'image/webp',
+                ];
+                foreach ($signatures as $sig => $mime) {
+                    if (strpos($decoded, $sig) === 0) {
+                        $mimeType = $mime;
+                        break;
+                    }
+                }
+            }
+            return 'data:' . $mimeType . ';base64,' . $logoData;
+        }
+
+        // 4. If nothing else works, check if the raw bytes are an image (binary blob)
+        if (class_exists('finfo')) {
+            $finfo = new finfo(FILEINFO_MIME_TYPE);
+            $mimeType = @$finfo->buffer($logoData);
+            if ($mimeType && strpos($mimeType, 'image/') === 0) {
+                return 'data:' . $mimeType . ';base64,' . base64_encode($logoData);
+            }
+        }
+
+        return $logoData;
+    }

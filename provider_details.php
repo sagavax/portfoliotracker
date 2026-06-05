@@ -2,7 +2,6 @@
     include_once 'includes/dbconnect.php';
     include_once 'includes/functions.php';
 
-
     $providerId = $_GET['providerId'] ?? null;
 
 
@@ -13,7 +12,7 @@
         while($row = mysqli_fetch_assoc($result)) {
             $providerName = $row['provider_name'];
             $providerDescription = $row['provider_description'];
-            $providerLogo = $row['provider_logo'];
+            $providerLogo = parseProviderLogo($row['provider_logo']);
             $providerUrl = $row['provider_url'];
 
             echo "<div class='provider_name_wrapper'><h2>$providerName</h2><div class='provider_logo'><img src='$providerLogo' alt='$providerName logo'></div></div>";

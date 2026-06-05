@@ -28,19 +28,39 @@
 }
 
 .provider_name_wrapper {
+    box-sizing: border-box;
+    padding: 10px;
+    max-height: 60px;
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.provider_url a {
-    margin-top: 20px;
-    font-size: 16px;
+.provider_name_wrapper h2 {
+    font-size: 24px;
+    margin: 0;
+    width: 100%;
+    display: flex;
+}
+
+.provider_logo {
+    box-sizing: border-box;
+}
+
+.provider_url a {    
+    font-size: 18px;
     color: #007BFF;
     text-decoration: none;
+    width:100%;
+    display: flex;
 }
 
 .provider_url {
-    width: fit-content;
+    display: flex;
+    align-items: center;
+    height:auto;
+    width:100%;
+    align-items: center;
+    gap:10px;
     margin-top: 20px;
 }
