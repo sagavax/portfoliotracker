@@ -37,6 +37,26 @@ button[name="add_entry_price"] {
     width: 100%;
 }
 
+button[name="long_short"] {
+    width: 95px;
+    min-width: 95px;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+button[name="take_profit"],
+button[name="stop_loss"] {
+    width: 70px;
+    min-width: 70px;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.transaction td[style*="display: flex; gap: 10px;"] {
+    min-width: 170px;
+    justify-content: center;
+}
+
 .create_transaction_wrapper button {
     width: 150px;
     display: flex;
