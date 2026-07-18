@@ -34,12 +34,12 @@
                 <nav>
                     <ul>
                         <?php
-                            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
-                            $base = $protocol . '://' . $_SERVER['HTTP_HOST'] . '/portfoliotracker/';
+                           $base = (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'localhost') ? 'http://localhost/portfoliotracker/' : 'https://portfoliotracker.tmisura.sk/';
+
                         ?>
 
                         <li><a href="<?= $base ?>index.php"><i class="fas fa-home"></i> Domov</a></li>
-                        <li><a href="<?= $base ?>/portfolio/index.php"><i class="fas fa-chart-line"></i> Portfólio</a></li>
+                        <li><a href="<?= $base ?>portfolio/index.php"><i class="fas fa-chart-line"></i> Portfólio</a></li>
                         <li><a href="<?= $base ?>providers.php"><i class="fas fa-building"></i> Poskytovatelia</a></li>
                         <li><a href="<?= $base ?>influencers.php"><i class="fas fa-users"></i> Influencers</a></li>
                         <li><a href="<?= $base ?>news.php"><i class="fas fa-newspaper"></i> Novinky</a></li>

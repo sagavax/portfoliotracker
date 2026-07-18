@@ -21,7 +21,7 @@ if(isset($_POST['login'])){
           $_SESSION['login'] = stripslashes($username);
           echo "<div class='login-status success'>Prihlásenie úspešné. Prebieha presmerovanie...</div>";
           echo "<script>setTimeout(function(){
-            window.location = 'portfolio/index.php';
+            window.location = 'index.php';
           }, 1500)</script>";
        } elseif ($overeni==0) {
             echo "<div class='login-status error'>Neplatné prihlasovacie údaje.</div>";
