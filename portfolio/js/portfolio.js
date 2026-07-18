@@ -21,7 +21,7 @@ const transactions_filters = document.querySelector('.transactions_filters');
 const selectCurrency = document.getElementById('currency');
 const modalNote = document.getElementById('modalNote');
 const modalNotes = document.getElementById('modalNotes');
-const modalManualBot = document.getElementById("modalManualBotModal");
+const modalManualBot = document.getElementById("modalManualBot");
 
 const MODAL_TICKER_MODES = {
   INSERT: "insertTicker",
@@ -81,7 +81,8 @@ modalManualBot.addEventListener("click", function(e){
   if(e.target && e.target.tagName === "BUTTON"){
     const manualBot = e.target.innerText;
      const transactionId = sessionStorage.getItem("currentTransactionId");
-     updateTransactionManualBot(transactionId, manualBot)
+     updateTransactionManualBot(transactionId, manualBot);
+     document.querySelector("#modalManualBot").close();
   }  
 });
 }
@@ -898,7 +899,6 @@ function updateTransactionManualBot(transactionId, manualBot){
            alert("Transaction information updated successfully!");
            const response = JSON.parse(this.responseText);
            document.querySelector(`.transaction[data-id="${transactionId}"] button[name="manual_bot"]`).innerText = manualBot;
-           document.querySelector("#modalManualBot").close();
         }
     }
     xhttp.open("POST", "transaction_update_manual_bot.php", true);

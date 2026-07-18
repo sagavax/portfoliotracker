@@ -390,7 +390,7 @@
   </div>
 </dialog>
 
-<dialog id="modalManualBotModal">
+<dialog id="modalManualBot">
     <div class="modal-container">
         <h3>Manual bot</h3>
         <div id="manualBotDetailsContent">
