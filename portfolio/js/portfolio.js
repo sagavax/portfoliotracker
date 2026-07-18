@@ -21,7 +21,7 @@ const transactions_filters = document.querySelector('.transactions_filters');
 const selectCurrency = document.getElementById('currency');
 const modalNote = document.getElementById('modalNote');
 const modalNotes = document.getElementById('modalNotes');
-const modalManualBot = document.getElementById("manualBotModal");
+const modalManualBot = document.getElementById("modalManualBotModal");
 
 const MODAL_TICKER_MODES = {
   INSERT: "insertTicker",
