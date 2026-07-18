@@ -135,8 +135,9 @@ document.addEventListener('keydown', function(e) {
 modalSpotPerpetual.addEventListener('click', function(e) {
     if(e.target.tagName === "BUTTON") {
         const value = e.target.name === "add_spot" ? "SPOT" : "PERPETUAL";
+        console.log(value);
         const transactionId = sessionStorage.getItem("currentTransactionId");
-        document.querySelector('tr[data-id="'+transactionId+'"] .button[name="spot_perpetual"]').textContent = value;
+        document.querySelector('tr[data-id="'+transactionId+'"] button[name="spot_perpetual"]').textContent = value;
         updateSpotPerpetual(transactionId, value);
         modalSpotPerpetual.close();
     }
