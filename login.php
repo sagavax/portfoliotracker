@@ -15,23 +15,19 @@ if(isset($_POST['login'])){
       //echo $get_login;
       //$row = mysqli_fetch_array($db,$result);
       $overeni = mysqli_num_rows($result);
-      echo "Pocet riadkov:".$overeni;
+      //echo "Pocet riadkov:".$overeni;
       
       if($overeni == 1) {
           $_SESSION['login'] = stripslashes($username);
-          //$row = mysqli_fetch_array($result);
-          echo "<div class='overlay'><div class='logon_information success'><i class='fa fa-check-circle'></i></div></div>"; 
+          echo "<div class='login-status success'>Prihlásenie úspešné. Prebieha presmerovanie...</div>";
           echo "<script>setTimeout(function(){
-            window.location = 'index.php';
-          }, 3000)</script>";
-
-          //header("location:dashboard.php");
+            window.location = 'portfolio/index.php';
+          }, 1500)</script>";
        } elseif ($overeni==0) {
-            echo "<div class='overlay'><div class='logon_information error'><i class='fas fa-times-circle'></i></div></div>";
+            echo "<div class='login-status error'>Neplatné prihlasovacie údaje.</div>";
             echo "<script>setTimeout(function(){
               window.location = 'login.php';
-            }, 3000)</script>";
-            
+            }, 1500)</script>";
           }
       }
  ?>
