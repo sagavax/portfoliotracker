@@ -21,7 +21,7 @@ const transactions_filters = document.querySelector('.transactions_filters');
 const selectCurrency = document.getElementById('currency');
 const modalNote = document.getElementById('modalNote');
 const modalNotes = document.getElementById('modalNotes');
-
+const modalManualBot = document.getElementById("manualBotModal");
 
 const MODAL_TICKER_MODES = {
   INSERT: "insertTicker",
@@ -75,6 +75,16 @@ let modalCurrencyMode;
         note.setAttribute("contenteditable", false);
     }
 }) */
+
+
+modalManualBot.addEventListener("click", function(e){
+  if(e.target && e.target.tagName === "BUTTON"){
+    const manualBot = e.target.innerText;
+     const transactionId = sessionStorage.getItem("currentTransactionId");
+     updateTransactionManualBot(transactionId, manualBot)
+     modalManualBot.close();
+  }  
+})
 
 
 
@@ -224,10 +234,10 @@ transactionList.addEventListener('click', function(e) {
     } else if (btn.name === "spot_perpetual") {
         modalSpotPerpetualMode = "editSpotPerpetual";
         document.getElementById("modalSpotPerpetualModal").showModal();
-    }
+    } else if (btn.name === "manual_bot") {
+        modalManualBot.showModal();
+    }     
 })
-
-
 
 
 
@@ -879,4 +889,19 @@ function createNewProvider(provider) {
     xhttp.open("POST", "transaction_provider_create.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`provider=${provider}`);
+}
+
+function updateTransactionManualBot(transactionId, manualBot){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+           alert("Transaction information updated successfully!");
+           const response = JSON.parse(this.responseText);
+           document.querySelector(`.transaction[data-id="${id}"] button[name="manual_bot"]`).innerText = manualBot;
+           document.querySelector("#modalManualBot").close();
+        }
+    }
+    xhttp.open("POST", "transaction_update_manual_bot.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`transaction_id=${id}&manual_bot=${encodeURIComponent(manualBot)}`);
 }

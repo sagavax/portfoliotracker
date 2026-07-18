@@ -254,7 +254,7 @@ button[name="new_transaction_cancel"]:hover {
 #tickerDetailsContent, #providerDetailsContent, #longShortDetailsContent,
 #assetCategoryDetailsContent, #modalPriceContent, #modalCurrencyContent,
 #modalTakeProfitContent, #modalStopLossContent, #modalAddNoteContent,
-#spotPerpetualDetailsContent {
+#spotPerpetualDetailsContent, #manualBotDetailsContent {
     display: flex;
     gap: 10px;
     align-items: center;
@@ -270,7 +270,7 @@ button[name="new_transaction_cancel"]:hover {
 }
 
 #longShortDetailsContent,
-#spotPerpetualDetailsContent {
+#spotPerpetualDetailsContent, #manualBotDetailsContent {
     justify-content: center;
 }
 
