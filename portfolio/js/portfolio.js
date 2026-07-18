@@ -76,13 +76,22 @@ let modalCurrencyMode;
     }
 }) */
 
+
+ document.querySelector("#manualBotModalClose").addEventListener("click", function(e) {
+     document.querySelector("#modalManualBot").close();
+ });    
+
+
 if(modalManualBot) {
 modalManualBot.addEventListener("click", function(e){
   if(e.target && e.target.tagName === "BUTTON"){
     const manualBot = e.target.innerText;
      const transactionId = sessionStorage.getItem("currentTransactionId");
-     updateTransactionManualBot(transactionId, manualBot);
-     document.querySelector("#modalManualBot").close();
+     if(e.target.name === "manual_bot_on" || e.target.name === "manual_bot_off") {
+        updateTransactionManualBot(transactionId, manualBot);
+        document.querySelector("#modalManualBot").close();
+     } 
+     
   }  
 });
 }
