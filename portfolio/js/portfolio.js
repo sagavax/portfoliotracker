@@ -76,7 +76,7 @@ let modalCurrencyMode;
     }
 }) */
 
-
+if(modalManualBot) {
 modalManualBot.addEventListener("click", function(e){
   if(e.target && e.target.tagName === "BUTTON"){
     const manualBot = e.target.innerText;
@@ -84,7 +84,9 @@ modalManualBot.addEventListener("click", function(e){
      updateTransactionManualBot(transactionId, manualBot)
      modalManualBot.close();
   }  
-})
+});
+}
+
 
 
 
