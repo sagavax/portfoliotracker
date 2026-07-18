@@ -269,6 +269,10 @@ button[name="new_transaction_cancel"]:hover {
     top:-20%;
 }
 
+#modalManualBotModal  {
+    width:30%;
+}
+
 #longShortDetailsContent,
 #spotPerpetualDetailsContent, #manualBotDetailsContent {
     justify-content: center;
