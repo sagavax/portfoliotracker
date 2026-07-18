@@ -82,7 +82,6 @@ modalManualBot.addEventListener("click", function(e){
     const manualBot = e.target.innerText;
      const transactionId = sessionStorage.getItem("currentTransactionId");
      updateTransactionManualBot(transactionId, manualBot)
-     modalManualBot.close();
   }  
 });
 }
@@ -895,15 +894,16 @@ function createNewProvider(provider) {
 
 function updateTransactionManualBot(transactionId, manualBot){
     const xhttp = new XMLHttpRequest();
+    console.log("update manual bot:", transactionId, manualBot);
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
            alert("Transaction information updated successfully!");
            const response = JSON.parse(this.responseText);
-           document.querySelector(`.transaction[data-id="${id}"] button[name="manual_bot"]`).innerText = manualBot;
+           document.querySelector(`.transaction[data-id="${transactionId}"] button[name="manual_bot"]`).innerText = manualBot;
            document.querySelector("#modalManualBot").close();
         }
     }
     xhttp.open("POST", "transaction_update_manual_bot.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send(`transaction_id=${id}&manual_bot=${encodeURIComponent(manualBot)}`);
+    xhttp.send(`transaction_id=${transactionId}&manual_bot=${encodeURIComponent(manualBot)}`);
 }
