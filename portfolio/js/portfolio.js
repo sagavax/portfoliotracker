@@ -349,19 +349,18 @@ modalPriceInput.addEventListener('keydown', function(e) {
     if (!price) return;
     
     const transactionId = sessionStorage.getItem("currentTransactionId");
-    //const transaction = document.querySelector(`.tdtransaction[data-id="${transactionId}"]`);
+    const row = document.querySelector("tr[data-id='" + transactionId + "']");
+    if (!row) return;
     
-    if (!transaction) return;
-    
-    const existing = transaction.querySelector("[data-type='price']");
+    const existing = row.querySelector("[data-type='price']");
     if (existing) {
         existing.textContent = price;
     } else {
-        //transaction.insertAdjacentHTML('beforeend',
-        //    `<button type='button' class='button' data-type='price'>${price}</button>`
-        const transaction = document.querySelector("tr[data-id='"+transactionId+"'] button[name='add_entry_price']");
-        transaction.outerHTML="<div class='quantity' contenteditable='true'>"+price+"</div>";
-     }
+        const priceButton = row.querySelector("button[name='add_entry_price']");
+        if (priceButton) {
+            priceButton.outerHTML = "<div class='quantity' contenteditable='true'>" + price + "</div>";
+        }
+    }
     
     updateTransactionEntryPrice(transactionId, price);
     modalPrice.close();
@@ -376,19 +375,18 @@ modalQuantityInput.addEventListener('keydown', function(e) {
     if (!quantity) return;
     
     const transactionId = sessionStorage.getItem("currentTransactionId");
-    //const transaction = document.querySelector(`.transaction[data-id="${transactionId}"]`);
-    const transaction = document.querySelector("tr[data-id='"+transactionId+"'] button[name='add_quantity']");
-    if (!transaction) return;
+    const row = document.querySelector("tr[data-id='" + transactionId + "']");
+    if (!row) return;
     
-    const existing = transaction.querySelector("[data-type='quantity']");
+    const existing = row.querySelector("[data-type='quantity']");
     if (existing) {
         existing.textContent = quantity;
     } else {
-        //transaction.insertAdjacentHTML('beforeend',
-        //    `<button type='button' class='button' data-type='quantity'>${quantity}</button>`
-
-        transaction.outerHTML="<div class='quantity' contenteditable='true'>"+quantity+"</div>";
-            }
+        const quantityButton = row.querySelector("button[name='add_quantity']");
+        if (quantityButton) {
+            quantityButton.outerHTML = "<div class='quantity' contenteditable='true'>" + quantity + "</div>";
+        }
+    }
     
     updateTransactionQuantity(transactionId, quantity);
     modalQuantity.close();
