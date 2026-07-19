@@ -542,6 +542,32 @@ function GetTickers(letter = ''){
     xhttp.send();
 }
 
+function GetCryptos(letter = ''){
+    const xhttp = new XMLHttpRequest(); 
+   const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("tickerDetailsContent").innerHTML = this.responseText;
+            /* const tickers = JSON.parse(this.responseText);
+            console.log(tickers); */
+        }
+    }
+    xhttp.open("GET", "cryptos_get.php?letter="+letter, true);
+    xhttp.send();
+}   
+
+function FindCrypto(ticker) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("tickerDetailsContent").innerHTML = this.responseText;  
+         }
+     }
+    xhttp.open("GET", "cryptos_get.php?letter="+letter, true);
+    xhttp.send();            
+}
+
+
 function FindTicker(ticker) {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {

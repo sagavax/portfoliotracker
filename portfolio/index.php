@@ -296,12 +296,20 @@
 <dialog id="modalTicker">
     <div class="modal-container">
         <h3>Ticker details</h3>
+
+         <div class="filter_stocks_crypto">
+            <button type="button" class="secondary" data-filter="stocks">Akcie</button>
+            <button type="button" class="secondary" data-filter="crypto">Kryptomeny</button>
+        </div> 
+
         <div class="filter_tickers">
             <?php foreach (range('A', 'Z') as $letter): ?>
                 <button type="button" class="secondary" data-letter="<?= $letter ?>"><?= $letter ?></button>
-            <?php endforeach; ?>
-        </div>
+            <?php endforeach; ?>           
+        </div>        
         
+       
+
         <div class="search_wrapper">
             <input type="text" name="search_ticker" id="search_in_ticker" placeholder="Hledat v tickeroch...">
         </div>  
