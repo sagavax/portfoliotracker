@@ -16,7 +16,7 @@ const new_transaction = document.querySelector('.new_transaction');
 const modalTakeProfit = document.getElementById('modalTakeProfit');
 const modalStopLoss = document.getElementById('modalStopLoss');
 const modalAddNote = document.getElementById('modalAddNote');
-const modalSpotPerpetual = document.getElementById('modalSpotPerpetualModal');
+const modalSpotPerpetual = document.getElementById('modalSpotPerpetual');
 const transactions_filters = document.querySelector('.transactions_filters');
 const selectCurrency = document.getElementById('currency');
 const modalNote = document.getElementById('modalNote');
@@ -164,7 +164,7 @@ document.addEventListener('keydown', function(e) {
 
 modalSpotPerpetual.addEventListener('click', function(e) {
     if(e.target.tagName === "BUTTON") {
-        const value = e.target.name === "add_spot" ? "SPOT" : "PERPETUAL";
+        const value = e.target.name === "add_spot" ? "Spot" : "Perpetual";
         console.log(value);
         const transactionId = sessionStorage.getItem("currentTransactionId");
         document.querySelector('tr[data-id="'+transactionId+'"] button[name="spot_perpetual"]').textContent = value;
@@ -253,7 +253,7 @@ transactionList.addEventListener('click', function(e) {
         window.location.href = "transaction_details.php?transaction_id=" + transactionId;
     } else if (btn.name === "spot_perpetual") {
         modalSpotPerpetualMode = "editSpotPerpetual";
-        document.getElementById("modalSpotPerpetualModal").showModal();
+        document.getElementById("modalSpotPerpetual").showModal();
     } else if (btn.name === "manual_bot") {
         modalManualBot.showModal();
     }  else if (btn.name === "duplicate_transaction") {

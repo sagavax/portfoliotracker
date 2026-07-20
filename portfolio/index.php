@@ -61,9 +61,16 @@
                 
                 
                  <div class="transactions_filters">
+
+                     <div class="create_transaction_action_wrapper">
+                        <button type="button" name="add_transation" class="button small_button" id="btnAddNewtransaction"><i class="fa fa-plus"></i> Přidat transakci</button>
+                    </div><!-- create_transaction_action_wrapper -->
+
                     <div class="transaction_filters_buttons">
-                        <button type="button" class="filter_button" data-filter="all">Vše</button>
-                        
+                        <div class="filter_all">
+                            <button type="button" class="filter_button" data-filter="all">Vše</button>
+                        </div>
+
                         <div class="filter_asset_category">
                             <button type="button" class="filter_button" data-filter="stocks">Akcie</button>
                             <button type="button" class="filter_button" data-filter="crypto">Kryptoměny</button>
@@ -96,6 +103,10 @@
                         <div class="filter_spot_perpetual">
                             <button type="button" class="filter_button" data-filter="spot">Spot</button>
                             <button type="button" class="filter_button" data-filter="perpetual">Perpetual</button>
+                        </div>
+                       
+
+                        <div class="filter_manual_bot">
                             <button type="button" class="filter_button" data-filter="manual">Manual</button>
                             <button type="button" class="filter_button" data-filter="bot">Bot</button>
                         </div>
@@ -122,12 +133,13 @@
                         </div>
 
                     </div><!-- transaction_filters_buttons -->
-                    <div class="create_transaction_action_wrapper">
-                        <button type="button" name="add_transation" class="button small_button" id="btnAddNewtransaction"><i class="fa fa-plus"></i> Přidat transakci</button>
-                    </div><!-- create_transaction_action_wrapper -->
+                    
 
                  </div><!-- transactions_filters -->    
                    <!-- create new transaction -->
+
+                 
+
                     <div class="create_transaction_wrapper">
                         <button type="button" name="add_ticker" class="button small_button" id="add_ticker"><i class="fa fa-plus"></i> Add ticker</button>
                         <button type="button" name="add_provider" class="button small_button" id="add_provider"><i class="fa fa-plus"></i> Add provider</button>
@@ -142,6 +154,8 @@
                         <button type="button" name="add_note" class="button small_button" id="add_note"><i class="fa fa-plus"></i> Add note</button>
                     </div><!--new_transaction-->
 
+                    
+
                     <div class="new_transaction">
                         <div class="new_transaction_actions_wrapper">
                             <button name="new_transaction_create" class="secondary">Create</button>
@@ -152,14 +166,13 @@
 
                 <div class="filter_ticker">
                     <?php
-                                $get_tickers = "SELECT symbol FROM transactions GROUP BY symbol ORDER BY symbol ASC";
-                                $result = mysqli_query($link, $get_tickers) or die("MySQL ERROR: " . mysqli_error($link));
-                                while ($row = mysqli_fetch_array($result)) {
-                                    $ticker = $row['symbol'];
-                                    echo "<button type='button' class='filter_button' data-filter='$ticker'>$ticker</button>";
-                                }
-                            ?>
-
+                        $get_tickers = "SELECT symbol FROM transactions GROUP BY symbol ORDER BY symbol ASC";
+                        $result = mysqli_query($link, $get_tickers) or die("MySQL ERROR: " . mysqli_error($link));
+                        while ($row = mysqli_fetch_array($result)) {
+                            $ticker = $row['symbol'];
+                            echo "<button type='button' class='filter_button' data-filter='$ticker'>$ticker</button>";
+                        }
+                    ?>
                 </div><!-- filter_ticker -->    
                 
                 <div class="transactions">
@@ -343,7 +356,7 @@
     </div>
 </dialog>
 
-<dialog id="modalSpotPerpetualModal">
+<dialog id="modalSpotPerpetual">
     <div class="modal-container">
         <h3>Spot/Perpetual details</h3>
         <div id="spotPerpetualDetailsContent">
