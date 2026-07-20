@@ -1,0 +1,59 @@
+
+   .notes {
+      margin-top:50px;
+      width:100%;
+      display: block;
+      flex-direction: column;
+   }
+
+
+   .note {
+      min-height:130px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #435B7C;
+      border-radius: 5px;
+      padding: 10px;
+      box-sizing: border-box;
+   }
+
+
+   .notes_header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 50px;
+   }
+
+   #modalAddNote .modal-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}  
+
+  #modalAddNote textarea {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 8px;
+    padding: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: #0d0d0d;
+    color:#435B7C;
+  }
+
+  .modal_note_actions {
+    height: 50px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .modal_note_actions button {
+    margin-left: 10px;
+  }

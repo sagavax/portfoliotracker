@@ -1,0 +1,109 @@
+
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+       margin: 24px; 
+       background-color: #253649;
+       background-color: #0d0d0d;
+        color:white;
+         outline: none;
+      }
+   ::placeholder { color:#91d1fe; }
+   header { display:flex; align-items:center; gap:12px; background-color: #435B7C; margin-bottom:20px; border:1px solid #eee;}
+   .container { display:flex; height:100vh; width:100%; }
+   .sidebar { width:15%; height:100%; box-sizing:border-box; background-color: #435B7C;background-color: #0d0d0d;font-size: 16px; padding:12px; }
+   .content { width:85%; height:100%; box-sizing:border-box; padding:12px; }
+
+    .providers { display:flex; flex-wrap:wrap; gap:12px; justify-content:flex-start; margin-top:12px; margin-bottom:12px; }
+
+   .provider_card {background-color: #253649; padding: 10px 12px;border:1px solid #eee; border-radius:8px; display:flex; flex-direction:column; gap:8px; justify-content:center; align-items:center; text-align:center; transition: background-color 0.3s ease; cursor: pointer; }
+   .provider_card:hover { background-color: #4e6a8c; }
+
+  .provider_card[data-name="new_provider"] { flex-direction: row;  padding: 10px 12px; width:150px; gap:5px; justify-content: center; align-items: center; }
+
+   .sidebar a { display: flex;
+    width: 100%;
+    padding: 12px;
+    height: 35px;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+    align-items: center;
+    gap: 10px;
+    }
+
+   .sidebar ul { list-style:none; padding:0; margin:0; }
+   .sidebar li {width:100%; display: flex; align-items: center; transition: background-color 0.3s ease; gap:10px; }
+   .sidebar li:hover {background-color: #1a1b1e; cursor: pointer; }
+   /* .sidebar a:hover { background-color: #4e6a8c; } */
+
+   button {background-color: #253649; border: 1px #435B7C solid; border-radius: 6px ; color: white; padding: 10px 20px; text-align: center; display: flex; align-items: center; gap:10px;}
+
+   button:hover { background-color: #4e6a8c; border: 2px #fff solid}
+
+   .transaction_button {background-color: #0d0d0d;color: white; padding: 10px 20px; display: flex; align-items: center; justify-content: center; gap:10px; height:100%; border:1px solid #0d0d0d;border-radius:0}   
+
+   .transaction_button:hover { background-color: #1a1b1e; border:1px solid #1a1b1e; cursor: pointer; }
+
+   dialog {
+      min-height: 100px;
+      width: 60%;
+      background-color: #435B7C;
+      color: white;
+      font-size: 18px;
+      box-sizing: border-box;
+      padding: 10px;
+      gap:10px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #435B7C;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+   }
+
+   .search_wrapper {
+      margin-top:50px;
+      height: 55px;
+      border: 1px solid #435B7C;
+      box-sizing: border-box;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-radius: 5px;
+      gap: 10px;
+      margin-bottom: 10px;
+   }
+
+   .search_wrapper input {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: white;
+      font-size: 18px;
+      width: 100%;
+   }
+
+   .clockWrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 20px;
+    gap: 20px;
+   }
+
+   #clock {
+    font-size: 28px;
+    font-weight: bold;
+   }
+
+   .loader {
+      height: 40px;
+      width:100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: white;
+   }
