@@ -3,6 +3,7 @@ const create_transaction_wrapper = document.querySelector('.create_transaction_w
 const search_in_ticker = document.getElementById('search_in_ticker');
 const add_provider = document.getElementById('add_provider');
 const tickerModal = document.getElementById('modalTicker');
+const modalTickerInput = document.querySelector('#modalTicker input');
 const providerModal = document.getElementById('modalProvider');
 const assetCategoryModal = document.getElementById('modalAssetCategory');
 const longShortModal = document.getElementById('modalLongShort');
@@ -303,6 +304,12 @@ search_in_ticker.addEventListener('input', function(e) {
     FindTicker(e.target.value);    
 })
 
+search_in_ticker.addEventListener('keydown', function(e) {
+    if(e.key === "Enter") {
+        e.preventDefault();
+        CreateNewTicker(e.target.value);
+    }
+})
 
 //add new transaction
 btnAddTransaction.addEventListener('click', function(e) {
@@ -480,6 +487,7 @@ if(tickerModal) {
             }
         }
     })
+    
 }
 
 if(providerModal){
@@ -961,6 +969,24 @@ function filterTransactionsByTicker(ticker) {
         }
     }
     xhttp.open("POST", "transaction_filter_by_symbol.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`symbol=${ticker}`);
+}
+
+function CreateNewTicker(ticker) {
+    const xhttp = new XMLHttpRequest();
+    console.log("create new ticker:", ticker);
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const response = JSON.parse(this.responseText);
+            if(response.status === "success") {
+                alert("Ticker created successfully!");
+            } else {
+                alert(response.message);
+            }
+        }
+    }
+    xhttp.open("POST", "transaction_ticker_create.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`symbol=${ticker}`);
 }

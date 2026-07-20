@@ -1,0 +1,110 @@
+.filter_ticker_alphabet {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.filter_ticker_alphabet {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.filter_ticker_alphabet .filter_button {
+    min-width: 36px;
+    justify-content: center;
+    padding: 8px 10px;
+}
+
+/* ── Search bar ───────────────────────────────── */
+.search-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.search-container input {
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    color: white;
+    background-color: #253649;
+    font-size: 16px;
+}
+
+.search-container button.primary {
+    background-color: #253649;
+    border: 1px solid #00b070;
+    color: #00b070;
+    white-space: nowrap;
+}
+
+.search-container button.primary:hover {
+    background-color: #00b070;
+    color: #0d0d0d;
+    border: 1px solid #00b070;
+}
+
+/* ── Tickers table ─────────────────────────────── */
+.content table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+    margin-top: 20px;
+}
+
+.content table thead tr {
+    border-bottom: 1px solid #435B7C;
+}
+
+.content table th {
+    text-align: left;
+    padding: 12px 15px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #91d1fe;
+}
+
+.content table tbody tr {
+    border-bottom: 1px solid #435B7C;
+    transition: background-color 0.3s ease;
+}
+
+.content table tbody tr:hover {
+    background-color: #1a1b1e;
+}
+
+.content table td {
+    padding: 12px 15px;
+    vertical-align: middle;
+}
+
+.content table td:first-child {
+    font-weight: bold;
+    color: #91d1fe;
+    white-space: nowrap;
+}
+
+.content table td.description {
+    max-width: 320px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.content table td a {
+    color: #91d1fe;
+    text-decoration: none;
+}
+
+.content table td a:hover {
+    text-decoration: underline;
+}

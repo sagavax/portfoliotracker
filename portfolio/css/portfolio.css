@@ -21,12 +21,12 @@ button[name="spot_perpetual"] {
     width: 160px;
 }
 
-button[data-ticker="add_ticker"], 
-button[data-provider="add_provider"],
-button[data-category="add_category"] {
+
+
+button[name="add_entry_price"] {
     background-color: transparent;
     border: none;
-    color: #97b6dc;   
+    color: #ebdc0d;
 }
 
 button[name="currency"] {
@@ -68,7 +68,8 @@ button[name="stop_loss"] {
 /* ── Flex row base ────────────────────────────── */
 .transactions_filters,
 .transactions_filter,
-.filter_ticker {
+.filter_ticker 
+{
     display: flex;
     gap: 10px;
     align-items: center;

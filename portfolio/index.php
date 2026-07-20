@@ -46,6 +46,7 @@
                         <li><a href="<?= $base ?>index.php"><i class="fas fa-home"></i> Domov</a></li>
                         <li><a href="<?= $base ?>/portfolio/index.php"><i class="fas fa-chart-line"></i> Portfólio</a></li>
                         <li><a href="<?= $base ?>providers.php"><i class="fas fa-building"></i> Poskytovatelia</a></li>
+                        <li><a href="<?= $base ?>tickers.php"><i class="fas fa-tags"></i> Tickers</a></li>
                        <!--  <li><a href="<?= $base ?>influencers.php"><i class="fas fa-users"></i> Influencers</a></li>
                         <li><a href="<?= $base ?>news.php"><i class="fas fa-newspaper"></i> Novinky</a></li>
                         <li><a href="<?= $base ?>settings.php"><i class="fas fa-cogs"></i> Nastavenia</a></li>
