@@ -7,7 +7,7 @@
     $transaction_id = $_POST['transaction_id'];
     
     //duplicate transaction
-    $duplicate_transaction_query = "INSERT INTO transactions (symbol, transaction_date, provider, asset_category, currency, quantity, entry_price, position_type, spot_perpetual, manual_bot) SELECT symbol, transaction_date, provider, asset_category, currency, quantity, entry_price, position_type, spot_perpetual, manual_bot FROM transactions WHERE id = $transaction_id";
+    $duplicate_transaction_query = "INSERT INTO transactions (symbol, date_of_transaction, provider, asset_category, currency, quantity, entry_price, position_type, spot_perpetual, manual_bot) SELECT symbol, date_of_transaction, provider, asset_category, currency, quantity, entry_price, position_type, spot_perpetual, manual_bot FROM transactions WHERE id = $transaction_id";
     $duplicate_transaction_result = mysqli_query($link, $duplicate_transaction_query) or die(mysqli_error($link));
 
     //get the last inserted transaction id
