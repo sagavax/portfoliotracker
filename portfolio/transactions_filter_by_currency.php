@@ -22,6 +22,7 @@ $result = mysqli_query($link, $get_transactions) or die("MySQL ERROR: " . mysqli
         $transaction_provider = $row['provider'];
         $transaction_category = $row['asset_category'];
         $transaction_currency = $row['currency'];
+        $transaction_leverage = $row['leverage'];
         $transaction_quantity = $row['quantity'];
         $transaction_entry_price = $row['entry_price'];
         $transaction_tp = $row['tp_price'];
@@ -53,7 +54,13 @@ $result = mysqli_query($link, $get_transactions) or die("MySQL ERROR: " . mysqli
             }
             
             echo "<td><button type='button' class='transaction_button' name='currency'>$transaction_currency</button>";
-            
+
+            if($transaction_leverage != 0) {
+                echo "<td><div class='leverage' contenteditable='true'>$transaction_leverage</div></td>";
+            } else {
+                echo "<td><button type='button' class='transaction_button' name='add_leverage'><i class='fa fa-plus'></i> Add leverage</button></td>";
+            }
+
             if($transaction_quantity != 0) {
                 echo "<td><div class='quantity' contenteditable='true'>$transaction_quantity</div></td>";
             } else {

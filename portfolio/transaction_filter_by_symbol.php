@@ -7,7 +7,7 @@
 
     $symbol = $_POST['symbol'];
 
-    $get_transactions_query = "SELECT * FROM transactions WHERE symbol = '$symbol' ORDER BY transaction_date DESC";
+    $get_transactions_query = "SELECT * FROM transactions WHERE symbol = '$symbol' ORDER BY date_of_transaction DESC";
 
     echo "<table>";
     echo "<thead>";
@@ -20,6 +20,7 @@
         $transaction_provider = $row['provider'];
         $transaction_category = $row['asset_category'];
         $transaction_currency = $row['currency'];
+        $transaction_leverage = $row['leverage'];
         $transaction_quantity = $row['quantity'];
         $transaction_entry_price = $row['entry_price'];
         $transaction_tp = $row['tp_price'];
@@ -54,7 +55,13 @@
             }
 
             echo "<td><button type='button' class='transaction_button' name='currency' data-currency='existing_currency'>$transaction_currency</button></td>";
-            
+
+            if($transaction_leverage != 0) {
+                echo "<td><div class='leverage' contenteditable='true'>$transaction_leverage</div></td>";
+            } else {
+                echo "<td><button type='button' class='transaction_button' name='add_leverage'><i class='fa fa-plus'></i> Add leverage</button></td>";
+            }
+
             if($transaction_quantity != 0) {
                 echo "<td><div class='quantity' contenteditable='true'>$transaction_quantity</div></td>";
             } else {

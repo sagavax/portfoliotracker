@@ -227,6 +227,10 @@ button[name="add_quantity"], .quantity[contenteditable="true"]{
     width:125px;
  }
 
+button[name="add_leverage"], .leverage[contenteditable="true"] {
+    width:125px;
+}
+
 
 .short {
     /* background-color: #ff7152; */
@@ -389,7 +393,8 @@ button[name="new_transaction_cancel"]:hover {
 }
 
 .quantity,
-.price {
+.price,
+.leverage {
     width: 100%;
     padding: 5px;
     box-sizing: border-box;
@@ -400,7 +405,8 @@ button[name="new_transaction_cancel"]:hover {
 }
 
 .quantity[contenteditable="true"]:hover,
-.price[contenteditable="true"]:hover {
+.price[contenteditable="true"]:hover,
+.leverage[contenteditable="true"]:hover {
     background-color: #1a1b1e;
     border:0px;
     cursor: pointer;
@@ -408,7 +414,8 @@ button[name="new_transaction_cancel"]:hover {
 }
 
 .quantity[contenteditable="true"]:focus,
-.price[contenteditable="true"]:focus {
+.price[contenteditable="true"]:focus,
+.leverage[contenteditable="true"]:focus {
     outline: none;
 }
 
