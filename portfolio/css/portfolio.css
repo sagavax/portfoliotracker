@@ -221,7 +221,7 @@ button[name="new_transaction_create"]:hover {
 }
 
 button[name="add_quantity"], .quantity[contenteditable="true"]{
-    width:190px;
+    width:180px;
 }
  button[name="add_entry_price"], .price[contenteditable="true"] {
     width:125px;
@@ -231,6 +231,9 @@ button[name="add_leverage"], .leverage[contenteditable="true"] {
     width:125px;
 }
 
+button[name="duplicate_transaction"] {
+    font-size: 18px;
+}
 
 .short {
     /* background-color: #ff7152; */
