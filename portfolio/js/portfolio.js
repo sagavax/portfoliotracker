@@ -27,6 +27,15 @@ const filter_ticker = document.querySelector('.filter_ticker');
 const modalLeverage = document.getElementById('modalLeverage');
 const leverageSlider = document.getElementById('leverageSlider');
 const leverageInput = document.getElementById('leverageInput');
+const leverageCancel = document.getElementById('leverageCancel');
+const leverageSave = document.getElementById('leverageSave');
+
+
+leverageCancel.addEventListener('click', function() {
+    modalLeverage.close();
+});
+
+
 
 leverageSlider.addEventListener('input', function() {
     leverageInput.value = leverageSlider.value;
