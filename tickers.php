@@ -59,7 +59,7 @@
                 <h1>Vitajte v Portfolio Tracker</h1>
                 <p>Zoznam jednotlivych tickersov.</p>
                 <div class="search-container">
-                    <input type="text" id="search_in_ticker" placeholder="Hľadať ticker...">
+                    <input type="text" id="search_in_ticker" placeholder="Hľadať ticker..." autocomplete="off">
                     <button type="button" class="primary" data-ticker="add_ticker">Pridať nový ticker</button>
                 </div>
                 

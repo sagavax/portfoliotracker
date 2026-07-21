@@ -12,10 +12,18 @@ saveTicker.addEventListener("click", function() {
     const new_website = document.querySelector("#new_website").value.trim();
     CreateNewTicker(new_ticker, new_short_name, new_industry, new_website);
     modalTicker.close();
+    document.querySelector("#new_ticker").value="";
+    document.querySelector("#new_short_name").value="";
+    document.querySelector("#new_industry").value="";
+    document.querySelector("#new_website").value="";
 });
 
 //close modal on cancel
 cancelTicker.addEventListener("click", function() {
+      document.querySelector("#new_ticker").value="";
+      document.querySelector("#new_short_name").value="";
+      document.querySelector("#new_industry").value="";
+      document.querySelector("#new_website").value="";
     modalTicker.close();
 });
 
@@ -71,10 +79,7 @@ function CreateNewTicker(ticker, short_name, industry, website) {
             const response = JSON.parse(this.responseText);
             if(response.status === "success") {
                 alert("Ticker created successfully!");
-                const new_ticker = document.querySelector("#new_ticker").value="";
-                document.querySelector("#new_short_name").value="";
-                document.querySelector("#new_industry").value="";
-                document.querySelector("#new_website").value="";
+    
             } else {
                 alert(response.message);
             }
