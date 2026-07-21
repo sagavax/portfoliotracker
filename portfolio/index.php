@@ -442,3 +442,16 @@
         <button id="manualBotModalClose" class="secondary">Close</button>
     </div>
 </dialog>
+
+<dialog id="modalLeverage">
+  <div class="modal-container">
+    <div id="modalLeverageContent">
+        <input type="range" min="0" max="100" step="1" value="0" id="leverageSlider">
+        <input type="text" placeholder="0" autocomplete="off" id="leverageInput">
+    </div>
+    <div class="leverage_actions">
+        <button id="leverageCancel" class="secondary">Cancel</button>
+        <button id="saveLeverage" class="secondary">Save</button>
+    </div>    
+  </div>
+</dialog>  
