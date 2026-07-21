@@ -6,21 +6,21 @@ include('../includes/functions.php');
 $filter_name = $_POST['filter_name'];
 
 if($filter_name == "all") {
-    $get_transactions = "SELECT * FROM transactions ORDER BY transaction_date DESC";
+    $get_transactions = "SELECT * FROM transactions ORDER BY date_of_transaction DESC";
 } else {
-    $get_transactions = "SELECT * FROM transactions WHERE asset_category='$filter_name' ORDER BY transaction_date DESC";
+    $get_transactions = "SELECT * FROM transactions WHERE asset_category='$filter_name' ORDER BY date_of_transaction DESC";
 } 
 
 if($filter_name == "active") {
-    $get_transactions = "SELECT * FROM transactions WHERE is_closed='0' ORDER BY transaction_date DESC";
+    $get_transactions = "SELECT * FROM transactions WHERE is_closed='0' ORDER BY date_of_transaction DESC";
 } elseif ($filter_name == "closed") {
-    $get_transactions = "SELECT * FROM transactions WHERE is_closed='1' ORDER BY transaction_date DESC";
+    $get_transactions = "SELECT * FROM transactions WHERE is_closed='1' ORDER BY date_of_transaction DESC";
 }
 
 if($filter_name == "long") {
-    $get_transactions = "SELECT * FROM transactions WHERE position_type='BUY' ORDER BY transaction_date DESC";
+    $get_transactions = "SELECT * FROM transactions WHERE position_type='BUY' ORDER BY date_of_transaction DESC";
 } elseif ($filter_name == "short") {
-    $get_transactions = "SELECT * FROM transactions WHERE position_type='SELL' ORDER BY transaction_date DESC";
+    $get_transactions = "SELECT * FROM transactions WHERE position_type='SELL' ORDER BY date_of_transaction DESC";
 }
 
 echo "<table>";
