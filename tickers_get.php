@@ -29,7 +29,7 @@
         echo "<td>".$row['company_name']."</td>";
         echo "<td>".$row['short_name']."</td>";
         echo "<td>".$row['industry']."</td>";
-        echo "<td class='description' title='".htmlspecialchars($row['description'])."'>".$row['description']."</td>";
+        echo "<td class='description' title='" . htmlspecialchars($row['description'] ?? '', ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars($row['description'] ?? '', ENT_QUOTES, 'UTF-8') . "</td>";
         echo "<td><a href='".$row['website']."' target='_blank'>".$row['website']."</a></td>";
         echo "</tr>";
     }

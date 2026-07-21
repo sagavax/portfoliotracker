@@ -1,8 +1,25 @@
 const filter_ticker_alphabet = document.querySelector(".filter_ticker_alphabet");
 const search_container = document.querySelector(".search-container");
+const saveTicker = document.querySelector("#saveTicker");
+const cancelTicker = document.querySelector("#cancelTicker");
 
 
+//save new ticker in modal
+saveTicker.addEventListener("click", function() {
+    const new_ticker = document.querySelector("#new_ticker").value.trim();
+    const new_short_name = document.querySelector("#new_short_name").value.trim();
+    const new_industry = document.querySelector("#new_industry").value.trim();
+    const new_website = document.querySelector("#new_website").value.trim();
+    CreateNewTicker(new_ticker, new_short_name, new_industry, new_website);
+    modalTicker.close();
+});
 
+//close modal on cancel
+cancelTicker.addEventListener("click", function() {
+    modalTicker.close();
+});
+
+// when I click on the add ticker button, show the modal and set the input value to the search input value
 search_container.addEventListener("click", function(event) {
     if (event.target.tagName === "BUTTON") {
         if(event.target.getAttribute("data-ticker") === "add_ticker") {
@@ -13,6 +30,7 @@ search_container.addEventListener("click", function(event) {
                 return;
             } else {
                 modalTicker.showModal();
+                document.querySelector("#new_ticker").value = document.querySelector(".search-container input").value.trim();
             }            
         }
     }
@@ -45,7 +63,7 @@ function filterTickersByLetter(letter) {
 }
 
 
-function CreateNewTicker(ticker) {
+function CreateNewTicker(ticker, short_name, industry, website) {
     const xhttp = new XMLHttpRequest();
     console.log("create new ticker:", ticker);
     xhttp.onreadystatechange = function() {
@@ -53,14 +71,18 @@ function CreateNewTicker(ticker) {
             const response = JSON.parse(this.responseText);
             if(response.status === "success") {
                 alert("Ticker created successfully!");
+                const new_ticker = document.querySelector("#new_ticker").value="";
+                document.querySelector("#new_short_name").value="";
+                document.querySelector("#new_industry").value="";
+                document.querySelector("#new_website").value="";
             } else {
                 alert(response.message);
             }
         }
     }
-    xhttp.open("POST", "ticker_create.php", true);
+    xhttp.open("POST", "tickers_create.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send(`symbol=${ticker}`);
+    xhttp.send(`symbol=${ticker}&short_name=${short_name}&industry=${industry}&website=${website}`);
 }   
 
 

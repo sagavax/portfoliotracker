@@ -79,7 +79,7 @@
                                 <th>Company Name</th>
                                 <th>Kratke meno</th>
                                 <th>Priemysel</th>
-                                <th>Popopis</th>
+                                <th>Popis</th>
                                 <th>websttranka</th>
                             </tr>
                         </thead>
@@ -93,7 +93,7 @@
                                         echo "<td>".$row['company_name']."</td>";
                                         echo "<td>".$row['short_name']."</td>";
                                         echo "<td>".$row['industry']."</td>";
-                                        echo "<td class='description' title='".htmlspecialchars($row['description'])."'>".$row['description']."</td>";
+                                        echo "<td class='description' title='" . htmlspecialchars($row['description'] ?? '', ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars($row['description'] ?? '', ENT_QUOTES, 'UTF-8') . "</td>";
                                         echo "<td><a href='".$row['website']."' target='_blank'>".$row['website']."</a></td>";
                                         echo "</tr>";
                                     } 
@@ -108,8 +108,10 @@
             <div class="modal-container">
                 <h3>Pridať nový ticker</h3>
                 <div id="addTickerContent">
-                    <input type="text" id="new_ticker" placeholder="Zadajte nový ticker...">
-                    <input type="text" id="new_short_name" placeholder="Zadajte kratke meno...">
+                    <input type="text" id="new_ticker" placeholder="Zadajte nový ticker..." autocomplete="off">
+                    <input type="text" id="new_short_name" placeholder="Zadajte kratke meno..." autocomplete="off">
+                    <input type="text" id="new_industry" placeholder="Zadajte priemysel..." autocomplete="off">
+                    <input type="text" id="new_website" placeholder="Zadajte websttranku..." autocomplete="off">
                 </div>
                 <div class="modal-actions">
                     <button id="cancelTicker" class="secondary">Zrušiť</button>

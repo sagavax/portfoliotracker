@@ -35,7 +35,6 @@
                     <ul>
                         <?php
                            $base = (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'localhost') ? 'http://localhost/portfoliotracker/' : 'https://portfoliotracker.tmisura.sk/';
-
                         ?>
 
                         <li><a href="<?= $base ?>index.php"><i class="fas fa-home"></i> Domov</a></li>
@@ -90,25 +89,6 @@
   </div>
 </div>
 </html>
-
-  <!-- <div id="assetListModal" class="modal-overlay">
-    <div class="modal-container-asset">
-      <h3>Zoznam assetu</h3>
-      <div id="charList">
-        <?php echo assetCharList() ?>
-      </div>
-      <input id="assetListSearch" placeholder="Hledať...">
-      <div id="assetListContent">
-        <?php echo assetSymbolList() ?>
-      </div>
-      <div id="assetListContentPagination">
-        <?php echo assetSymbolListPagination() ?>
-      </div>
-      <div class="modal-actions">
-        <button id="assetListClose" class="secondary">Zatvoriť</button>
-      </div>
-    </div>
-  </div> -->
  
 
 <dialog id="modalModifyPosition" class="modal-overlay">
