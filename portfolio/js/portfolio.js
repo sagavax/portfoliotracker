@@ -24,7 +24,18 @@ const modalNote = document.getElementById('modalNote');
 const modalNotes = document.getElementById('modalNotes');
 const modalManualBot = document.getElementById("modalManualBot");
 const filter_ticker = document.querySelector('.filter_ticker');
+const modalLeverage = document.getElementById('modalLeverage');
+const leverageSlider = document.getElementById('leverageSlider');
+const leverageInput = document.getElementById('leverageInput');
 
+leverageSlider.addEventListener('input', function() {
+    leverageInput.value = leverageSlider.value;
+});
+
+leverageInput.addEventListener('input', function() {
+    const value = Math.min(Math.max(parseInt(leverageInput.value) || 0, leverageSlider.min), leverageSlider.max);
+    leverageSlider.value = value;
+});
 
 const MODAL_TICKER_MODES = {
   INSERT: "insertTicker",
@@ -259,8 +270,10 @@ transactionList.addEventListener('click', function(e) {
         modalManualBot.showModal();
     }  else if (btn.name === "duplicate_transaction") {
         duplicateTransaction(transactionId);
-    }    
-})
+    }  else if (btn.name === "add_leverage") {
+        document.getElementById("modalLeverage").showModal();
+    }  
+}); 
 
 
 
