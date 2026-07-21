@@ -24,7 +24,8 @@
         <link rel="icon" type="image/svg+xml" sizes="32x32" href="../investment.png">
         <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
         <script src="js/clock.js?<?php echo time() ?>" defer></script>
-        <script src="js/message.js?<?php echo time() ?> defer"></script>
+        <script src="js/tickers.js?<?php echo time() ?>" defer></script>
+        <script src="js/message.js?<?php echo time() ?>" defer></script>
         <!-- <script src="js/worldclock.js?<?php echo time() ?>"></script> -->
     </head>
 
@@ -32,7 +33,7 @@
           <a href="."><img src="portfolio-ticker-logo.svg" alt="Portfolio Ticker"></a><div class="clockWrapper"><button type ="button" class="secondary" name="worldclock"  id="worldclock">World Clock</button><div id="clock">--:--:--</div></div>
         </header>
         <div class="container">
-            <div class="debug" style="display: flex; color:white"><?php echo $_SERVER['HTTP_HOST']; ?></div>
+           <!--  <div class="debug" style="display: flex; color:white"><?php echo $_SERVER['HTTP_HOST']; ?></div> -->
             <div class="sidebar">
                 <nav>
                     <ul>
@@ -70,37 +71,51 @@
                     ?>
                 </div>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Ticker</th>
-                            <th>Company Name</th>
-                            <th>Kratke meno</th>
-                            <th>Priemysel</th>
-                            <th>Popopis</th>
-                            <th>websttranka</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                                $sql = "SELECT * FROM tickers ORDER BY ticker ASC LIMIT 25";
-                                $result = mysqli_query($link, $sql) or die("MySQLi ERROR: ".mysqli_error($link));
-                                while ($row = mysqli_fetch_array($result)) {
-                                    echo "<tr>";
-                                    echo "<td>".$row['ticker']."</td>";
-                                    echo "<td>".$row['company_name']."</td>";
-                                    echo "<td>".$row['short_name']."</td>";
-                                    echo "<td>".$row['industry']."</td>";
-                                    echo "<td class='description' title='".htmlspecialchars($row['description'])."'>".$row['description']."</td>";
-                                    echo "<td><a href='".$row['website']."' target='_blank'>".$row['website']."</a></td>";
-                                    echo "</tr>";
-                                } 
-                        ?>
-                    </tbody>
-                </table>
+                <div class="tickers_wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ticker</th>
+                                <th>Company Name</th>
+                                <th>Kratke meno</th>
+                                <th>Priemysel</th>
+                                <th>Popopis</th>
+                                <th>websttranka</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                    $sql = "SELECT * FROM tickers ORDER BY ticker ASC LIMIT 25";
+                                    $result = mysqli_query($link, $sql) or die("MySQLi ERROR: ".mysqli_error($link));
+                                    while ($row = mysqli_fetch_array($result)) {
+                                        echo "<tr>";
+                                        echo "<td>".$row['ticker']."</td>";
+                                        echo "<td>".$row['company_name']."</td>";
+                                        echo "<td>".$row['short_name']."</td>";
+                                        echo "<td>".$row['industry']."</td>";
+                                        echo "<td class='description' title='".htmlspecialchars($row['description'])."'>".$row['description']."</td>";
+                                        echo "<td><a href='".$row['website']."' target='_blank'>".$row['website']."</a></td>";
+                                        echo "</tr>";
+                                    } 
+                            ?>
+                        </tbody>
+                    </table>
+                </div><!-- tickers_wrapper -->
             </div><!-- content -->
-        </div><!-- container -->    
-<body>
-    
+        </div><!-- container -->
+
+        <dialog id="modalTicker">
+            <div class="modal-container">
+                <h3>Pridať nový ticker</h3>
+                <div id="addTickerContent">
+                    <input type="text" id="new_ticker" placeholder="Zadajte nový ticker...">
+                    <input type="text" id="new_short_name" placeholder="Zadajte kratke meno...">
+                </div>
+                <div class="modal-actions">
+                    <button id="cancelTicker" class="secondary">Zrušiť</button>
+                    <button id="saveTicker" class="secondary">Uložiť</button>
+                </div>
+            </div>
+        </dialog>
 </body>
 </html>
