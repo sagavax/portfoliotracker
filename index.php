@@ -49,16 +49,18 @@
                     </ul>
                 </nav>
             </div>
+            
             <div class="content">
                 <h1>Vitajte v Portfolio Tracker</h1>
                 <p>Tu môžete sledovat svoje investície, spravovat portfólio a získavať novinky z finančného sveta.</p>
                 <div class=dashboard>
                     <div class="dashboard-item">Portfolio</div>
                     <div class="dashboard-item">Poskytovatelia</div>
-                    <div class="dashboard-item">Influencers</div>
+                    <div class="dashboard-item">Tikers</div>
+                    <!-- <div class="dashboard-item">Influencers</div>
                     <div class="dashboard-item">Novinky</div>
                     <div class="dashboard-item">Poznámky</div>
-                    <div class="dashboard-item">Nastavenia</div>
+                    <div class="dashboard-item">Nastavenia</div> -->
                 </div>                    
             </div>  
         </div><!--container-->  
