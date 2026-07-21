@@ -2,6 +2,16 @@ const filter_ticker_alphabet = document.querySelector(".filter_ticker_alphabet")
 const search_container = document.querySelector(".search-container");
 const saveTicker = document.querySelector("#saveTicker");
 const cancelTicker = document.querySelector("#cancelTicker");
+const new_ticker_crypto_checkbox = document.querySelector("#new_ticker_crypto_checkbox");
+let searchXhttp = null;
+
+
+new_ticker_crypto_checkbox.addEventListener("change", function() {
+    const ticker = document.querySelector("#new_ticker").value.trim();
+    if (this.checked && ticker !== "") {
+        checkCryptoShortName(ticker);
+    }
+});
 
 
 //save new ticker in modal
@@ -91,8 +101,6 @@ function CreateNewTicker(ticker, short_name, industry, website) {
 }   
 
 
-let searchXhttp = null;
-
 function filterTickersBySearch(searchTerm) {
     if (searchXhttp) {
         searchXhttp.abort();
@@ -105,4 +113,19 @@ function filterTickersBySearch(searchTerm) {
     }
     searchXhttp.open("GET", "tickers_get.php?ticker=" + searchTerm, true);
     searchXhttp.send();
+}
+
+
+function checkCryptoShortName(ticker) {
+  const api_url = "https://api.coingecko.com/api/v3/search?query=" + encodeURIComponent(ticker);
+  //search ranks by market cap, so the real coin outranks wrapped/bridged duplicates with the same symbol
+  fetch(api_url)
+    .then(response => response.json())
+    .then(data => {
+      const coin = data.coins.find(item => item.symbol.toLowerCase() === ticker.toLowerCase());
+      if (coin) {
+        document.querySelector("#new_short_name").value = coin.name;
+      }
+    })
+    .catch(error => console.log(error));
 }
