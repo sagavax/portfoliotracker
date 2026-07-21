@@ -264,7 +264,7 @@ button[name="new_transaction_cancel"]:hover {
     width: 20%;
 }
 
-#modalCurrency {
+#modalCurrency, #modalLeverage {
     width: 50%;
 }
 
@@ -291,7 +291,7 @@ button[name="new_transaction_cancel"]:hover {
 #tickerDetailsContent, #providerDetailsContent, #longShortDetailsContent,
 #assetCategoryDetailsContent, #modalPriceContent, #modalCurrencyContent,
 #modalTakeProfitContent, #modalStopLossContent, #modalAddNoteContent,
-#spotPerpetualDetailsContent, #manualBotDetailsContent {
+#spotPerpetualDetailsContent, #manualBotDetailsContent, #modalLeverageContent {
     display: flex;
     gap: 10px;
     align-items: center;
@@ -300,6 +300,37 @@ button[name="new_transaction_cancel"]:hover {
     margin-bottom: 12px;
     margin-top: 12px;
 }
+
+#modalLeverageContent {
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+#modalLeverageContent input[type="range"] {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#modalLeverageContent input[type="text"] {
+    width: 80px;
+    height: 55px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    color: white;
+    background-color: #253649;
+    font-size: 18px;
+}
+
+.leverage_actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
 
 #modalNotes {
     min-height:200px;
