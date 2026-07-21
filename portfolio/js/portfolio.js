@@ -28,11 +28,24 @@ const modalLeverage = document.getElementById('modalLeverage');
 const leverageSlider = document.getElementById('leverageSlider');
 const leverageInput = document.getElementById('leverageInput');
 const leverageCancel = document.getElementById('leverageCancel');
-const leverageSave = document.getElementById('leverageSave');
+const leverageSave = document.getElementById('saveLeverage');
 
 
 leverageCancel.addEventListener('click', function() {
     modalLeverage.close();
+});
+
+leverageSave.addEventListener('click', function() {
+    console.log("leverage save clicked");
+   if(leverageInput.value == 0) {
+       alert("Leverage cannot be 0!");
+       return;
+   } else {
+       const transactionId = sessionStorage.getItem("currentTransactionId");
+       document.querySelector('tr[data-id="'+transactionId+'"] button[name="add_leverage"]').textContent = leverageInput.value + "x";
+       updateTransactionLeverage(transactionId, leverageInput.value + "x");
+       modalLeverage.close();
+   }
 });
 
 
@@ -164,21 +177,27 @@ document.addEventListener('keydown', function(e) {
     
     const isPrice = e.target.classList.contains('price');
     const isQuantity = e.target.classList.contains('quantity');
-    if (!isPrice && !isQuantity) return;
-    
+    const isLeverage = e.target.classList.contains('leverage');
+    if (!isPrice && !isQuantity && !isLeverage) return;
+
     e.preventDefault();
     const transactionId = e.target.closest('.transaction').dataset.id;
     const value = e.target.textContent.trim();
-    
+
     if (isPrice) {
         updateTransactionEntryPrice(transactionId, value);
         if (value === "") {
             e.target.outerHTML = "<button type='button' class='button' name='add_entry_price'><i class='fa fa-plus'></i> Add price</button>";
         }
-    } else {
+    } else if (isQuantity) {
         updateTransactionQuantity(transactionId, value);
         if (value === "") {
             e.target.outerHTML = "<button type='button' class='button' name='add_quantity'><i class='fa fa-plus'></i> Add quantity</button>";
+        }
+    } else {
+        updateTransactionLeverage(transactionId, value);
+        if (value === "") {
+            e.target.outerHTML = "<button type='button' class='transaction_button' name='add_leverage'><i class='fa fa-plus'></i> Add leverage</button>";
         }
     }
 });
@@ -1011,4 +1030,18 @@ function CreateNewTicker(ticker) {
     xhttp.open("POST", "transaction_ticker_create.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`symbol=${ticker}`);
+}
+
+
+function updateTransactionLeverage(id, leverage) {
+    console.log("update leverage:", id, leverage);
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+        }
+    }
+    xhttp.open("POST", "transaction_update_leverage.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`transaction_id=${id}&leverage=${leverage}`);
 }
