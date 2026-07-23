@@ -9,9 +9,14 @@ search_wrapper_input.addEventListener("input", function() {
 });
 
 
-notes.addEventListener("input", function(e) {
-    if(e.target && e.target.matches(".note p")) {
+notes.addEventListener("keydown", function(e) {
+    if(e.key === "Enter" && e.target.matches(".note p")) {
+        e.preventDefault();
         const noteText = e.target.innerHTML.trim();
+        if(!noteText) {
+            alert("Note cannot be empty!");
+            return;
+        }
         const noteId = e.target.closest(".note").getAttribute("data-note-id");
         updateNote(noteId, noteText);
     }
