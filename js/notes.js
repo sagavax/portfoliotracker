@@ -2,7 +2,6 @@ const notes_header = document.getElementById("notes_header");
 const notes = document.querySelector(".notes");
 const search_wrapper_input = document.querySelector(".search_wrapper input");
 const modalAddNote = document.getElementById("modalAddNote");
-const note_text  = document.querySelector(".note p");
 
 search_wrapper_input.addEventListener("input", function() {
     const searchValue = this.value.toLowerCase();
@@ -10,11 +9,10 @@ search_wrapper_input.addEventListener("input", function() {
 });
 
 
-note_text.addEventListener("keydown", function(e) {
-    if(e.key === "Enter") {
-        e.preventDefault();
-        const noteText = this.innerHTML.trim();
-        const noteId = this.closest(".note").getAttribute("data-note-id");
+notes.addEventListener("input", function(e) {
+    if(e.target && e.target.matches(".note p")) {
+        const noteText = e.target.innerHTML.trim();
+        const noteId = e.target.closest(".note").getAttribute("data-note-id");
         updateNote(noteId, noteText);
     }
 })
@@ -74,7 +72,6 @@ function updateNote(id, noteText) {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            alert("Transaction note updated successfully!");
             console.log(this.responseText);
         }
     }
