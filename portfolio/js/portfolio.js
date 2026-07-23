@@ -116,6 +116,7 @@ filter_ticker.addEventListener('click', function(e) {
     if(e.target && e.target.tagName === "BUTTON" && e.target.getAttribute("data-filter")) {
         const ticker = e.target.getAttribute("data-filter");
         filterTransactionsByTicker(ticker);
+        sessionStorage.setItem("currentFilter", ticker);
     }
 })
 
@@ -1009,7 +1010,7 @@ function filterTransactionsByTicker(ticker) {
             document.querySelector(".transactions").innerHTML = this.responseText;
         }
     }
-    xhttp.open("POST", "transaction_filter_by_symbol.php", true);
+    xhttp.open("POST", "transactions_filter_by_symbol.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`symbol=${ticker}`);
 }
