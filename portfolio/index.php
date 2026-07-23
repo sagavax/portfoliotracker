@@ -167,7 +167,7 @@
 
                 <div class="filter_ticker">
                     <?php
-                        $get_tickers = "SELECT symbol FROM transactions GROUP BY symbol ORDER BY symbol ASC";
+                        $get_tickers = "SELECT symbol FROM transactions WHERE is_closed = 0 GROUP BY symbol ORDER BY symbol ASC";
                         $result = mysqli_query($link, $get_tickers) or die("MySQL ERROR: " . mysqli_error($link));
                         while ($row = mysqli_fetch_array($result)) {
                             $ticker = $row['symbol'];
@@ -229,10 +229,10 @@
                                         
                                         echo "<td><button type='button' class='transaction_button' name='currency' data-currency='existing_currency'>$transaction_currency</button></td>";
 
-                                        if($transaction_leverage != 0) {
-                                            echo "<td><div class='leverage' contenteditable='true'>$transaction_leverage</div></td>";
+                                        if ($transaction_leverage != 0) {
+                                            echo "<td><button type='button' class='transaction_button has-leverage' name='add_leverage'>$transaction_leverage</button></td>";
                                         } else {
-                                            echo "<td><button type='button' class='transaction_button' name='add_leverage'><i class='fa fa-plus'></i> Add leverage</button></td>";
+                                            echo "<td><button type='button' class='transaction_button add-leverage' name='add_leverage'><i class='fa fa-plus'></i> Add leverage</button></td>";
                                         }
 
                                         if($transaction_quantity != 0) {
