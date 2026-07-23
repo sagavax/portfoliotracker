@@ -9,6 +9,11 @@ button[name="category"] {
     justify-content: center;
 }
 
+button[name="category"] {
+    font-size: 17px;
+}
+
+
 button[name="provider"],
 button[name="ticker"],
 button[name="asset_category"],
@@ -31,7 +36,13 @@ button[name="add_entry_price"] {
 
 button[name="currency"] {
     width: 140px;
+    font-size: 17px;
 }
+
+[data-leverage] { 
+    cursor: pointer; 
+    font-size: 17px;
+} 
 
 button[name="add_entry_price"] {
     width: 100%;
@@ -231,8 +242,21 @@ button[name="add_leverage"], .leverage[contenteditable="true"] {
     width:125px;
 }
 
+.transaction_button.add-leverage {
+    font-size: 14px;
+}
+
+.transaction_button.has-leverage {
+    font-size: 18px;
+}
+
 button[name="duplicate_transaction"] {
     font-size: 18px;
+}
+
+button[name="manual_bot"] {
+    width:140px;
+    font-size: 16px;
 }
 
 .short {
