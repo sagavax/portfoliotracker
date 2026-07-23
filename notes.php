@@ -37,8 +37,7 @@
                 <nav>
                     <ul>
                         <?php
-                            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
-                            $base = $protocol . '://' . $_SERVER['HTTP_HOST'] . '/portfoliotracker/';
+                           $base = (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'localhost') ? 'http://localhost/portfoliotracker/' : 'https://portfoliotracker.tmisura.sk/';
                         ?>
 
                         <li><a href="<?= $base ?>index.php"><i class="fas fa-home"></i> Domov</a></li>
