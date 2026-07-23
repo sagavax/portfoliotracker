@@ -34,7 +34,7 @@
           <a href="."><img src="../portfolio-ticker-logo.svg" alt="Portfolio Ticker"></a><div class="clockWrapper"><button type ="button" class="secondary" name="worldclock"  id="worldclock">World Clock</button><div id="clock">--:--:--</div></div>
         </header>
         <div class="container">
-            <div class="debug" style="display: flex; color:white"><?php echo $_SERVER['HTTP_HOST']; ?></div>
+            <!-- <div class="debug" style="display: flex; color:white"><?php echo $_SERVER['HTTP_HOST']; ?></div> -->
             <div class="sidebar">
                 <nav>
                     <ul>
@@ -47,10 +47,10 @@
                         <li><a href="<?= $base ?>/portfolio/index.php"><i class="fas fa-chart-line"></i> Portfólio</a></li>
                         <li><a href="<?= $base ?>providers.php"><i class="fas fa-building"></i> Poskytovatelia</a></li>
                         <li><a href="<?= $base ?>tickers.php"><i class="fas fa-tags"></i> Tickers</a></li>
-                       <!--  <li><a href="<?= $base ?>influencers.php"><i class="fas fa-users"></i> Influencers</a></li>
+                        <li><a href="<?= $base ?>notes.php"><i class="fas fa-sticky-note"></i> Poznámky</a></li>
+                        <!--  <li><a href="<?= $base ?>influencers.php"><i class="fas fa-users"></i> Influencers</a></li>
                         <li><a href="<?= $base ?>news.php"><i class="fas fa-newspaper"></i> Novinky</a></li>
-                        <li><a href="<?= $base ?>settings.php"><i class="fas fa-cogs"></i> Nastavenia</a></li>
-                        <li><a href="<?= $base ?>notes.php"><i class="fas fa-sticky-note"></i> Poznámky</a></li> -->
+                        <li><a href="<?= $base ?>settings.php"><i class="fas fa-cogs"></i> Nastavenia</a></li>-->
                         <li><a href="<?= $base ?>logout.php"><i class="fas fa-sign-out-alt"></i> Odhlásiť sa</a></li>
 
                     </ul>
