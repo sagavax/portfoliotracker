@@ -44,9 +44,9 @@
                         <li><a href="<?= $base ?>index.php"><i class="fas fa-home"></i> Domov</a></li>
                         <li><a href="<?= $base ?>/portfolio/index.php"><i class="fas fa-chart-line"></i> Portfólio</a></li>
                         <li><a href="<?= $base ?>providers.php"><i class="fas fa-building"></i> Poskytovatelia</a></li>
-                        <li><a href="<?= $base ?>influencers.php"><i class="fas fa-users"></i> Influencers</a></li>
+                        <!-- <li><a href="<?= $base ?>influencers.php"><i class="fas fa-users"></i> Influencers</a></li>
                         <li><a href="<?= $base ?>news.php"><i class="fas fa-newspaper"></i> Novinky</a></li>
-                        <li><a href="<?= $base ?>settings.php"><i class="fas fa-cogs"></i> Nastavenia</a></li>
+                        <li><a href="<?= $base ?>settings.php"><i class="fas fa-cogs"></i> Nastavenia</a></li> -->
                         <li><a href="<?= $base ?>notes.php"><i class="fas fa-sticky-note"></i> Poznámky</a></li>
                         <li><a href="<?= $base ?>logout.php"><i class="fas fa-sign-out-alt"></i> Odhlásiť sa</a></li>
                     </ul>
@@ -75,7 +75,7 @@
                     $get_notes_result = mysqli_query($link, $get_notes_sql);
                     while($row = mysqli_fetch_assoc($get_notes_result)) {
                         echo "<div class='note' data-note-id='" . $row['id'] . "'>";
-                        echo "<p>" . $row['text'] . "</p>";
+                        echo "<p>" . $row['note_text'] . "</p>";
                         echo "<small>Created: " . $row['created_at'] . "</small>";
                         echo "<small>Modified: " . $row['modified_at'] . "</small>";
                         echo "</div>";
