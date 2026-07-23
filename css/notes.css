@@ -45,8 +45,12 @@
       margin: 0;
       font-size: 16px;
       line-height: 1.5;
+      min-height: 100px;
       color: white;
       white-space: pre-wrap;
+      background-color: #0d0d0d;
+      box-sizing: border-box;
+      padding:10px;
    }
 
    .note small {
@@ -87,4 +91,13 @@
       align-items: center;
       justify-content: flex-end;
       gap: 10px;
+   }
+
+   .note_actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: flex-end;
+      background-color: #0d0d0d;
+      padding:10px;
    }

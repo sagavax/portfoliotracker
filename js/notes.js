@@ -2,12 +2,23 @@ const notes_header = document.getElementById("notes_header");
 const notes = document.querySelector(".notes");
 const search_wrapper_input = document.querySelector(".search_wrapper input");
 const modalAddNote = document.getElementById("modalAddNote");
-
+const note_text  = document.querySelector(".note p");
 
 search_wrapper_input.addEventListener("input", function() {
     const searchValue = this.value.toLowerCase();
     searchNotes(searchValue);
 });
+
+
+note_text.addEventListener("keydown", function(e) {
+    if(e.key === "Enter") {
+        e.preventDefault();
+        const noteText = this.innerHTML.trim();
+        const noteId = this.closest(".note").getAttribute("data-note-id");
+        updateNote(noteId, noteText);
+    }
+})
+
 
 
 notes.addEventListener("click", function(e) {
@@ -45,7 +56,7 @@ function searchNotes(searchValue) {
 }
 
 
-function updateTransactionNote(id, note) {
+/* function updateTransactionNote(id, note) {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -57,4 +68,17 @@ function updateTransactionNote(id, note) {
     xhttp.open("POST", "transaction_update_note.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`transaction_id=${id}&note=${encodeURIComponent(note)}`);
+}
+ */
+function updateNote(id, noteText) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            alert("Transaction note updated successfully!");
+            console.log(this.responseText);
+        }
+    }
+    xhttp.open("POST", "notes_update.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`noteId=${id}&noteText=${encodeURIComponent(noteText)}`);
 }

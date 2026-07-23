@@ -75,9 +75,12 @@
                     $get_notes_result = mysqli_query($link, $get_notes_sql);
                     while($row = mysqli_fetch_assoc($get_notes_result)) {
                         echo "<div class='note' data-note-id='" . $row['id'] . "'>";
-                        echo "<p>" . $row['note_text'] . "</p>";
-                        echo "<small>Created: " . $row['created_at'] . "</small>";
-                        echo "<small>Modified: " . $row['modified_at'] . "</small>";
+                            echo "<p contenteditable='true'>" . $row['note_text'] . "</p>";
+                            echo "<div class='note_actions'>";
+                                echo "<small>Created: " . $row['created_at'] . "</small>";
+                                echo "<small>Modified: " . $row['modified_at'] . "</small>";
+                                echo "<button type='button' name='remove_note' data-note-id='" . $row['id'] . "'><i class='fa fa-times'></i> Remove</button>";
+                            echo "</div>";    
                         echo "</div>";
                     }
                     ?>
