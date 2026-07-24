@@ -75,23 +75,12 @@ button[name="stop_loss"] {
     justify-content: center;
 }
 
-
 /* ── Flex row base ────────────────────────────── */
-.transactions_filters,
-.transactions_filter,
-.filter_ticker 
-{
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-}
 
-.filter_ticker {
+/* .filter_ticker {
     margin-top: 20px;
     margin-bottom: 10px;
-}
+} */
 
 .transactions_filters {
     margin-bottom: 12px;
@@ -100,7 +89,6 @@ button[name="stop_loss"] {
     /* border: 1px solid #435B7C; */
     border-radius: 5px;
     box-sizing: border-box;
-    padding: 15px;
 }
 
 .filters h3 {
@@ -110,7 +98,14 @@ button[name="stop_loss"] {
     padding: 0;
 }
 
-div[class^="filter_"],.create_transaction_action_wrapper  {
+.filter_manual_bot, .filter_long_short,.filter_spot_perpetual {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* div[class^="filter_"]  {
     display: flex;
     gap: 10px;
     align-items: center;
@@ -120,25 +115,58 @@ div[class^="filter_"],.create_transaction_action_wrapper  {
     border-radius: 5px;
     box-sizing: border-box;
     padding: 15px;
+    width: 100%;
+}
+ */
+.create_transaction_action_wrapper  {
+    display: flex;
+     align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 15px;
 }
 
-.transactions_filter {
-    margin-bottom: 12px;
-    margin-top: 12px;
+.filter_active_closed {
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 15px;
+}
+
+.new_wrapper {
+    display: flex;
+    gap:20px;
 }
 
 .filter_tickers {
+    display: flex;    
     margin-bottom: 5px;
     margin-top: 5px;
+    gap:10px;
 }
 
+
+
 /* ── New transaction card ─────────────────────── */
-.transaction_filters_buttons {
+.filter_providers {
     display: flex;
     gap: 30px;
     align-items: center;
     justify-content: flex-start;
     flex-wrap: wrap;
+    width: 100%;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 15px;
+    margin-top:20px;
+}
+
+.filter_providers {
+    gap:10px;
 }
 
 .create_transaction_wrapper,
@@ -579,4 +607,18 @@ button[name="new_transaction_cancel"]:hover {
     background-color: #253649;
     border-radius: 8px;
     font-size: 16px;
+  }
+
+  .detailed_filters_wrapper{
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 25px;
+    width:100%;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
