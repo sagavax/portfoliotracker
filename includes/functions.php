@@ -104,6 +104,54 @@
         }
     }
 
+
+    function GetBugbusterApiHost() {
+        $currAddress = $_SERVER['SERVER_NAME'] ?? '';
+        return ($currAddress === 'localhost') ? "http://localhost/bugbuster" : "https://bugbuster.tmisura.sk";
+    }
+
+    function GetBugbusterApiJson($query) {
+        $apiUrl = GetBugbusterApiHost() . '/api/api.php?' . $query;
+        $ch = curl_init();
+        curl_setopt_array($ch, [
+            CURLOPT_URL => $apiUrl,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 10,
+            CURLOPT_HTTPGET => true,
+        ]);
+        $response = curl_exec($ch);
+        $httpCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($response === false || $httpCode !== 200) {
+            return null;
+        }
+
+        $data = json_decode($response, true);
+        return (json_last_error() === JSON_ERROR_NONE) ? $data : null;
+    }
+
+    function GetCountIdeas() {
+        $data = GetBugbusterApiJson('endpoint=ideas&app_name=portfoliotracker');
+        return is_array($data) ? count($data) : 0;
+    }
+
+    function GetCountBugs() {
+        $data = GetBugbusterApiJson('endpoint=bugs&app_name=portfoliotracker');
+        return is_array($data) ? count($data) : 0;
+    }
+
+    function GetCountIdeaComments($idea_id) {
+        $data = GetBugbusterApiJson('endpoint=idea_comments_count&idea_id=' . (int)$idea_id);
+        return $data[0]['count'] ?? 0;
+    }
+
+    function GetCountLogRecords() {
+        // No app_log data source is wired up yet (no bugbuster API endpoint,
+        // app_event_tracker.js doesn't exist). Stubbed at 0 until that exists.
+        return 0;
+    }
+
 /**
  * Retrieves all influencers from the database and echoes out a button for each one.
  * 
