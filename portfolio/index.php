@@ -145,7 +145,7 @@
                         <button type="button" name="add_ticker" class="button small_button" id="add_ticker"><i class="fa fa-plus"></i> Add ticker</button>
                         <button type="button" name="add_provider" class="button small_button" id="add_provider"><i class="fa fa-plus"></i> Add provider</button>
                         <button type="button" name="add_asset_category" class="button small_button" id="add_asset_category"><i class="fa fa-plus"></i> Add category</button>
-                        <button type="button" name="add_entry_price" class="button small_button" id="add_entry_price"><i class="fa fa-plus"></i> Add price</button>
+                        <button type="button" name="add_price" class="button small_button" id="add_entry_price"><i class="fa fa-plus"></i> Add price</button>
                         <button type="button" name="add_quantity" class="button small_button" id="add_quqntity"><i class="fa fa-plus"></i> Add quantity</button>
                         <button type="button" name="add_tp" class="button small_button"><i class="fa fa-plus"></i> Add TP</button>
                         <button type="button" name="add_sl" class="button small_button"><i class="fa fa-plus"></i> Add SL</button>
