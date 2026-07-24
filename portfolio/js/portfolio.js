@@ -434,7 +434,7 @@ modalPriceInput.addEventListener('keydown', function(e) {
     } else {
         const priceButton = row.querySelector("button[name='add_entry_price']");
         if (priceButton) {
-            priceButton.outerHTML = "<div class='quantity' contenteditable='true'>" + price + "</div>";
+            priceButton.outerHTML = "<div class='price' contenteditable='true'>" + price + "</div>";
         }
     }
     
@@ -685,6 +685,7 @@ function updateTransactionTicker(id, ticker){
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
             alert("Transaction ticker updated successfully!");
+            reloadFilterTickers();
             //document.getElementById("newTransactionContent").innerHTML = this.responseText;
             /* const tickers = JSON.parse(this.responseText);
             console.log(tickers); */
