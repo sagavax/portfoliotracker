@@ -7,7 +7,7 @@
 
     $symbol = $_POST['symbol'];
 
-    $get_transactions_query = "SELECT * FROM transactions WHERE symbol = '$symbol' ORDER BY date_of_transaction DESC";
+    $get_transactions_query = "SELECT * FROM transactions WHERE symbol = '$symbol' AND is_closed = 0 ORDER BY date_of_transaction DESC";
 
     echo "<table>";
     echo "<thead>";

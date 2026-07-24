@@ -6,10 +6,10 @@ include('../includes/functions.php');
 $currency= $_POST['currency'];
 
 if($currency == "all") {
-    $get_transactions = "SELECT * FROM transactions ORDER BY transaction_date DESC";
+    $get_transactions = "SELECT * FROM transactions WHERE is_closed = 0 ORDER BY transaction_date DESC";
 } else {
-    $get_transactions = "SELECT * FROM transactions WHERE currency='$currency' ORDER BY transaction_date DESC";
-} 
+    $get_transactions = "SELECT * FROM transactions WHERE currency='$currency' AND is_closed = 0 ORDER BY transaction_date DESC";
+}
 
 
 echo "<table>";
