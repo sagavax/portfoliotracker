@@ -34,31 +34,34 @@ $result = mysqli_query($link, $get_transactions) or die("MySQL ERROR: " . mysqli
 
         echo "<tr class='transaction' data-id='$transaction_id'>";
             
+        // Duplicate transaction button
+        echo "<td><button type='button' class='transaction_button' title='Duplicate transaction' name='duplicate_transaction' transaction_id='$transaction_id'><i class='fa fa-copy'></i></button></td>";
+
             if($transaction_ticker) {
-                echo "<td><button type='button' class='transaction_button' name='ticker'>$transaction_ticker</button></td>";
+                echo "<td><button type='button' class='transaction_button' name='ticker' data-ticker='existing_ticker'>$transaction_ticker</button></td>";
             } else {
-                echo "<td><button type='button' class='transaction_button' name='ticker'><i class='fa fa-plus'></i> Add ticker</button></td>";
+                echo "<td><button type='button' class='transaction_button' name='ticker' data-ticker='add_ticker'><i class='fa fa-plus'></i> Add ticker</button></td>";
             }
             
             if($transaction_provider) {
-                echo "<td><button type='button' class='transaction_button' name='provider'>$transaction_provider</button></td>";
+                echo "<td><button type='button' class='transaction_button' name='provider' data-provider='existing_provider'>$transaction_provider</button></td>";
             } else {
-                echo "<td><button type='button' class='transaction_button' name='provider'><i class='fa fa-plus'></i> Add provider</button></td>";
+                echo "<td><button type='button' class='transaction_button' name='provider' data-provider='add_provider'><i class='fa fa-plus'></i> Add provider</button></td>";
             }
             
             
             if($transaction_category) {
-                echo "<td><button type='button' class='transaction_button' name='category'>$transaction_category</button></td>";
+                echo "<td><button type='button' class='transaction_button' name='category' data-category='existing_category'>$transaction_category</button></td>";
             } else {
-                echo "<td><button type='button' class='transaction_button' name='category'><i class='fa fa-plus'></i> Add category</button></td>";
+                echo "<td><button type='button' class='transaction_button' name='category' data-category='add_category'><i class='fa fa-plus'></i> Add category</button></td>";
             }
             
-            echo "<td><button type='button' class='transaction_button' name='currency'>$transaction_currency</button>";
+            echo "<td><button type='button' class='transaction_button' name='currency' data-currency='existing_currency'>$transaction_currency</button></td>";
 
-            if($transaction_leverage != 0) {
-                echo "<td><div class='leverage' contenteditable='true'>$transaction_leverage</div></td>";
+            if ($transaction_leverage != 0) {
+                echo "<td><button type='button' class='transaction_button has-leverage' name='add_leverage'>$transaction_leverage</button></td>";
             } else {
-                echo "<td><button type='button' class='transaction_button' name='add_leverage'><i class='fa fa-plus'></i> Add leverage</button></td>";
+                echo "<td><button type='button' class='transaction_button add-leverage' name='add_leverage'><i class='fa fa-plus'></i> Add leverage</button></td>";
             }
 
             if($transaction_quantity != 0) {
@@ -99,7 +102,12 @@ $result = mysqli_query($link, $get_transactions) or die("MySQL ERROR: " . mysqli
                 echo "<td><button type='button' class='transaction_button' name='manual_bot'><i class='fa fa-plus'></i> Manual / Bot</button></td>";
             }
 
-            echo "<td><button type='button' class='transaction_button' name='add_note'><i class='fa fa-plus'></i> Add note</button></td>";
+            $nr_notes = GetCountTransactionNotes($transaction_id);
+            if($nr_notes > 0) {
+                echo "<td><button type='button' class='transaction_button' name='notes'>$nr_notes</button></td>";
+            } else {
+                echo "<td><button type='button' class='transaction_button' name='notes'>0</button></td>";
+            }
             
             echo "<td><button type='button' class='transaction_button' name='see_transaction' data-id='$transaction_id'><i class='fa fa-eye'></i> See transaction</button></td>";
 
