@@ -90,7 +90,18 @@
 
 
     function assetSymbolListPagination(){
-        
+
+    }
+
+
+    function GetTickers(){
+        global $link;
+        $get_tickers = "SELECT symbol FROM transactions WHERE is_closed = 0 GROUP BY symbol ORDER BY symbol ASC";
+        $result = mysqli_query($link, $get_tickers) or die("MySQL ERROR: " . mysqli_error($link));
+        while ($row = mysqli_fetch_array($result)) {
+            $ticker = $row['symbol'];
+            echo "<button type='button' class='filter_button' data-filter='$ticker'>$ticker</button>";
+        }
     }
 
 /**

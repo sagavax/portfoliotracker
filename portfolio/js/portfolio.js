@@ -1054,3 +1054,17 @@ function updateTransactionLeverage(id, leverage) {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`transaction_id=${id}&leverage=${leverage}`);
 }
+
+
+function reloadFilterTickers(){
+    const xhttp = new XMLHttpRequest();
+    console.log("reload tickers");
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.querySelector(".filter_tickers").innerHTML = this.responseText;
+        }
+    }
+    xhttp.open("GET", "tickers_filter_reload.php", true);
+    xhttp.send();
+
+}
