@@ -23,7 +23,7 @@ const selectCurrency = document.getElementById('currency');
 const modalNote = document.getElementById('modalNote');
 const modalNotes = document.getElementById('modalNotes');
 const modalManualBot = document.getElementById("modalManualBot");
-const filter_ticker = document.querySelector('.filter_ticker');
+const filter_tickers = document.querySelector('.filter_tickers');
 const modalLeverage = document.getElementById('modalLeverage');
 const leverageSlider = document.getElementById('leverageSlider');
 const leverageInput = document.getElementById('leverageInput');
@@ -112,7 +112,7 @@ let modalCurrencyMode;
     }
 }) */
 
-filter_ticker.addEventListener('click', function(e) {
+filter_tickers.addEventListener('click', function(e) {
     if(e.target && e.target.tagName === "BUTTON" && e.target.getAttribute("data-filter")) {
         const ticker = e.target.getAttribute("data-filter");
         filterTransactionsByTicker(ticker);
@@ -157,11 +157,13 @@ modalNote.addEventListener('click', function(e) {
     }
 })
 
-
+/* if(currency){
 currency.addEventListener('change', function(e) {
     const selectedCurrency = e.target.value;
     filterTransactionsByCurrency(selectedCurrency);
-}); 
+});
+} */
+ 
 
 transactions_filters.addEventListener('click', function(e) {
     if(e.target.tagName === "BUTTON") {
