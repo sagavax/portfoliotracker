@@ -67,12 +67,12 @@
                         <button type="button" name="add_transation" class="button small_button" id="btnAddNewtransaction"><i class="fa fa-plus"></i> Přidat transakci</button>
                     </div><!-- create_transaction_action_wrapper -->
 
-                    <div class="transaction_filters_buttons">
-                        <div class="filter_all">
+                   
+                       <!--  <div class="filter_all">
                             <button type="button" class="filter_button" data-filter="all">Vše</button>
-                        </div>
+                        </div> -->
 
-                        <div class="filter_asset_category">
+                      <!--   <div class="filter_asset_category">
                             <button type="button" class="filter_button" data-filter="stocks">Akcie</button>
                             <button type="button" class="filter_button" data-filter="crypto">Kryptoměny</button>
                             <button type="button" class="filter_button" data-filter="etf">ETF</button>
@@ -81,27 +81,27 @@
                             <button type="button" class="filter_button" data-filter="forex">Forex</button>
                             <button type="button" class="filter_button" data-filter="commodities">Komoditý</button>
                             <button type="button" class="filter_button" data-filter="indices">Indexy</button>
-                        </div><!-- filter_asset_category -->
+                        </div>< --><!-- filter_asset_category -->
                         
                        
 
 
-                        <div class="filter_currency">
+                     <!--    <div class="filter_currency">
                             <select name="currency" id="currency">
                                <option value="all">All</option>     
-                            <?php
-                                $get_currencies = "SELECT currency FROM transactions GROUP BY currency ORDER BY currency ASC";
-                                $result = mysqli_query($link, $get_currencies) or die("MySQL ERROR: " . mysqli_error($link));
-                                while ($row = mysqli_fetch_array($result)) {
-                                    $currency = $row['currency'];
-                                    echo "<option value='$currency'>$currency</option>";
-                                }
-                            ?>
+                                <?php
+                                    $get_currencies = "SELECT currency FROM transactions GROUP BY currency ORDER BY currency ASC";
+                                    $result = mysqli_query($link, $get_currencies) or die("MySQL ERROR: " . mysqli_error($link));
+                                    while ($row = mysqli_fetch_array($result)) {
+                                        $currency = $row['currency'];
+                                        echo "<option value='$currency'>$currency</option>";
+                                    }
+                                ?>
                             </select>
-                        </div><!-- filter_currency -->
+                        </div>--><!-- filter_currency -->
 
 
-                        <div class="filter_spot_perpetual">
+                        <!--<div class="filter_spot_perpetual">
                             <button type="button" class="filter_button" data-filter="spot">Spot</button>
                             <button type="button" class="filter_button" data-filter="perpetual">Perpetual</button>
                         </div>
@@ -115,9 +115,9 @@
                         <div class="filter_long_short">
                             <button type="button" class="filter_button" data-filter="long">Long</button>
                             <button type="button" class="filter_button" data-filter="short">Short</button>
-                        </div>
+                        </div> -->
 
-                      <!--   <div class="filter_providers">
+                        <div class="filter_providers">
                             <?php
                                 $get_providers = "SELECT provider_name FROM providers ORDER BY provider_name ASC";
                                 $result = mysqli_query($link, $get_providers) or die("MySQL ERROR: " . mysqli_error($link));
@@ -126,15 +126,12 @@
                                     echo "<button type='button' class='filter_button' data-filter='$provider_name'>$provider_name</button>";
                                 }
                             ?>
-                        </div> -->
-
+                        </div> 
+<!-- 
                         <div class="filter_active_closed">
                             <button type="button" class="filter_button" data-filter="active">Aktivní</button>
                             <button type="button" class="filter_button" data-filter="closed">Uzavřené</button>                    
-                        </div>
-
-                    </div><!-- transaction_filters_buttons -->
-                    
+                        </div>   -->                  
 
                  </div><!-- transactions_filters -->    
                    <!-- create new transaction -->
@@ -165,16 +162,37 @@
                         </div>   
                     </div>    
 
-                <div class="filter_ticker">
-                    <?php
-                        $get_tickers = "SELECT symbol FROM transactions WHERE is_closed = 0 GROUP BY symbol ORDER BY symbol ASC";
-                        $result = mysqli_query($link, $get_tickers) or die("MySQL ERROR: " . mysqli_error($link));
-                        while ($row = mysqli_fetch_array($result)) {
-                            $ticker = $row['symbol'];
-                            echo "<button type='button' class='filter_button' data-filter='$ticker'>$ticker</button>";
-                        }
-                    ?>
-                </div><!-- filter_ticker -->    
+              
+
+                    <div class="detailed_filters_wrapper">
+                        <div class="filter_tickers">
+                            <?php
+                                $get_tickers = "SELECT symbol FROM transactions WHERE is_closed = 0 GROUP BY symbol ORDER BY symbol ASC";
+                                $result = mysqli_query($link, $get_tickers) or die("MySQL ERROR: " . mysqli_error($link));
+                                while ($row = mysqli_fetch_array($result)) {
+                                    $ticker = $row['symbol'];
+                                    echo "<button type='button' class='filter_button' data-filter='$ticker'>$ticker</button>";
+                                }
+                            ?>
+                        </div><!-- filter_ticker -->        
+                        
+                        <div class="new_wrapper">
+                            <div class="filter_manual_bot">
+                                <button type="button" class="filter_button" data-filter="manual">Manual</button>
+                                <button type="button" class="filter_button" data-filter="bot">Bot</button>
+                            </div>
+                                                    
+                            <div class="filter_long_short">
+                                <button type="button" class="filter_button" data-filter="long">Long</button>
+                                <button type="button" class="filter_button" data-filter="short">Short</button>
+                            </div>
+
+                            <div class="filter_spot_perpetual">
+                                <button type="button" class="filter_button" data-filter="spot">Spot</button>
+                                <button type="button" class="filter_button" data-filter="perpetual">Perpetual</button>
+                            </div>
+                        </div>    
+                    </div><!-- detailed_filters_wrapper -->
                 
                 <div class="transactions">
 
