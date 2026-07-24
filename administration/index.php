@@ -22,7 +22,7 @@
     <script src="../js/admin_dashboard.js" defer></script>
     <script src="../js/timer.js" defer></script>
     <script defer src="../js/app_event_tracker.js?<?php echo time() ?>"></script>
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../investment.png">
   </head>
   
   <body>

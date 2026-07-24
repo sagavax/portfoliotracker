@@ -18,7 +18,7 @@
     <link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">  
     <script type="text/javascript" src="../../js/idea.js?<?php echo time(); ?>" defer></script>  <!-- this file contains functions for like, comment, apply -->
-    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../investment.png">
     
   </head>
   <body>

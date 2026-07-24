@@ -23,7 +23,7 @@
     
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">  
     <script type="text/javascript" defer src="../../js/bug.js?<?php echo time(); ?>"></script>
-    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../investment.png">
 
   </head>
   <body>
