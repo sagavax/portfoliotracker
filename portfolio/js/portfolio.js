@@ -490,7 +490,7 @@ create_transaction_wrapper.addEventListener('click', function(e) {
         } else if (e.target.name==="add_asset_category") {
             modalCategoryMode = "insertCategory";
             document.getElementById("modalAssetCategory").showModal();
-        } else if (e.target.name==="add_entry_price") {
+        } else if (e.target.name==="add_price") {
             document.getElementById("modalPrice").showModal();
             modalPriceInput.value = "";
             modalPriceInput.focus();
