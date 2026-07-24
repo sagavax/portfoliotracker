@@ -18,15 +18,13 @@ button[name="provider"],
 button[name="ticker"],
 button[name="asset_category"],
 button[name="long_short"],
-button[name="category"] {
-    width: 150px;
-}
-
 button[name="spot_perpetual"] {
     width: 160px;
 }
 
-
+button[name="category"] {
+    width: 170px;
+}
 
 button[name="add_entry_price"] {
     background-color: transparent;
@@ -268,7 +266,7 @@ button[name="add_quantity"], .quantity[contenteditable="true"]{
  }
 
 button[name="add_leverage"], .leverage[contenteditable="true"] {
-    width:125px;
+    width:165px;
 }
 
 .transaction_button.add-leverage {
@@ -284,7 +282,7 @@ button[name="duplicate_transaction"] {
 }
 
 button[name="manual_bot"] {
-    width:140px;
+    width:160px;
     font-size: 16px;
 }
 
@@ -621,6 +619,7 @@ button[name="new_transaction_cancel"]:hover {
     gap: 25px;
     width:100%;
     flex-direction: row;
+    flex-wrap: wrap;
   }
 
   .advanced_filters {
