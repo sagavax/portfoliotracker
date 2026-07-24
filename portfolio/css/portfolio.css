@@ -241,20 +241,24 @@ button[name="stop_loss"] {
 }
 
 /* ── Color variants ───────────────────────────── */
-.long {
+.long,button[name="new_transaction_create"] {
     /* background-color: #00b070; */
-    color:#00b070;
+    color:white;
     border: 1px solid #00b070;
+    background-color: #00b070;
         height: 80%;
         border-radius: 6px;
         font-size: 16px;
 }
 
-.long:hover,
-button[name="new_transaction_create"]:hover {
-    /* background-color: #00b070; */
+.long:hover {
+    background-color: #00b070;
     border: 1px solid #00b070;
-    color:#00b070;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+button[name="new_transaction_create"]:hover {
     cursor: pointer;
 }
 
@@ -289,15 +293,17 @@ button[name="manual_bot"] {
 .short {
     /* background-color: #ff7152; */
     border: 1px solid #ff7152;
-    color:#ff7152;
+    background-color: #ff7152;
+    color:white;
     height: 80%;
     border-radius: 6px;
      font-size: 16px;
 }
 
 .short:hover {
-    /* background-color: #ff7152; */
+    background-color: #ff7152;
     border: 1px solid #ff7152;
+    opacity: 0.8;
     cursor: pointer;
 }
 
