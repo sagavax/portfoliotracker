@@ -300,7 +300,9 @@ transactionList.addEventListener('click', function(e) {
     } else if (btn.name === "manual_bot") {
         modalManualBot.showModal();
     }  else if (btn.name === "duplicate_transaction") {
-        duplicateTransaction(transactionId);
+        if (btn.disabled) return;
+        btn.disabled = true;
+        duplicateTransaction(transactionId, btn);
     }  else if (btn.name === "add_leverage") {
         document.getElementById("modalLeverage").showModal();
     }  
@@ -357,6 +359,8 @@ search_in_ticker.addEventListener('keydown', function(e) {
 
 //add new transaction
 btnAddTransaction.addEventListener('click', function(e) {
+    if (btnAddTransaction.disabled) return;
+    btnAddTransaction.disabled = true;
     document.querySelector('.create_transaction_wrapper').style.display = 'flex';
     document.querySelector('.new_transaction').style.display = 'flex';
     //create a new transaction in db
@@ -651,6 +655,7 @@ function createTransaction(){
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
            getLastestTransaction();
+           btnAddTransaction.disabled = false;
            //document.getElementById("tickerDetailsContent").innerHTML = this.responseText;
             /* const tickers = JSON.parse(this.responseText);
             console.log(tickers); */
@@ -979,11 +984,12 @@ function updateTransactionManualBot(transactionId, manualBot){
 }
 
 
-function duplicateTransaction(transactionId) {
+function duplicateTransaction(transactionId, btn) {
     const xhttp = new XMLHttpRequest();
     console.log("duplicate transaction:", transactionId);
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            if (btn) btn.disabled = false;
             const response = JSON.parse(this.responseText);
             if (response.success) {
                 //duplicate transaction in the transaction list
