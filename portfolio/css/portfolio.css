@@ -51,6 +51,7 @@ button[name="long_short"] {
     min-width: 95px;
     justify-content: center;
     white-space: nowrap;
+    height:100%;
 }
 
 button[name="take_profit"],
@@ -227,9 +228,10 @@ button[name="stop_loss"] {
     align-items: center;
     justify-content: flex-start;
     flex-wrap: nowrap;
-    margin-bottom: 5px;
-    margin-top: 5px;
+    padding-bottom: 2px;
+    padding-top: 2px;
     padding-left: 10px;
+    box-sizing: border-box;
 }
 
 .transaction td {
@@ -246,9 +248,12 @@ button[name="stop_loss"] {
     color:white;
     border: 1px solid #00b070;
     background-color: #00b070;
-        height: 80%;
-        border-radius: 6px;
+        height: 100%;
         font-size: 16px;
+}
+
+button[name="new_transaction_create"] {
+    border-radius: 6px;
 }
 
 .long:hover {
@@ -296,8 +301,7 @@ button[name="manual_bot"] {
     background-color: #ff7152;
     color:white;
     height: 80%;
-    border-radius: 6px;
-     font-size: 16px;
+    font-size: 16px;
 }
 
 .short:hover {
