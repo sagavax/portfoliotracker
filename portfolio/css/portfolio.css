@@ -22,6 +22,10 @@ button[name="spot_perpetual"] {
     width: 160px;
 }
 
+button[name="spot_perpetual"] {
+    font-size: 17px;
+}
+
 button[name="category"] {
     width: 170px;
 }
@@ -146,6 +150,7 @@ button[name="stop_loss"] {
     margin-top: 5px;
     width: 100%;
     gap:10px;
+    flex-wrap: wrap;
 }
 
 
@@ -269,9 +274,11 @@ button[name="new_transaction_create"]:hover {
 
 button[name="add_quantity"], .quantity[contenteditable="true"]{
     width:180px;
+    font-size: 17px;
 }
  button[name="add_entry_price"], .price[contenteditable="true"] {
-    width:125px;
+    width:145px;
+    font-size: 17px;
  }
 
 button[name="add_leverage"], .leverage[contenteditable="true"] {
