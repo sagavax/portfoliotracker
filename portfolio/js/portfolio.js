@@ -472,36 +472,37 @@ modalQuantityInput.addEventListener('keydown', function(e) {
 
 //create new transaction
 create_transaction_wrapper.addEventListener('click', function(e) {
-    if(e.target && e.target.tagName === "BUTTON") {
-        if(e.target.name === "close") {
+    const btn = e.target.closest('button');
+    if(btn) {
+        if(btn.name === "close") {
             document.querySelector('.create_transaction_wrapper').style.display = 'none';
-        } else if (e.target.name ==="add_ticker") {
+        } else if (btn.name ==="add_ticker") {
             modalTickerMode = MODAL_TICKER_MODES.INSERT;
             document.querySelector('#modalTicker').showModal();
             GetTickers();
-        } else if (e.target.name==="add_provider") {
+        } else if (btn.name==="add_provider") {
             //modalProviderMode = MODAL_PROVIDER_MODES.INSERT;
             modalProviderMode = "insertProvider";
             document.getElementById("modalProvider").showModal();
            GetProviders();
-        } else if (e.target.name==="long_short") {
+        } else if (btn.name==="long_short") {
             modalLongShortMode = "insertLongShort";
             document.getElementById("modalLongShort").showModal();
-        } else if (e.target.name==="add_asset_category") {
+        } else if (btn.name==="add_asset_category") {
             modalCategoryMode = "insertCategory";
             document.getElementById("modalAssetCategory").showModal();
-        } else if (e.target.name==="add_price") {
+        } else if (btn.name==="add_price") {
             document.getElementById("modalPrice").showModal();
             modalPriceInput.value = "";
             modalPriceInput.focus();
-        } else if (e.target.name==="add_quantity") {
-            document.getElementById("modalQuantity").showModal();   
-        } else if (e.target.name==="add_currency") {
+        } else if (btn.name==="add_quantity") {
+            document.getElementById("modalQuantity").showModal();
+        } else if (btn.name==="add_currency") {
             modalCurrencyMode = "insertCurrency";
             document.getElementById("modalCurrency").showModal();
-        } else if (e.target.name === "add_tp") {
+        } else if (btn.name === "add_tp") {
             modalTakeProfit.showModal();
-        } else if (e.target.name === "add_sl") {
+        } else if (btn.name === "add_sl") {
             modalStopLoss.showModal();
         }
     }
