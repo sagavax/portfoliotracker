@@ -297,6 +297,12 @@ button[name="duplicate_transaction"] {
     font-size: 18px;
 }
 
+button[name="duplicate_transaction"]:hover {
+    color: #00b070;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
 button[name="manual_bot"] {
     width:160px;
     font-size: 16px;
