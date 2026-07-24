@@ -22,13 +22,11 @@
     
   </head>
   <body>
-        <?php include("../../includes/header.php") ?>   
-      <div class="main_wrap">
-      <div class="tab_menu">
-          <?php include("../../includes/menu.php"); ?>
-        </div>    
-        <div class="main_wrap">
-         <div class="content">
+    <header>
+      <a href="../../index.php"><img src="../../portfolio-ticker-logo.svg" alt="Portfolio Ticker"></a>
+    </header>
+    <div class="container">
+         <div class="content" style="width:100%;">
                <div class="fab fab-icon-holder" onclick="window.location.href='ideas.php';">
                 <i class="fa fa-arrow-left"></i>
               </div>
@@ -207,6 +205,6 @@
                 </div><!-- list-->
 
         </div><!--content-->
-      </div><!--main_wrap-->
+    </div><!--container-->
     </body>
   </html> 

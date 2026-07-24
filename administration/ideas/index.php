@@ -63,13 +63,11 @@
 
   </head>
   <body>
-        <?php include("../../includes/header.php") ?>   
-      <div class="main_wrap">
-      <div class="tab_menu">
-          <?php include("../../includes/menu.php"); ?>
-        </div>    
-        <div class="main_wrap">
-         <div class="content">
+    <header>
+      <a href="../../index.php"><img src="../../portfolio-ticker-logo.svg" alt="Portfolio Ticker"></a>
+    </header>
+    <div class="container">
+         <div class="content" style="width:100%;">
               <div class="list">
               
               <h3>Ideas for the informating system</h3>
@@ -146,8 +144,8 @@
                 </div><!-- ideas_list-->             
             </div><!-- list-->
         </div><!--content-->
-      </div><!--main_wrap-->
-      
+    </div><!--container-->
+
       <dialog class="modal_show_status">
         <ul>
           <li>new</li>

@@ -19,13 +19,11 @@
   <link rel="icon" type="image/png" sizes="32x32" href="../investment.png">
 </head>
 <body>
-
-<?php include "../includes/header.php" ?>
-    <div class="main_wrap">
-        <div class="tab_menu">
-            <?php include("../includes/vanila_menu.php"); ?>
-        </div><!--tab_menu-->
-    <div class="content">
+    <header>
+      <a href="../index.php"><img src="../portfolio-ticker-logo.svg" alt="Portfolio Ticker"></a>
+    </header>
+    <div class="container">
+    <div class="content" style="width:100%;">
         <div class="list">
             <div class="add_news">
                 <button type="button" class="button small_button"><i class="fa fa-plus"></i> Add News</button>
@@ -57,8 +55,8 @@
                     }
                 ?>
         </div><!--list-->
-    </div><!--content--> 
-    </div><!--main_wrap-->   
+    </div><!--content-->
+    </div><!--container-->
     <dialog class="modal_add_news">    
         <div class="add_news_inner_layer">
             <textarea name="news_text" placeholder="text of the news ...."></textarea>

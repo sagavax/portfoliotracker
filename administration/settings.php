@@ -26,11 +26,12 @@
   </head>
   
     <body>
-        <?php   include("../includes/header.php") ?>
-  
-      <div class="main_wrap">
-        <div class="content">            
-        </div><!--content-->    
-      </div><!-- main_wrap-->
-    </body> 
+    <header>
+      <a href="../index.php"><img src="../portfolio-ticker-logo.svg" alt="Portfolio Ticker"></a>
+    </header>
+    <div class="container">
+        <div class="content" style="width:100%;">
+        </div><!--content-->
+    </div><!--container-->
+    </body>
 </html>

@@ -26,12 +26,12 @@
   </head>
   
   <body>
-  <?php
-    
-      include("../includes/header.php") ?>
-          <div class="main_wrap">
-            <div class="content">            
-              <div class="dashboard_wrap">   
+    <header>
+      <a href="../index.php"><img src="../portfolio-ticker-logo.svg" alt="Portfolio Ticker"></a>
+    </header>
+    <div class="container">
+        <div class="content" style="width:100%;">
+              <div class="dashboard_wrap">
                   <div class="dashboard">  
                      <div class="tile_list">
                       <div class="tile" tile-id="ideas">
@@ -60,6 +60,6 @@
                 
                 
               </div>
-            </div>
-     
-  </body> 
+        </div><!--content-->
+    </div><!--container-->
+  </body>

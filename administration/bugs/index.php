@@ -69,14 +69,12 @@
 
   </head>
   <body>
-       <?php include("../../includes/header.php") ?>   
-      <div class="main_wrap">
-      <div class="tab_menu">
-          <?php include("../../includes/menu.php"); ?>
-        </div>    
-        <div class="main_wrap">
-         <div class="content">
-              <div class="list">              
+    <header>
+      <a href="../../index.php"><img src="../../portfolio-ticker-logo.svg" alt="Portfolio Ticker"></a>
+    </header>
+    <div class="container">
+         <div class="content" style="width:100%;">
+              <div class="list">
                 <div class="new_bug">
                     <form action="" method="post">
                         <input type="text" name="bug_title" placeholder="bug title here" id="bug_title" autocomplete="off">
@@ -158,8 +156,8 @@
             </div><!-- list-->
 
         </div><!--content-->
-      </div><!--main_wrap-->
-      
+    </div><!--container-->
+
      <dialog class="modal_show_status">
         <ul>
           <li>new</li>
