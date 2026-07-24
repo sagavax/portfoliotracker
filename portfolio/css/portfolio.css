@@ -145,6 +145,7 @@ button[name="stop_loss"] {
     display: flex;    
     margin-bottom: 5px;
     margin-top: 5px;
+    width: 100%;
     gap:10px;
 }
 
@@ -620,5 +621,11 @@ button[name="new_transaction_cancel"]:hover {
     gap: 25px;
     width:100%;
     flex-direction: row;
-    flex-wrap: wrap;
   }
+
+  .advanced_filters {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  } 
