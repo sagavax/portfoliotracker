@@ -106,16 +106,17 @@
                 echo "<td><button type='button' class='transaction_button' name='manual_bot'><i class='fa fa-plus'></i> Manual / Bot</button></td>";
             }
 
-            $status_class = ($transaction_is_closed == 1) ? "short" : "long";
-            $status_label = ($transaction_is_closed == 1) ? "Closed" : "Active";
-            echo "<td><button type='button' class='transaction_button $status_class' name='status'>$status_label</button></td>";
-
+           
             $nr_notes = GetCountTransactionNotes($transaction_id);
             echo "<td><button type='button' class='transaction_button' name='notes'>$nr_notes</button></td>";
 
             echo "<td><button type='button' class='transaction_button' name='see_transaction' data-id='$transaction_id'><i class='fa fa-eye'></i> See transaction</button></td>";
 
-            echo "<td><div class='close_transaction_wrapper' data-id='$transaction_id'><button type='button' class='transaction_button' name='close_transaction' data-id='$transaction_id'><i class='fa fa-times'></i></button></div></td>";
+            $status_class = ($transaction_is_closed == 1) ? "closed" : "active";
+            $status_label = ($transaction_is_closed == 1) ? "Closed" : "Active";
+            echo "<td><button type='button' class='transaction_button $status_class' name='status'>$status_label</button></td>";
+
+            //echo "<td><div class='close_transaction_wrapper' data-id='$transaction_id'><button type='button' class='transaction_button' name='close_transaction' data-id='$transaction_id'><i class='fa fa-times'></i></button></div></td>";
             echo "</tr>";
         }
         echo "</tbody>";

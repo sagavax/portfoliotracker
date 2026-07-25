@@ -264,6 +264,13 @@
 
 .transaction_actions_tabs button {
     flex:1;
+    background-color: #0d0d0d;
+    color: white;
+    font-size: 16px;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 0;
+    transition: all 0.2s ease;
 }
 
 .provider_transactions {
@@ -430,7 +437,7 @@ button[name="add_entry_price"] {
     background-color: transparent;
     border: none;
     color: #ebdc0d;
-    width: 100%;
+    width: 145px;
 }
 
 .price[contenteditable="true"] {
@@ -474,6 +481,15 @@ button[name="close_transaction"]:hover {
 
 button[name="notes"] {
     font-size: 18px;
+}
+
+
+.closed {
+    color: #ff7152;
+}
+
+.active {
+    color: #00b070;
 }
 
 .quantity,
