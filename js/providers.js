@@ -9,7 +9,7 @@ const providerList = document.querySelector('.providers');
 const providerDetails = document.querySelector('.provider_details');
 const modalProviderLogoEditor = document.getElementById('modalProviderLogoEditor');
 const edit_provider_url = document.querySelector('button[name=edit_provider_url]');
-
+const provider_transactions = document.querySelector('.provider_transactions');
 
 if (modalAddNewProviderSave){
     modalAddNewProviderSave.addEventListener('click', () => {
@@ -80,6 +80,18 @@ if (providerDetails) {
                 const updatedUrl = providerUrl.innerText.trim();
                 updateProviderUrl(providerId, updatedUrl);
             });
+        }
+
+        const filterBtn = e.target.closest('.transaction_actions_tabs button');
+        if (filterBtn) {
+            const providerId = filterBtn.closest('.provider_details').dataset.id;
+            if (filterBtn.name === 'all_transactions') {
+                loadTransactions(providerId, 'all');
+            } else if (filterBtn.name === 'active_transactions') {
+                loadTransactions(providerId, 'active');
+            } else if (filterBtn.name === 'closed_transactions') {
+                loadTransactions(providerId, 'closed');
+            }
         }
     });
 }
@@ -175,6 +187,7 @@ function getProviderDetails(providerId) {
             if (detailsDiv) {
                 detailsDiv.innerHTML = this.responseText;
                 detailsDiv.dataset.id = providerId;
+                loadTransactions(providerId, 'all');
             }
         }
     }
@@ -246,3 +259,19 @@ function addNewProvider(providerName, providerUrl, providerLogo, providerDescrip
     const data = `providerName=${providerName}&providerUrl=${providerUrl}&providerLogo=${providerLogo}&providerDescription=${providerDescription}`;
     xhttp.send(data);
 }
+
+function loadTransactions(providerId, filter) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const transactionsDiv = document.querySelector(".provider_transactions");
+            if (transactionsDiv) {
+                transactionsDiv.innerHTML = this.responseText;
+                transactionsDiv.dataset.id = providerId;
+            }
+        }
+    }
+    xhttp.open("GET", "provider_transactions.php?providerId=" + providerId+"&filter=" + filter, true);
+    //xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send();
+};

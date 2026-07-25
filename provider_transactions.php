@@ -1,0 +1,123 @@
+<?php
+
+    include_once 'includes/dbconnect.php';
+    include_once 'includes/functions.php';
+
+    $providerId = (int)($_GET['providerId'] ?? 0);
+    $filter = $_GET['filter'] ?? 'all';
+
+    $get_provider = "SELECT provider_name FROM providers WHERE id = $providerId";
+    $provider_result = mysqli_query($link, $get_provider) or die("MySQL ERROR: " . mysqli_error($link));
+    $provider_row = mysqli_fetch_assoc($provider_result);
+    $provider_name = mysqli_real_escape_string($link, $provider_row['provider_name'] ?? '');
+
+    $where = "provider = '$provider_name'";
+    if ($filter === 'active') {
+        $where .= " AND is_closed = 0";
+    } elseif ($filter === 'closed') {
+        $where .= " AND is_closed = 1";
+    }
+
+    $get_transactions = "SELECT * FROM transactions WHERE $where ORDER BY created_at DESC";
+    $result = mysqli_query($link, $get_transactions) or die("MySQL ERROR: " . mysqli_error($link));
+
+    echo "<div class='provider_transactions_header'>
+            <h3>Transactions</h3><button type='button' name='add_transaction'>Pridat transakciu</button>
+        </div>";
+    echo "<div class='transaction_actions_tabs'>";
+        echo "<button type='button' name='all_transactions'>All transactions</button>";
+        echo "<button type='button' name='active_transactions'>Active transactions</button>";
+        echo "<button type='button' name='closed_transactions'>Closed transactions</button>";
+        echo "<button type='button' name='new_transaction'>New transaction</button>";
+    echo "</div>";
+    echo "<div class='provider_transactions_body'>";
+        echo "<table>";
+        echo "<thead></thead>";
+        echo "<tbody>";
+        while ($row = mysqli_fetch_array($result)) {
+            $transaction_id = $row['id'];
+            $transaction_ticker = $row['symbol'];
+            $transaction_provider = $row['provider'];
+            $transaction_category = $row['asset_category'];
+            $transaction_currency = $row['currency'];
+            $transaction_leverage = $row['leverage'];
+            $transaction_quantity = $row['quantity'];
+            $transaction_entry_price = $row['entry_price'];
+            $transaction_tp = $row['tp_price'];
+            $transaction_sl = $row['sl_price'];
+            $transaction_long_short = $row['position_type'];
+            $transaction_spot_perpetual = $row['spot_perpetual'];
+            $transaction_manual_bot = $row['manual_bot'];
+
+            echo "<tr class='transaction' data-id='$transaction_id'>";
+
+            echo "<td><button type='button' class='transaction_button' title='Duplicate transaction' name='duplicate_transaction' transaction_id='$transaction_id'><i class='fa fa-copy'></i></button></td>";
+
+            if ($transaction_ticker) {
+                echo "<td><button type='button' class='transaction_button' name='ticker' data-ticker='existing_ticker'>$transaction_ticker</button></td>";
+            } else {
+                echo "<td><button type='button' class='transaction_button' name='ticker' data-ticker='add_ticker'><i class='fa fa-plus'></i> Add ticker</button></td>";
+            }
+
+            if ($transaction_category) {
+                echo "<td><button type='button' class='transaction_button' name='category' data-category='existing_category'>$transaction_category</button></td>";
+            } else {
+                echo "<td><button type='button' class='transaction_button' name='category' data-category='add_category'><i class='fa fa-plus'></i> Add category</button></td>";
+            }
+
+            echo "<td><button type='button' class='transaction_button' name='currency' data-currency='existing_currency'>$transaction_currency</button></td>";
+
+            if ($transaction_leverage != 0) {
+                echo "<td><button type='button' class='transaction_button has-leverage' name='add_leverage'>$transaction_leverage</button></td>";
+            } else {
+                echo "<td><button type='button' class='transaction_button add-leverage' name='add_leverage'><i class='fa fa-plus'></i> Add leverage</button></td>";
+            }
+
+            if ($transaction_quantity != 0) {
+                echo "<td><div class='quantity' contenteditable='true'>$transaction_quantity</div></td>";
+            } else {
+                echo "<td><button type='button' class='transaction_button' name='add_quantity'><i class='fa fa-plus '></i> Add quantity</button></td>";
+            }
+
+            if ($transaction_entry_price != 0.0) {
+                echo "<td><div class='price' contenteditable='true'>$transaction_entry_price</div></td>";
+            } else {
+                echo "<td><button type='button' class='transaction_button' name='add_entry_price'><i class='fa fa-plus'></i> Add price</button></td>";
+            }
+
+            $tp_display = ($transaction_tp == 0.0) ? "TP" : $transaction_tp;
+            $sl_display = ($transaction_sl == 0.0) ? "SL" : $transaction_sl;
+            echo "<td style='display: flex; gap: 10px;'><button type='button' class='transaction_button' name='take_profit'>" . $tp_display . "</button> / <button type='button' class='transaction_button' name='stop_loss'>" . $sl_display . "</button></td>";
+
+            if ($transaction_long_short) {
+                $ls_class = ($transaction_long_short === "BUY") ? "long" : (($transaction_long_short === "SELL") ? "short" : "");
+                echo "<td><button type='button' class='transaction_button " . $ls_class . "' name='long_short'>" . $transaction_long_short . "</button></td>";
+            } else {
+                echo "<td><button type='button' class='transaction_button' name='long_short'><i class='fa fa-plus'></i> Long/Short</button></td>";
+            }
+
+            if ($transaction_spot_perpetual) {
+                $sp_class = ($transaction_spot_perpetual === "Spot") ? "green" : (($transaction_spot_perpetual === "Perpetual") ? "blue" : "");
+                echo "<td><button type='button' class='transaction_button " . $sp_class . "' name='spot_perpetual'>" . $transaction_spot_perpetual . "</button></td>";
+            } else {
+                echo "<td><button type='button' class='transaction_button' name='spot_perpetual'><i class='fa fa-plus'></i> Spot / Perpetual</button></td>";
+            }
+
+            if ($transaction_manual_bot) {
+                $mb_class = ($transaction_manual_bot === "MANUAL") ? "green" : (($transaction_manual_bot === "BOT") ? "blue" : "");
+                echo "<td><button type='button' class='transaction_button " . $mb_class . "' name='manual_bot'>" . $transaction_manual_bot . "</button></td>";
+            } else {
+                echo "<td><button type='button' class='transaction_button' name='manual_bot'><i class='fa fa-plus'></i> Manual / Bot</button></td>";
+            }
+
+            $nr_notes = GetCountTransactionNotes($transaction_id);
+            echo "<td><button type='button' class='transaction_button' name='notes'>$nr_notes</button></td>";
+
+            echo "<td><button type='button' class='transaction_button' name='see_transaction' data-id='$transaction_id'><i class='fa fa-eye'></i> See transaction</button></td>";
+
+            echo "<td><div class='close_transaction_wrapper' data-id='$transaction_id'><button type='button' class='transaction_button' name='close_transaction' data-id='$transaction_id'><i class='fa fa-times'></i></button></div></td>";
+            echo "</tr>";
+        }
+        echo "</tbody>";
+        echo "</table>";
+    echo "</div>";

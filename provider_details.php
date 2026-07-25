@@ -26,4 +26,19 @@
             echo "<div class='provider_url'><a href='$providerUrl' target='_blank'>Visit Website</a> <button type='button' class='button small_button' name='edit_provider_url' title='edit provider url'>Edit</button></div>";
         }
 
-    echo "</div>";        
+    echo "</div>";     
+    
+    echo "<div class='provider_transactions'>";
+        echo "<div class='provider_transactions_header'>  
+                <h3>Transactions</h3><button type='button' name='add_transaction'>Pridat transakciu</button>
+            </div>";
+            echo "<div class='transaction_actions_tabs'>";
+                echo "<button type='button' name='all_transactions'>All transactions</button>";
+                echo "<button type='button' name='active_transactions'>Active transactions</button>";
+                echo "<button type='button' name='closed_transactions'>Closed transactions</button>";
+                echo "<button type='button' name='new_transaction'>New transaction</button>";
+            echo "</div>";
+            echo "<div class='provider_transactions_body'>";
+                echo "<div class='loader'>Loading transactions...</div>";
+            echo "</div>";
+    echo "</div>";
