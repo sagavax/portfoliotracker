@@ -84,13 +84,13 @@ if (providerDetails) {
 
         const filterBtn = e.target.closest('.transaction_actions_tabs button');
         if (filterBtn) {
-            const providerId = filterBtn.closest('.provider_details').dataset.id;
+            const providerName = filterBtn.closest('.provider_details').dataset.name;
             if (filterBtn.name === 'all_transactions') {
-                loadTransactions(providerId, 'all');
+                loadTransactions(providerName, 'all');
             } else if (filterBtn.name === 'active_transactions') {
-                loadTransactions(providerId, 'active');
+                loadTransactions(providerName, 'active');
             } else if (filterBtn.name === 'closed_transactions') {
-                loadTransactions(providerId, 'closed');
+                loadTransactions(providerName, 'closed');
             }
         }
     });
@@ -102,7 +102,8 @@ if (providerDetails) {
 providerList.addEventListener('click', function (e) {
     if (e.target && e.target.classList.contains('provider_card')) {
         const providerId = e.target.dataset.id;
-        getProviderDetails(providerId);
+        const providerName = e.target.dataset.name;
+        getProviderDetails(providerId, providerName);
     }
 });
 
@@ -179,7 +180,7 @@ function httpRequest(method, url, callback) {
 };
 
 
-function getProviderDetails(providerId) {
+function getProviderDetails(providerId, providerName) {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -187,7 +188,8 @@ function getProviderDetails(providerId) {
             if (detailsDiv) {
                 detailsDiv.innerHTML = this.responseText;
                 detailsDiv.dataset.id = providerId;
-                loadTransactions(providerId, 'all');
+                detailsDiv.dataset.name = providerName;
+                loadTransactions(providerName, 'all');
             }
         }
     }
@@ -260,18 +262,18 @@ function addNewProvider(providerName, providerUrl, providerLogo, providerDescrip
     xhttp.send(data);
 }
 
-function loadTransactions(providerId, filter) {
+function loadTransactions(provider_name, filter) {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             const transactionsDiv = document.querySelector(".provider_transactions");
             if (transactionsDiv) {
                 transactionsDiv.innerHTML = this.responseText;
-                transactionsDiv.dataset.id = providerId;
+                transactionsDiv.dataset.name = provider_name;
             }
         }
     }
-    xhttp.open("GET", "provider_transactions.php?providerId=" + providerId+"&filter=" + filter, true);
+    xhttp.open("GET", "provider_transactions.php?provider_name=" + encodeURIComponent(provider_name) + "&filter=" + filter, true);
     //xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send();
 };

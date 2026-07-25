@@ -304,3 +304,209 @@
 .provider_transactions_header button {
     height:60px;
 }
+
+/* ── Transaction table (ported from portfolio.css) ───────────── */
+.provider_transactions_body table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+}
+
+.provider_transactions_body table tr:first-child {
+    border-top: 1px solid #435B7C;
+}
+
+.transaction {
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid #435B7C;
+    height: 60px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+.transaction td {
+    min-width: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.transaction td[style*="display: flex; gap: 10px;"] {
+    min-width: 170px;
+    justify-content: center;
+}
+
+button[name="long_short"],
+button[name="currency"],
+button[name="category"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button[name="category"] {
+    font-size: 17px;
+    width: 170px;
+}
+
+button[name="ticker"],
+button[name="long_short"],
+button[name="spot_perpetual"] {
+    width: 160px;
+}
+
+button[name="spot_perpetual"] {
+    font-size: 17px;
+}
+
+button[name="currency"] {
+    width: 140px;
+    font-size: 17px;
+}
+
+button[name="long_short"] {
+    width: 95px;
+    min-width: 95px;
+    justify-content: center;
+    white-space: nowrap;
+    height: 100%;
+}
+
+button[name="take_profit"],
+button[name="stop_loss"] {
+    width: 70px;
+    min-width: 70px;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+[data-leverage] {
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.long {
+    color: white;
+    border: 1px solid #00b070;
+    background-color: #00b070;
+    height: 100%;
+    font-size: 16px;
+}
+
+.long:hover {
+    background-color: #00b070;
+    border: 1px solid #00b070;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.short {
+    border: 1px solid #ff7152;
+    background-color: #ff7152;
+    color: white;
+    height: 80%;
+    font-size: 16px;
+}
+
+.short:hover {
+    background-color: #ff7152;
+    border: 1px solid #ff7152;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+button[name="add_quantity"], .quantity[contenteditable="true"] {
+    width: 180px;
+    font-size: 17px;
+}
+
+button[name="add_entry_price"] {
+    background-color: transparent;
+    border: none;
+    color: #ebdc0d;
+    width: 100%;
+}
+
+.price[contenteditable="true"] {
+    width: 145px;
+    font-size: 17px;
+}
+
+button[name="add_leverage"], .leverage[contenteditable="true"] {
+    width: 165px;
+}
+
+.transaction_button.add-leverage {
+    font-size: 14px;
+}
+
+.transaction_button.has-leverage {
+    font-size: 18px;
+}
+
+button[name="duplicate_transaction"] {
+    font-size: 18px;
+}
+
+button[name="duplicate_transaction"]:hover {
+    color: #00b070;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+button[name="manual_bot"] {
+    width: 160px;
+    font-size: 16px;
+}
+
+button[name="close_transaction"]:hover {
+    opacity: 0.8;
+    cursor: pointer;
+    background-color: #ff7152;
+    border: 1px solid #ff7152;
+}
+
+button[name="notes"] {
+    font-size: 18px;
+}
+
+.quantity,
+.price,
+.leverage {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity[contenteditable="true"]:hover,
+.price[contenteditable="true"]:hover,
+.leverage[contenteditable="true"]:hover {
+    background-color: #1a1b1e;
+    border: 0px;
+    cursor: pointer;
+    outline: none;
+}
+
+.quantity[contenteditable="true"]:focus,
+.price[contenteditable="true"]:focus,
+.leverage[contenteditable="true"]:focus {
+    outline: none;
+}
+
+.close_transaction_wrapper {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}

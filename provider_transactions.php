@@ -3,13 +3,8 @@
     include_once 'includes/dbconnect.php';
     include_once 'includes/functions.php';
 
-    $providerId = (int)($_GET['providerId'] ?? 0);
+    $provider_name = mysqli_real_escape_string($link, $_GET['provider_name'] ?? '');
     $filter = $_GET['filter'] ?? 'all';
-
-    $get_provider = "SELECT provider_name FROM providers WHERE id = $providerId";
-    $provider_result = mysqli_query($link, $get_provider) or die("MySQL ERROR: " . mysqli_error($link));
-    $provider_row = mysqli_fetch_assoc($provider_result);
-    $provider_name = mysqli_real_escape_string($link, $provider_row['provider_name'] ?? '');
 
     $where = "provider = '$provider_name'";
     if ($filter === 'active') {
@@ -48,10 +43,11 @@
             $transaction_long_short = $row['position_type'];
             $transaction_spot_perpetual = $row['spot_perpetual'];
             $transaction_manual_bot = $row['manual_bot'];
+            $transaction_is_closed = $row['is_closed'];
 
             echo "<tr class='transaction' data-id='$transaction_id'>";
 
-            echo "<td><button type='button' class='transaction_button' title='Duplicate transaction' name='duplicate_transaction' transaction_id='$transaction_id'><i class='fa fa-copy'></i></button></td>";
+            //echo "<td><button type='button' class='transaction_button' title='Duplicate transaction' name='duplicate_transaction' transaction_id='$transaction_id'><i class='fa fa-copy'></i></button></td>";
 
             if ($transaction_ticker) {
                 echo "<td><button type='button' class='transaction_button' name='ticker' data-ticker='existing_ticker'>$transaction_ticker</button></td>";
@@ -109,6 +105,10 @@
             } else {
                 echo "<td><button type='button' class='transaction_button' name='manual_bot'><i class='fa fa-plus'></i> Manual / Bot</button></td>";
             }
+
+            $status_class = ($transaction_is_closed == 1) ? "short" : "long";
+            $status_label = ($transaction_is_closed == 1) ? "Closed" : "Active";
+            echo "<td><button type='button' class='transaction_button $status_class' name='status'>$status_label</button></td>";
 
             $nr_notes = GetCountTransactionNotes($transaction_id);
             echo "<td><button type='button' class='transaction_button' name='notes'>$nr_notes</button></td>";
