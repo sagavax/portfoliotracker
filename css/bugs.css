@@ -249,17 +249,14 @@ dialog.show {
     box-sizing: border-box;
     margin-bottom: 10px;
     flex-direction: column;
-    border: 1px #fdf376 solid;
+    border: 1px solid #435B7C;
     border-radius: 6px;
     padding:15px;
 }
 
 .new_bug form select, .new_idea form select{
     width:100%;
-    /* /height:45px; */
-    margin-top:10px;
-    /* background: #eff3f4; */
-    border: 1px #fdf376 solid;
+    margin-top:10px;    
 }
 
 .bugs_action {
@@ -270,6 +267,8 @@ dialog.show {
 }
 
 .new_bug_action {
+    display: flex;
+    justify-content: flex-end;
     margin-top:10px
 }
 
