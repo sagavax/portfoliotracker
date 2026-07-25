@@ -1,12 +1,3 @@
-input {
-    background-color: #253649;
-    border: 1px solid #435B7C;
-    border-radius: 5px;
-    color: white;
-    padding: 10px;
-    font-size: 18px;
-    width: 100%;
-}
 
 /* ── Transaction column buttons ───────────────── */
 button[name="long_short"],
