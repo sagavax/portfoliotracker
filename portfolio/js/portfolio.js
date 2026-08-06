@@ -434,11 +434,17 @@ modalPriceInput.addEventListener('input', function(e) {
 modalPriceInput.addEventListener('keydown', function(e) {
     if (e.key !== "Enter") return;
     e.preventDefault();
-
+    console.log(modalPriceMode);
     const price = e.target.value.trim();
     if (!price) return;
 
     const transactionId = sessionStorage.getItem("currentTransactionId");
+
+    if(modalPriceMode === "insertPrice") {
+                 document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-type='price'>" + price + "</button>";
+                 modalPrice.close();
+    }
+
 
     const row = document.querySelector("tr[data-id='" + transactionId + "']");
     if (!row) return;
@@ -508,6 +514,7 @@ create_transaction_wrapper.addEventListener('click', function(e) {
             modalCategoryMode = "insertCategory";
             document.getElementById("modalAssetCategory").showModal();
         } else if (btn.name==="add_price") {
+            modalPriceMode = "insertPrice";
             document.getElementById("modalPrice").showModal();
             modalPriceInput.value = "";
             modalPriceInput.focus();
