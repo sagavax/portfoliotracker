@@ -272,10 +272,10 @@ transactionList.addEventListener('click', function(e) {
 
     if (btn.name === "ticker") {
         tickerModal.showModal();
-        modalTickerMode = "editTicker";
+        const modalTickerMode = "editTicker";
         GetTickers();
     } else if (btn.name === "provider") {
-        modalProviderMode = "editProvider";
+        const modalProviderMode = "editProvider";
         document.getElementById("modalProvider").showModal();
         GetProviders();
     } else if (btn.name === "category") {
@@ -298,6 +298,7 @@ transactionList.addEventListener('click', function(e) {
     } else if (btn.name === "add_quantity") {
         document.getElementById("modalQuantity").showModal();
     } else if (btn.name === "add_entry_price") {
+        const modalPriceMode = "editPrice";
         document.getElementById("modalPrice").showModal();
     } else if (btn.name === "take_profit") {
         modalTakeProfit.showModal();
@@ -306,7 +307,7 @@ transactionList.addEventListener('click', function(e) {
     } else if (btn.name === "see_transaction") {
         window.location.href = "transaction_details.php?transaction_id=" + transactionId;
     } else if (btn.name === "spot_perpetual") {
-        modalSpotPerpetualMode = "editSpotPerpetual";
+        const modalSpotPerpetualMode = "editSpotPerpetual";
         document.getElementById("modalSpotPerpetual").showModal();
     } else if (btn.name === "manual_bot") {
         modalManualBot.showModal();
