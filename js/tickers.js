@@ -81,7 +81,7 @@ function filterTickersByLetter(letter) {
 }
 
 
-function CreateNewTicker(ticker, short_name, industry, website) {
+function CreateNewTicker(ticker, short_name, company_name, industry, website) {
     const xhttp = new XMLHttpRequest();
     console.log("create new ticker:", ticker);
     xhttp.onreadystatechange = function() {
@@ -97,7 +97,7 @@ function CreateNewTicker(ticker, short_name, industry, website) {
     }
     xhttp.open("POST", "tickers_create.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send(`symbol=${ticker}&short_name=${short_name}&industry=${industry}&website=${website}`);
+    xhttp.send(`symbol=${ticker}&short_name=${short_name}&company_name=${company_name}&industry=${industry}&website=${website}`);
 }   
 
 

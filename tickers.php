@@ -110,6 +110,7 @@
                 <div id="addTickerContent">
                     <div class='new_ticker_name_wrapper'><input type="text" id="new_ticker" placeholder="Zadajte nový ticker..." autocomplete="off"><input type="checkbox" id="new_ticker_crypto_checkbox"><label for="new_ticker_crypto_checkbox">Crypto</label></div>
                     <input type="text" id="new_short_name" placeholder="Zadajte kratke meno..." autocomplete="off">
+                    <input type="text" id="new_company_name" placeholder="Zadajte názov spoločnosti..." autocomplete="off">
                     <input type="text" id="new_industry" placeholder="Zadajte priemysel..." autocomplete="off">
                     <input type="text" id="new_website" placeholder="Zadajte websttranku..." autocomplete="off">
                 </div>
