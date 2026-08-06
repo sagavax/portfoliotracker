@@ -272,10 +272,10 @@ transactionList.addEventListener('click', function(e) {
 
     if (btn.name === "ticker") {
         tickerModal.showModal();
-        const modalTickerMode = "editTicker";
+        modalTickerMode = "editTicker";
         GetTickers();
     } else if (btn.name === "provider") {
-        const modalProviderMode = "editProvider";
+        modalProviderMode = "editProvider";
         document.getElementById("modalProvider").showModal();
         GetProviders();
     } else if (btn.name === "category") {
