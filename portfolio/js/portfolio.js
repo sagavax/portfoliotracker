@@ -210,7 +210,13 @@ modalSpotPerpetual.addEventListener('click', function(e) {
         const value = e.target.name === "add_spot" ? "Spot" : "Perpetual";
         console.log(value);
         const transactionId = sessionStorage.getItem("currentTransactionId");
-        document.querySelector('tr[data-id="'+transactionId+'"] button[name="spot_perpetual"]').textContent = value;
+        //if edit mode
+        if(modalSpotPerpetualMode == "editSpotPerpetual"){
+            document.querySelector('tr[data-id="'+transactionId+'"] button[name="spot_perpetual"]').textContent = value;        
+        } else if (modalSpotPerpetualMode == "insertSpotPerpetual") {
+           new_transaction.innerHTML += "<button type='button' class='button'>"+value+"</button>";
+        }
+        
         updateSpotPerpetual(transactionId, value);
         modalSpotPerpetual.close();
     }
@@ -504,6 +510,9 @@ create_transaction_wrapper.addEventListener('click', function(e) {
             modalTakeProfit.showModal();
         } else if (btn.name === "add_sl") {
             modalStopLoss.showModal();
+        } else if (btn.name === "add_spot_perpetual") {
+            modalSpotPerpetualMode = "insertSpotPerpetual";
+            document.getElementById("modalSpotPerpetual").showModal();
         }
     }
 })

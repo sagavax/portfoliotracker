@@ -151,7 +151,7 @@
                         <button type="button" name="add_sl" class="button small_button"><i class="fa fa-plus"></i> Add SL</button>
                         <button type="button" name="long_short"><i class="fa fa-plus"></i> Long/Short</button>
                         <button type="button" name="add_currency"><i class="fa fa-plus"></i> Currency</button> 
-                        <button type="button" name="spot_perpetual" class="button small_button" id="spot_perpetual"><i class="fa fa-plus"></i> Spot/Perpetual</button>
+                        <button type="button" name="add_spot_perpetual" class="button small_button" id="spot_perpetual"><i class="fa fa-plus"></i> Spot/Perpetual</button>
                         <button type="button" name="add_note" class="button small_button" id="add_note"><i class="fa fa-plus"></i> Add note</button>
                     </div><!--new_transaction-->
 
