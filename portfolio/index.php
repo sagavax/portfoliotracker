@@ -68,6 +68,29 @@
                     </div><!-- create_transaction_action_wrapper -->
 
                    
+                        <div class="create_transaction_wrapper">
+                        <button type="button" name="add_ticker" class="button small_button" id="add_ticker"><i class="fa fa-plus"></i> Add ticker</button>
+                        <button type="button" name="add_provider" class="button small_button" id="add_provider"><i class="fa fa-plus"></i> Add provider</button>
+                        <button type="button" name="add_asset_category" class="button small_button" id="add_asset_category"><i class="fa fa-plus"></i> Add category</button>
+                        <button type="button" name="add_price" class="button small_button" id="add_entry_price"><i class="fa fa-plus"></i> Add price</button>
+                        <button type="button" name="add_quantity" class="button small_button" id="add_quqntity"><i class="fa fa-plus"></i> Add quantity</button>
+                        <button type="button" name="add_tp" class="button small_button"><i class="fa fa-plus"></i> Add TP</button>
+                        <button type="button" name="add_sl" class="button small_button"><i class="fa fa-plus"></i> Add SL</button>
+                        <button type="button" name="long_short"><i class="fa fa-plus"></i> Long/Short</button>
+                        <button type="button" name="add_currency"><i class="fa fa-plus"></i> Currency</button> 
+                        <button type="button" name="add_spot_perpetual" class="button small_button" id="spot_perpetual"><i class="fa fa-plus"></i> Spot/Perpetual</button>
+                        <button type="button" name="add_note" class="button small_button" id="add_note"><i class="fa fa-plus"></i> Add note</button>
+                    </div><!--new_transaction-->
+
+                    
+
+                    <div class="new_transaction">
+                        <div class="new_transaction_actions_wrapper">
+                            <button name="new_transaction_create" class="secondary">Create</button>
+                            <button name="new_transaction_reset" class="secondary">Reset</button>
+                            <button name="new_transaction_cancel" class="secondary">Cancel</button>
+                        </div>   
+                    </div>    
 
                         <div class="filter_providers">
                             <?php
@@ -138,34 +161,6 @@
                             <button type="button" class="filter_button" data-filter="short">Short</button>
                         </div>
                  </div>    
-
-                 
-
-                    <div class="create_transaction_wrapper">
-                        <button type="button" name="add_ticker" class="button small_button" id="add_ticker"><i class="fa fa-plus"></i> Add ticker</button>
-                        <button type="button" name="add_provider" class="button small_button" id="add_provider"><i class="fa fa-plus"></i> Add provider</button>
-                        <button type="button" name="add_asset_category" class="button small_button" id="add_asset_category"><i class="fa fa-plus"></i> Add category</button>
-                        <button type="button" name="add_price" class="button small_button" id="add_entry_price"><i class="fa fa-plus"></i> Add price</button>
-                        <button type="button" name="add_quantity" class="button small_button" id="add_quqntity"><i class="fa fa-plus"></i> Add quantity</button>
-                        <button type="button" name="add_tp" class="button small_button"><i class="fa fa-plus"></i> Add TP</button>
-                        <button type="button" name="add_sl" class="button small_button"><i class="fa fa-plus"></i> Add SL</button>
-                        <button type="button" name="long_short"><i class="fa fa-plus"></i> Long/Short</button>
-                        <button type="button" name="add_currency"><i class="fa fa-plus"></i> Currency</button> 
-                        <button type="button" name="add_spot_perpetual" class="button small_button" id="spot_perpetual"><i class="fa fa-plus"></i> Spot/Perpetual</button>
-                        <button type="button" name="add_note" class="button small_button" id="add_note"><i class="fa fa-plus"></i> Add note</button>
-                    </div><!--new_transaction-->
-
-                    
-
-                    <div class="new_transaction">
-                        <div class="new_transaction_actions_wrapper">
-                            <button name="new_transaction_create" class="secondary">Create</button>
-                            <button name="new_transaction_reset" class="secondary">Reset</button>
-                            <button name="new_transaction_cancel" class="secondary">Cancel</button>
-                        </div>   
-                    </div>    
-
-              
 
                     <div class="detailed_filters_wrapper">
                         <div class="filter_tickers">
