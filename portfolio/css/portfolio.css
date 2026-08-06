@@ -123,9 +123,9 @@ button[name="stop_loss"] {
 .create_transaction_action_wrapper  {
     display: flex;
      align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-end;
     flex-wrap: wrap;
-    border: 1px solid #435B7C;
+    /* border: 1px solid #435B7C; */
     border-radius: 5px;
     box-sizing: border-box;
     padding: 15px;
@@ -191,6 +191,7 @@ button[name="stop_loss"] {
     transition: background-color 0.3s ease;
     cursor: pointer;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .new_transaction {
@@ -650,3 +651,8 @@ button[name="new_transaction_cancel"]:hover {
     gap: 10px;
     width: 100%;
   } 
+
+  #modalNewTransaction {
+    width: 70%;
+    height: 80%;
+  }
