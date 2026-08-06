@@ -18,12 +18,14 @@ new_ticker_crypto_checkbox.addEventListener("change", function() {
 saveTicker.addEventListener("click", function() {
     const new_ticker = document.querySelector("#new_ticker").value.trim();
     const new_short_name = document.querySelector("#new_short_name").value.trim();
+    const new_company_name = document.querySelector("#new_company_name").value.trim();
     const new_industry = document.querySelector("#new_industry").value.trim();
     const new_website = document.querySelector("#new_website").value.trim();
-    CreateNewTicker(new_ticker, new_short_name, new_industry, new_website);
+    CreateNewTicker(new_ticker, new_short_name, new_company_name, new_industry, new_website);
     modalTicker.close();
     document.querySelector("#new_ticker").value="";
     document.querySelector("#new_short_name").value="";
+    document.querySelector("#new_company_name").value="";
     document.querySelector("#new_industry").value="";
     document.querySelector("#new_website").value="";
 });
@@ -81,6 +83,8 @@ function filterTickersByLetter(letter) {
 }
 
 
+
+//new_ticker, new_short_name, new_company_name, new_industry, new_website
 function CreateNewTicker(ticker, short_name, company_name, industry, website) {
     const xhttp = new XMLHttpRequest();
     console.log("create new ticker:", ticker);
