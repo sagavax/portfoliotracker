@@ -26,7 +26,7 @@
         <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
         <script src="../js/clock.js?<?php echo time() ?>" defer></script>
         <script src="js/portfolio.js?<?php echo time() ?>" defer></script>
-        <script src="../js/message.js?<?php echo time() ?> defer"></script>
+        <script src="../js/message.js?<?php echo time() ?>" defer></script>
         <!-- <script src="../js/worldclock.js?<?php echo time() ?>"></script> -->
     </head>
 
