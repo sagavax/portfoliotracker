@@ -249,6 +249,7 @@ new_transaction.addEventListener('click', function(e) {
                 return;
             } else {
                  document.querySelector('.create_transaction_wrapper').style.display = 'none';
+                 document.querySelector('.new_transaction').style.display = 'none';
             }
 
             //add created transaction to transaction list
