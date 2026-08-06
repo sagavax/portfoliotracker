@@ -473,6 +473,11 @@ modalQuantityInput.addEventListener('keydown', function(e) {
 
     const transactionId = sessionStorage.getItem("currentTransactionId");
 
+    if(modalQuantityMode === "insertQuantity") {
+        document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-type='quantity'>" + quantity + "</button>";
+        modalQuantity.close();
+    }
+
     const row = document.querySelector("tr[data-id='" + transactionId + "']");
     if (!row) return;
     
@@ -519,6 +524,7 @@ create_transaction_wrapper.addEventListener('click', function(e) {
             modalPriceInput.value = "";
             modalPriceInput.focus();
         } else if (btn.name==="add_quantity") {
+            modalQuantityMode = "insertQuantity";
             document.getElementById("modalQuantity").showModal();
         } else if (btn.name==="add_currency") {
             modalCurrencyMode = "insertCurrency";
