@@ -338,6 +338,7 @@ modalTakeProfit.addEventListener('keydown', function(e) {
     currTransaction = sessionStorage.getItem("currentTransactionId");
     if(e.key === "Enter") {
         e.preventDefault();
+        new_transaction.innerHTML += "<button type='button' class='button'>"+e.target.value+"</button>";
         updateTakeProfit(currTransaction, e.target.value);
         modalTakeProfit.close();
     }
@@ -347,6 +348,7 @@ modalStopLoss.addEventListener('keydown', function(e) {
     currTransaction = sessionStorage.getItem("currentTransactionId");
     if(e.key === "Enter") {
         e.preventDefault();
+        new_transaction.innerHTML += "<button type='button' class='button'>"+e.target.value+"</button>";
         updateStopLoss(currTransaction, e.target.value);
         modalStopLoss.close();
     }
