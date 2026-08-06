@@ -67,7 +67,7 @@ body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 
    button {background-color: #253649; border: 1px #435B7C solid; border-radius: 6px ; color: white; padding: 10px 20px; text-align: center; display: flex; align-items: center; gap:10px;}
 
-   button:hover { background-color: #4e6a8c; border: 2px #fff solid}
+   button:hover { background-color: #4e6a8c; /* border: 2px #fff solid */; cursor: pointer; }
 
    .transaction_button {background-color: #0d0d0d;color: white; padding: 10px 20px; display: flex; align-items: center; justify-content: center; gap:10px; height:100%; border:1px solid #0d0d0d;border-radius:0}   
 
