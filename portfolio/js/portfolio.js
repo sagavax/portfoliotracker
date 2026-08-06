@@ -31,6 +31,15 @@ const leverageCancel = document.getElementById('leverageCancel');
 const leverageSave = document.getElementById('saveLeverage');
 
 
+let modalPriceMode = null;
+let modalQuantityMode = null;
+let modalLongShortMode = null;
+let modalTickerMode = null;
+let modalProviderMode = null;
+let modalCategoryMode = null;
+let modalSpotPerpetualMode = null;
+let modalCurrencyMode = null;
+
 leverageCancel.addEventListener('click', function() {
     modalLeverage.close();
 });
@@ -80,12 +89,7 @@ const LONG_SHORT_MODES = {
 }
 
 
-let modalLongShortMode;
-let modalTickerMode;
-let modalProviderMode;
-let modalCategoryMode;
-let modalSpotPerpetualMode;
-let modalCurrencyMode;
+
 
 /* modalNotes.addEventListener("keyup", function(e) {
     if(!e.target.classList.contains('note')) return;
@@ -429,11 +433,12 @@ modalPriceInput.addEventListener('input', function(e) {
 modalPriceInput.addEventListener('keydown', function(e) {
     if (e.key !== "Enter") return;
     e.preventDefault();
-    
+
     const price = e.target.value.trim();
     if (!price) return;
-    
+
     const transactionId = sessionStorage.getItem("currentTransactionId");
+
     const row = document.querySelector("tr[data-id='" + transactionId + "']");
     if (!row) return;
     
@@ -458,8 +463,9 @@ modalQuantityInput.addEventListener('keydown', function(e) {
     
     const quantity = e.target.value.trim();
     if (!quantity) return;
-    
+
     const transactionId = sessionStorage.getItem("currentTransactionId");
+
     const row = document.querySelector("tr[data-id='" + transactionId + "']");
     if (!row) return;
     
