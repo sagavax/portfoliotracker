@@ -92,16 +92,16 @@
                         </div>   
                     </div>    
 
-                        <div class="filter_providers">
-                            <?php
-                                $get_providers = "SELECT provider_name FROM providers ORDER BY provider_name ASC";
-                                $result = mysqli_query($link, $get_providers) or die("MySQL ERROR: " . mysqli_error($link));
-                                while ($row = mysqli_fetch_array($result)) {
-                                    $provider_name = $row['provider_name'];
-                                    echo "<button type='button' class='filter_button' data-filter='$provider_name'>$provider_name</button>";
-                                }
-                            ?>
-                        </div> 
+                    <div class="filter_providers">
+                        <?php
+                            $get_providers = "SELECT provider_name FROM providers ORDER BY provider_name ASC";
+                            $result = mysqli_query($link, $get_providers) or die("MySQL ERROR: " . mysqli_error($link));
+                            while ($row = mysqli_fetch_array($result)) {
+                                $provider_name = $row['provider_name'];
+                                echo "<button type='button' class='filter_button' data-filter='$provider_name'>$provider_name</button>";
+                            }
+                        ?>
+                    </div> 
                         <!-- 
                         <div class="filter_active_closed">
                             <button type="button" class="filter_button" data-filter="active">Aktivní</button>
@@ -110,26 +110,24 @@
 
                  </div><!-- transactions_filters -->    
                  
-                 <div class="advanced_filters">
-                    
-                       <div class="filter_all">
-                            <button type="button" class="filter_button" data-filter="all">Vše</button>
-                        </div>
-
-                      <div class="filter_asset_category">
-                            <button type="button" class="filter_button" data-filter="stocks">Akcie</button>
-                            <button type="button" class="filter_button" data-filter="crypto">Kryptoměny</button>
-                            <button type="button" class="filter_button" data-filter="etf">ETF</button>
-                            <button type="button" class="filter_button" data-filter="options">Opcie</button>
-                            <button type="button" class="filter_button" data-filter="bonds">Dlhopis(y)</button>
-                            <button type="button" class="filter_button" data-filter="forex">Forex</button>
-                            <button type="button" class="filter_button" data-filter="commodities">Komoditý</button>
-                            <button type="button" class="filter_button" data-filter="indices">Indexy</button>
-                        </div><!-- filter_asset_category -->
-                        
+                 <div class="advanced_filters">                    
                        
+                    <div class="filter_all">
+                        <button type="button" class="filter_button" data-filter="all">Vše</button>
+                    </div>
 
-
+                    <div class="filter_asset_category">
+                        <button type="button" class="filter_button" data-filter="stocks">Akcie</button>
+                        <button type="button" class="filter_button" data-filter="crypto">Kryptoměny</button>
+                        <button type="button" class="filter_button" data-filter="etf">ETF</button>
+                        <button type="button" class="filter_button" data-filter="options">Opcie</button>
+                        <button type="button" class="filter_button" data-filter="bonds">Dlhopis(y)</button>
+                        <button type="button" class="filter_button" data-filter="forex">Forex</button>
+                        <button type="button" class="filter_button" data-filter="commodities">Komoditý</button>
+                        <button type="button" class="filter_button" data-filter="indices">Indexy</button>
+                    </div><!-- filter_asset_category -->
+                        
+                    
                      <div class="filter_currency">
                             <select name="currency" id="currency">
                                <option value="all">All</option>     
@@ -164,7 +162,7 @@
 
                     <div class="detailed_filters_wrapper">
                         <div class="filter_tickers">
-                            <?php GetTickers(); ?>
+                            <?php GetActiveickers(); ?>
                         </div><!-- filter_ticker -->        
                         
                         <div class="new_wrapper">
