@@ -94,7 +94,7 @@
     }
 
 
-    function GetTickers(){
+    function GetActiveickers(){
         global $link;
         $get_tickers = "SELECT symbol FROM transactions WHERE is_closed = 0 GROUP BY symbol ORDER BY symbol ASC";
         $result = mysqli_query($link, $get_tickers) or die("MySQL ERROR: " . mysqli_error($link));
