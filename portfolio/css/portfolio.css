@@ -660,3 +660,63 @@ button[name="new_transaction_cancel"]:hover {
     width: 70%;
     height: 80%;
   }
+
+  #transaction-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin-bottom: 20px;
+}
+
+#transaction-details-table th,
+#transaction-details-table td {
+    width: 25%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#transaction-details-table th {
+    font-weight: 600;
+    background-color: #435B7C;
+}
+
+
+#transaction-notes {
+    margin-top: 60px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#transaction-note-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #435B7C;
+    gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#transaction-note-header h2 {
+    width: 87%;
+    margin: 0;
+}
+
+#transaction-notes-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+.transaction-note {
+    background-color: #1a1b1e;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}

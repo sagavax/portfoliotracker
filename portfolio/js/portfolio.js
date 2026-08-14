@@ -305,7 +305,7 @@ transactionList.addEventListener('click', function(e) {
     } else if (btn.name === "stop_loss") {
         modalStopLoss.showModal();
     } else if (btn.name === "see_transaction") {
-        window.location.href = "transaction_details.php?transaction_id=" + transactionId;
+        window.location.href = "transaction.php?transaction_id=" + transactionId;
     } else if (btn.name === "spot_perpetual") {
         const modalSpotPerpetualMode = "editSpotPerpetual";
         document.getElementById("modalSpotPerpetual").showModal();

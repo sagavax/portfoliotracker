@@ -19,21 +19,22 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Portforlio Tracker</title>
-        <link rel="stylesheet" href="css/style.css?<?php echo time() ?>" />
+        <link rel="stylesheet" href="../css/style.css?<?php echo time() ?>" />
         <link rel="stylesheet" href="css/portfolio.css?<?php echo time() ?>" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-        <link rel="icon" type="image/png" sizes="32x32" href="investment.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../investment.png">
         <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
-        <script src="js/clock.js?<?php echo time() ?>" defer></script>
-        <script src="js/portfolio.js?<?php echo time() ?>" defer></script>
-        <script src="js/messsage.js?<?php echo time() ?> defer"></script>
+        <script src="../js/clock.js?<?php echo time() ?>" defer></script>
+        <!-- <script src="../js/portfolio.js?<?php echo time() ?>" defer></script> -->
+        <script src="../js/transaction.js?<?php echo time() ?>" defer></script>
+        <script src="../js/message.js?<?php echo time() ?> defer"></script>
         <!-- <script src="js/worldclock.js?<?php echo time() ?>"></script> -->
         
     </head>
 
         <header>
-          <a href="."><img src="portfolio-ticker-logo.svg" alt="Portfolio Ticker"></a><div class="clockWrapper"><button type ="button" class="secondary" name="worldclock"  id="worldclock">World Clock</button><div id="clock">--:--:--</div></div>
+          <a href="."><img src="../portfolio-ticker-logo.svg" alt="Portfolio Ticker"></a><div class="clockWrapper"><button type ="button" class="secondary" name="worldclock"  id="worldclock">World Clock</button><div id="clock">--:--:--</div></div>
         </header>
         <div class="container">
             <div class="sidebar">
@@ -53,6 +54,134 @@
             <div class="content">
                 <h1>Vitajte v Portfolio Tracker Transaction Details</h1>
                 <p>Tu si možete sledovat detaily transakcie.</p>
-            </div>
-        </div>
+
+                <div class="transaction-details">
+                    <table id="transaction-details-table">                       
+                        <tbody id="transaction-details-body">
+                            <!-- Transaction details will be populated here -->
+                        </tbody>
+                  
+
+                <?php
+                        
+                           $transaction_id = $_GET['transaction_id'];
+                           $transaction = GetTransactionDetails($transaction_id);
+
+                        if ($transaction !== null) {
+                            $id = $transaction['id'];
+                            $date = $transaction['date_of_transaction'];
+                            $provider = $transaction['provider'];
+                            $type = $transaction['type'];
+                            $asset_category = $transaction['asset_category'];
+                            $symbol = $transaction['symbol'];
+                            $position_type = $transaction['position_type'];
+                            $spot_perpetual = $transaction['spot_perpetual'];
+                            $manual_bot = $transaction['manual_bot'];
+                            $quantity = $transaction['quantity'];
+                            $tp_price = $transaction['tp_price'];
+                            $sl_price = $transaction['sl_price'];
+                            $entry_price = $transaction['entry_price'];
+                            $currency = $transaction['currency'];
+                            $created_at = $transaction['created_at'];
+                            $modified_at = $transaction['modified_at'];
+                            $is_closed = $transaction['is_closed'];
+
+                            echo "
+                            <tr>
+                                <th>ID</th>
+                                <td>$id</td>
+                                <th>Dátum</th>
+                                <td>$date</td>
+                            </tr>
+
+                            <tr>
+                                <th>Poskytovateľ</th>
+                                <td>$provider</td>
+                                <th>Typ</th>
+                                <td>$type</td>
+                            </tr>
+
+                            <tr>
+                                <th>Kategória aktíva</th>
+                                <td>$asset_category</td>
+                                <th>Symbol</th>
+                                <td>$symbol</td>
+                            </tr>
+
+                            <tr>
+                                <th>Typ pozície</th>
+                                <td>$position_type</td>
+                                <th>Spot/Perpetual</th>
+                                <td>$spot_perpetual</td>
+                            </tr>
+
+                            <tr>
+                                <th>Manuálny/Bot</th>
+                                <td>$manual_bot</td>
+                                <th>Množstvo</th>
+                                <td>$quantity</td>
+                            </tr>
+
+                            <tr>
+                                <th>TP cena</th>
+                                <td>$tp_price</td>
+                                <th>SL cena</th>
+                                <td>$sl_price</td>
+                            </tr>
+
+                            <tr>
+                                <th>Vstupná cena</th>
+                                <td>$entry_price</td>
+                                <th>Mena</th>
+                                <td>$currency</td>
+                            </tr>
+
+                            <tr>
+                                <th>Vytvorené dňa</th>
+                                <td>$created_at</td>
+                                <th>Zmenené dňa</th>
+                                <td>$modified_at</td>
+                            </tr>
+
+                            <tr>
+                                <th>Zatvorená?</th>
+                                <td>" . ($is_closed ? 'Áno' : 'Nie') . "</td>
+                                <th></th>
+                                <td></td>
+                            </tr>
+                            ";
+                        }
+                     ?>    
+                    </table>                   
+            </div><!-- .transaction-details -->
+
+            <div id="transaction-notes">
+                <div id="transaction-note-header">
+                    <h2>Poznámky k transakcii</h2>
+                    <button type="button" class="secondary" name="add_note" id="add_note"><i class="fas fa-plus"></i> Pridať poznámku</button>
+                </div>
+                
+                <div id="transaction-notes-container">
+                    <!-- Transaction notes will be populated here -->
+                     <?php
+                            
+                        $transaction_id = $_GET['transaction_id'];
+                        $notes = GetTransactionNotes($transaction_id);
+
+                        if (!empty($notes)) {
+                            
+                            foreach ($notes as $note) {
+                                $note_id = $note['id'];
+                                $note_text = $note['note_text'];
+                                $created_at = $note['created_at'];
+                                echo "<div class='transaction-note'>
+                                    <strong>[$created_at]</strong> $note_text <button type='button' class='secondary' name='delete_note' data-note-id='$note_id'><i class='fas fa-trash'></i> remove</button></div>";
+                            }
+                            
+                        } else {
+                            echo "<p>No notes available for this transaction.</p>";
+                        }
+                     ?>
+                </div>
+        </div><!-- .content -->
   </body>    
