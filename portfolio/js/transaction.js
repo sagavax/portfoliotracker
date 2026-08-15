@@ -1,18 +1,18 @@
-const add-note-dialog = document.getElementById('add-note-dialog');
-const add-note-form = document.getElementById('add-note-form');
-const cancel-add-note = document.getElementById('cancel-add-note');
+const add_note_dialog = document.getElementById('add-note-dialog');
+const add_note_form = document.getElementById('add-note-form');
+const cancel_add_note = document.getElementById('cancel-add-note');
 
 
-add-note-form.addEventListener('submit', function(event) {
+add_note_form.addEventListener('submit', function(event) {
     event.preventDefault();
-    const formData = new FormData(add-note-form);
+    const formData = new FormData(add_note_form);
     const transactionId = formData.get('transaction_id');
     const noteText = formData.get('note_text');
     createNote(transactionId, noteText);
 });
 
-cancel-add-note.addEventListener('click', function() {
-    add-note-dialog.close();
+cancel_add_note.addEventListener('click', function() {
+    add_note_dialog.close();
 });
 
 
