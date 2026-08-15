@@ -109,8 +109,15 @@
                             </tr>
 
                             <tr>
-                                <th>Typ pozície</th>
-                                <td>$position_type</td>
+                                <th>Short / Long</th>
+                              ";  
+                                if ($position_type == 'BUY') {
+                                    echo "<td class='long'>BUY</td>";
+                                } else if ($position_type == 'SELL') {
+                                    echo "<td class='short'>SELL</td>";
+                                } 
+
+                             echo "
                                 <th>Spot/Perpetual</th>
                                 <td>$spot_perpetual</td>
                             </tr>
@@ -142,12 +149,9 @@
                                 <th>Zmenené dňa</th>
                                 <td>$modified_at</td>
                             </tr>
-
                             <tr>
-                                <th>Zatvorená?</th>
-                                <td>" . ($is_closed ? 'Áno' : 'Nie') . "</td>
-                                <th></th>
-                                <td></td>
+                                <td colspan='4'><div class='transaction-actions'><button type='button' class='secondary' name='delete_transaction' data-transaction-id='$transaction_id'><i class='fas fa-trash'></i> Zmazať
+                                </button></td>
                             </tr>
                             ";
                         }
