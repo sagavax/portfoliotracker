@@ -2,7 +2,7 @@
 
 session_start();
 include ("includes/dbconnect.php");
-/* include ("includes/functions.php"); */
+include ("includes/functions.php");
 
 
 if(isset($_POST['login'])){
