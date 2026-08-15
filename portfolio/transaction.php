@@ -27,8 +27,7 @@
         <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
         <script src="../js/clock.js?<?php echo time() ?>" defer></script>
         <!-- <script src="../js/portfolio.js?<?php echo time() ?>" defer></script> -->
-        <script src="../js/transaction.js?<?php echo time() ?>" defer></script>
-        <script src="../js/message.js?<?php echo time() ?> defer"></script>
+        <script src="js/transaction.js?<?php echo time() ?>" defer></script>
         <!-- <script src="js/worldclock.js?<?php echo time() ?>"></script> -->
         
     </head>
@@ -178,8 +177,14 @@
                                 $note_id = $note['id'];
                                 $note_text = $note['note_text'];
                                 $created_at = $note['created_at'];
-                                echo "<div class='transaction-note'>
-                                    <strong>[$created_at]</strong> $note_text <button type='button' class='secondary' name='delete_note' data-note-id='$note_id'><i class='fas fa-trash'></i> remove</button></div>";
+                                echo "<div class='transaction-note' id='$note_id'><div class='transaction-note-text'>$note_text</div>
+
+                                
+                                <div class='transaction-note-actions'>
+                                    <div class='transaction-note-meta'>Vytvorené dňa: $created_at</div><button type='button' class='secondary' name='edit_note' data-note-id='$note_id'><i class='fas fa-edit'></i> upraviť</button>
+                                    <button type='button' class='secondary' name='delete_note' data-note-id='$note_id'><i class='fas fa-trash'></i> remove</button>
+                                </div>
+                             </div>";
                             }
                             
                         } else {
@@ -188,4 +193,15 @@
                      ?>
                 </div>
         </div><!-- .content -->
-  </body>    
+  </body>
+    <dialog id="add-note-dialog">
+        <form id="add-note-form">
+            <label for="note-text">Poznámka:</label>
+            <textarea id="note-text" name="note_text"></textarea>
+            <input type="hidden" id="transaction-id" name="transaction_id" value="<?php echo $_GET['transaction_id']; ?>">
+            <div id="add-note-actions">
+                <button type="submit">Uložiť</button>
+                <button type="button" id="cancel-add-note">Zrušiť</button>
+            </div>
+        </form>    
+  </html>
