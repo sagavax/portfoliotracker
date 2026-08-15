@@ -177,7 +177,7 @@
                                 $note_id = $note['id'];
                                 $note_text = $note['note_text'];
                                 $created_at = $note['created_at'];
-                                echo "<div class='transaction-note' id='$note_id'><div class='transaction-note-text'>$note_text</div>
+                                echo "<div class='transaction-note' data-note-id='$note_id'><div class='transaction-note-text'>$note_text</div>
 
                                 
                                 <div class='transaction-note-actions'>
