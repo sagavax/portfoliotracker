@@ -158,6 +158,31 @@
                     </table>                   
             </div><!-- .transaction-details -->
 
+            <div id="transaction-ticker-chart">
+                <h2>Graf pre ticker: <?php echo $symbol; ?></h2>
+                <div class="tradingview-widget-container">
+                <div id="tradingview_chart"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                <script type="text/javascript">
+                    new TradingView.widget({
+                        "width": 800,
+                        "height": 400,
+                        "symbol": "<?php echo $symbol; ?>",
+                        "interval": "1D",
+                        "timezone": "Etc/UTC",
+                        "theme": "dark",
+                        "style": "1",
+                        "locale": "en",
+                        "toolbar_bg": "#f1f3f6",
+                        "enable_publishing": false,
+                        "hide_top_toolbar": false,
+                        "hide_legend": false,
+                        "save_image": false
+                    });
+                </script>
+            </div>
+            </div><!-- #transaction-ticker-chart -->
+
             <div id="transaction-notes">
                 <div id="transaction-note-header">
                     <h2>Poznámky k transakcii</h2>
@@ -191,7 +216,11 @@
                             echo "<p>No notes available for this transaction.</p>";
                         }
                      ?>
-                </div>
+                </div><!-- #transaction-notes-container -->
+            </div><!-- #transaction-notes -->
+            <div class="transaction-actions">
+                <button type="button" class="secondary" name="see_more" data-transaction-id="<?php echo $transaction_id; ?>"><i class="fas fa-ellipsis-v"></i> Vsetky poznámky</button>
+            </div><!-- .transaction-actions -->    
         </div><!-- .content -->
   </body>
     <dialog id="add-note-dialog">
