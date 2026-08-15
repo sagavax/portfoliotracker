@@ -47,6 +47,7 @@ if(isset($_POST['login'])){
 <body>
   <main>
      <div class="login-page">
+          <H3>Login into portfolio section</H3>
           <div class="form">
            <form class="login-form" action="" method="post">
               <input type="text" placeholder="username" name="username" autocomplete="off">
