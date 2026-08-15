@@ -9,9 +9,9 @@
             or die("MySQLi ERROR: " . mysqli_error($link));
 
         if ($result && mysqli_num_rows($result) > 0) {
-            return mysqli_fetch_assoc($result);
+            return mysqli_fetch_all($result, MYSQLI_ASSOC);
         }
-        
+
     }
 
     function GetTransactionDetails($transaction_id) {
