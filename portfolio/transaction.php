@@ -177,7 +177,8 @@
                         "enable_publishing": false,
                         "hide_top_toolbar": false,
                         "hide_legend": false,
-                        "save_image": false
+                        "save_image": false,
+                        "disabled_features": ["header_compare", "header_indicators","header_chart_type"]
                     });
                 </script>
             </div>
