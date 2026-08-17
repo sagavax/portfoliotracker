@@ -580,7 +580,7 @@ if(providerModal){
             const currTransaction = sessionStorage.getItem("currentTransactionId");
             if(modalProviderMode === "insertProvider") {
                 console.log("insert provider:", card.getAttribute("data-name"));
-                document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-id-"+card.getAttribute("data-id")+">"+card.getAttribute("data-name")+"</button>";
+                document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button' data-type='provider'>"+card.getAttribute("data-name")+"</button>";
                 updateTransactionProvider(currTransaction, card.getAttribute("data-name"));
                 document.getElementById("modalProvider").close();
             } else if(modalProviderMode === "editProvider") {
