@@ -40,7 +40,7 @@
                 <nav>
                     <ul>
                         <li><a href="index.php"><i class="fas fa-home"></i> Domov</a></li>
-                        <li><a href="portfolio.php"><i class="fas fa-chart-line"></i> Portfólio</a></li>
+                        <li><a href="index.php"><i class="fas fa-chart-line"></i> Portfólio</a></li>
                         <li><a href="providers.php"><i class="fas fa-building"></i> Poskytovatelia</a></li>
                         <li><a href="influencers.php"><i class="fas fa-users"></i> Influencers</a></li>
                         <li><a href="news.php"><i class="fas fa-newspaper"></i> Novinky</a></li>
