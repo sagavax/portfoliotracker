@@ -70,7 +70,7 @@
                             $id = $transaction['id'];
                             $date = $transaction['date_of_transaction'];
                             $provider = $transaction['provider'];
-                            $type = $transaction['type'];
+                            $type = $transaction['position_type'];
                             $asset_category = $transaction['asset_category'];
                             $symbol = $transaction['symbol'];
                             $position_type = $transaction['position_type'];
