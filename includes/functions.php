@@ -1,6 +1,31 @@
 <?php
     global $link;
 
+    function GetTransactionNotes($transaction_id) {
+        global $link;
+
+        $get_transaction = "SELECT * FROM transaction_notes WHERE transaction_id=$transaction_id";
+        $result = mysqli_query($link, $get_transaction)
+            or die("MySQLi ERROR: " . mysqli_error($link));
+
+        if ($result && mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_all($result, MYSQLI_ASSOC);
+        }
+
+    }
+
+    function GetTransactionDetails($transaction_id) {
+    global $link;
+
+    $get_transaction = "SELECT * FROM transactions WHERE id=$transaction_id";
+    $result = mysqli_query($link, $get_transaction)
+        or die("MySQLi ERROR: " . mysqli_error($link));
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        return mysqli_fetch_assoc($result);
+    }     
+}
+
     function GetCountTransactionNotes($transaction_id){
         global $link;
         $get_notes = "SELECT * from transaction_notes WHERE transaction_id=$transaction_id";

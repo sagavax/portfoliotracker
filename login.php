@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-include "includes/dbconnect.php";
-include "includes/functions.php";
+include ("includes/dbconnect.php");
+include ("includes/functions.php");
 
 
 if(isset($_POST['login'])){
@@ -47,6 +47,7 @@ if(isset($_POST['login'])){
 <body>
   <main>
      <div class="login-page">
+          <H3>Login into portfolio section</H3>
           <div class="form">
            <form class="login-form" action="" method="post">
               <input type="text" placeholder="username" name="username" autocomplete="off">
