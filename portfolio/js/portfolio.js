@@ -183,7 +183,7 @@ document.addEventListener('keydown', function(e) {
     if (e.key !== 'Enter') return;
 
     const isTicker= e.target.getAttribute('data-ticker');
-    const isProvider = e.target.classList.contains('provider');
+    const isProvider = e.target.getAttribute('data-type') === 'provider';
     const isPrice = e.target.classList.contains('price');
     const isQuantity = e.target.classList.contains('quantity');
     const isLeverage = e.target.classList.contains('leverage');
