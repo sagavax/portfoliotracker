@@ -131,17 +131,17 @@ filter_tickers.addEventListener('click', function(e) {
 
 
 if(modalManualBot) {
-modalManualBot.addEventListener("click", function(e){
-  if(e.target && e.target.tagName === "BUTTON"){
-    const manualBot = e.target.innerText;
-     const transactionId = sessionStorage.getItem("currentTransactionId");
-     if(e.target.name === "manual_bot_on" || e.target.name === "manual_bot_off") {
-        updateTransactionManualBot(transactionId, manualBot);
-        document.querySelector("#modalManualBot").close();
-     } 
-     
-  }  
-});
+    modalManualBot.addEventListener("click", function(e){
+        if(e.target && e.target.tagName === "BUTTON"){
+            const manualBot = e.target.innerText;
+            const transactionId = sessionStorage.getItem("currentTransactionId");
+            if(e.target.name === "manual_bot_on" || e.target.name === "manual_bot_off") {
+                updateTransactionManualBot(transactionId, manualBot);
+                document.querySelector("#modalManualBot").close();
+            } 
+            
+        }  
+    });
 }
 
 
@@ -181,7 +181,7 @@ transactions_filters.addEventListener('click', function(e) {
 
 document.addEventListener('keydown', function(e) {
     if (e.key !== 'Enter') return;
-    
+
     const isPrice = e.target.classList.contains('price');
     const isQuantity = e.target.classList.contains('quantity');
     const isLeverage = e.target.classList.contains('leverage');
