@@ -178,14 +178,16 @@ transactions_filters.addEventListener('click', function(e) {
     }
 });
 
-
+//creating a new transaction
 document.addEventListener('keydown', function(e) {
     if (e.key !== 'Enter') return;
 
+    const isTicker= e.target.getAttribute('data-ticker');
+    const isProvider = e.target.classList.contains('provider');
     const isPrice = e.target.classList.contains('price');
     const isQuantity = e.target.classList.contains('quantity');
     const isLeverage = e.target.classList.contains('leverage');
-    if (!isPrice && !isQuantity && !isLeverage) return;
+    if (!isPrice && !isQuantity && !isLeverage && !isTicker && !isProvider) return;
 
     e.preventDefault();
     const transactionId = e.target.closest('.transaction').dataset.id;
