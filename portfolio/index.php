@@ -162,7 +162,7 @@
 
                     <div class="detailed_filters_wrapper">
                         <div class="filter_tickers">
-                            <?php GetActiveickers(); ?>
+                            <?php GetActiveTickers(); ?>
                         </div><!-- filter_ticker -->        
                         
                         <div class="new_wrapper">
