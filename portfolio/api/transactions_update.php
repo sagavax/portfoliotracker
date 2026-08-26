@@ -1,6 +1,6 @@
 <?php
-    include('../../includes/dbconnect.php');
-    include('../../includes/functions.php');
+    include_once('../../includes/dbconnect.php');
+    include_once('../../includes/functions.php');
 
     $transaction_id = $_POST['transaction_id'];
     if(isset($_POST['entry_price'])) {
