@@ -97,6 +97,14 @@ if (providerDetails) {
                 loadTransactions(providerName, 'closed');
             }
         }
+
+        const addTransactionBtn = e.target.closest('button[name=add_transaction]');
+        if (addTransactionBtn) {
+            const providerName = sessionStorage.getItem('selectedProviderName');
+            if (providerName) {
+                createTransaction(providerName);
+            }
+        }
     });
 }
 
@@ -108,6 +116,7 @@ providerList.addEventListener('click', function (e) {
         const providerId = e.target.dataset.id;
         const providerName = e.target.dataset.name;
         getProviderDetails(providerId, providerName);
+        sessionStorage.setItem('selectedProviderName', providerName);
     }
 });
 
@@ -265,6 +274,24 @@ function addNewProvider(providerName, providerUrl, providerLogo, providerDescrip
     const data = `providerName=${providerName}&providerUrl=${providerUrl}&providerLogo=${providerLogo}&providerDescription=${providerDescription}`;
     xhttp.send(data);
 }
+
+function createTransaction(providerName) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const response = JSON.parse(this.responseText);
+            if (response.status === 'success') {
+                loadTransactions(providerName, 'all');
+            } else {
+                alert(response.message || 'Failed to create transaction.');
+            }
+        }
+    }
+    xhttp.open("POST", "provider_transaction_create.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`provider_name=${encodeURIComponent(providerName)}`);
+};
+
 
 function loadTransactions(provider_name, filter) {
     const xhttp = new XMLHttpRequest();
