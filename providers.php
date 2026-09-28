@@ -76,6 +76,19 @@
 
             </div><!--content-->  
         </div><!--container-->      
-    
+    <dialog id="modalAddNewProvider">
+        <div class="modal-container">
+            <div id="modalAddNewPRoviderContent">
+                <input type="text" id="provider_name" placeholder="provider name..." autocomplete="off">
+                <input type="text" id="provider_url" placeholder="provider url..." autocomplete="off">
+                <input type="text" id="provider_logo" placeholder="provider logo url..." autocomplete="off">
+                <textarea id="provider_description" placeholder="provider description..." autocomplete="off"></textarea>
+                <div id="modalAddNewProviderButtons">
+                    <button type="button" id="btnSaveNewProvider" class="button small_button" name="save_new_provider" title="save new provider"><i class="fa fa-save"></i></button>
+                    <button type="button" id="btnCancelNewProvider" class="button small_button" name="cancel_new_provider" title="cancel new provider"><i class="fa fa-times"></i></button>
+                </div>    
+            </div>
+        </div>
+    </dialog>
 </body>
 </html>

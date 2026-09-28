@@ -178,6 +178,7 @@
 
 #modalAddNewProvider{
     width:60%;
+    height: 450px;
 }
 
 #modalAddNewProvider h4 {
@@ -525,4 +526,21 @@ button[name="notes"] {
     align-items: center;
     justify-content: flex-end;
     width: 100%;
+}
+
+#modalAddNewProviderButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    height:40px
+}
+
+#modalAddNewProviderButtons button {
+    height: 100%;
+    width: 100px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

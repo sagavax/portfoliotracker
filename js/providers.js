@@ -1,10 +1,10 @@
 const btnAddNewProvider = document.getElementById('btnAddNewProvider');
 const modalAddNewProvider = document.getElementById('modalAddNewProvider');
-const modalAddNewProviderSave = document.getElementById('modalAddNewProviderSave');
-const modalAddNewProviderClose = document.getElementById('modalAddNewProviderClose');
-const providerName = document.getElementById('providerName');
-const providerUrl = document.getElementById('providerUrl');
-const providerDescription = document.getElementById('providerDescription');
+const modalAddNewProviderSave = document.getElementById('btnSaveNewProvider');
+const btnCancelNewProvider = document.getElementById('btnCancelNewProvider');
+const providerName = document.getElementById('provider_name');
+const providerUrl = document.getElementById('provider_url');
+const providerDescription = document.getElementById('provider_description');
 const providerList = document.querySelector('.providers');
 const providerDetails = document.querySelector('.provider_details');
 const modalProviderLogoEditor = document.getElementById('modalProviderLogoEditor');
@@ -17,6 +17,10 @@ if (modalAddNewProviderSave){
         const providerUrl = document.getElementById('provider_url').value;
         const providerLogo = document.getElementById('provider_logo').value;
         const providerDescription = document.getElementById('provider_description').innerText;
+        if(!providerName) {
+            alert('Please fill at least the provider name before saving.');
+            return;
+        }
         addNewProvider(providerName, providerUrl, providerLogo, providerDescription);
     });
 }
@@ -115,7 +119,7 @@ if (btnAddNewProvider && modalAddNewProvider) {
 }
 
 if (modalAddNewProvider) {
-    modalAddNewProviderClose.addEventListener('click', () => {
+    btnCancelNewProvider.addEventListener('click', () => {
         modalAddNewProvider.close();
     });
 }
