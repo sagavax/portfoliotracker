@@ -10,6 +10,9 @@ const providerDetails = document.querySelector('.provider_details');
 const modalProviderLogoEditor = document.getElementById('modalProviderLogoEditor');
 const edit_provider_url = document.querySelector('button[name=edit_provider_url]');
 const provider_transactions = document.querySelector('.provider_transactions');
+const provider_transactions_body = document.querySelector('.provider_transactions tbody');
+
+
 
 if (modalAddNewProviderSave){
     modalAddNewProviderSave.addEventListener('click', () => {
