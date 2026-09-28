@@ -30,7 +30,6 @@ const leverageInput = document.getElementById('leverageInput');
 const leverageCancel = document.getElementById('leverageCancel');
 const leverageSave = document.getElementById('saveLeverage');
 
-
 let modalPriceMode = null;
 let modalQuantityMode = null;
 let modalLongShortMode = null;
