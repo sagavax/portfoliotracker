@@ -270,6 +270,7 @@ function addNewProvider(providerName, providerUrl, providerLogo, providerDescrip
             const newProviderId = reponse.provider_id;
             const html = `<div class="provider_card" data-id="${newProviderId}" data-name="${providerName}">${providerName}</div>`;
             document.querySelector(".providers").insertAdjacentHTML('beforeend', html);
+            alert("New provider added successfully!");
         }
     }
     xhttp.open("POST", "providers_add_new.php", true);
