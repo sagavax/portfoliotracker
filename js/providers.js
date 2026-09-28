@@ -305,6 +305,7 @@ function loadTransactions(provider_name, filter) {
             if (transactionsDiv) {
                 transactionsDiv.innerHTML = this.responseText;
                 transactionsDiv.dataset.name = provider_name;
+                console.log(`Transactions for provider ${provider_name} loaded with filter: ${filter}`);
             }
         }
     }
