@@ -41,13 +41,7 @@ body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       margin-bottom: 15px;
    }
 
-    .providers { display:flex; flex-wrap:wrap; gap:12px; justify-content:flex-start; margin-top:12px; margin-bottom:12px; }
-
-   .provider_card {background-color: #253649; padding: 10px 12px;border:1px solid #eee; border-radius:8px; display:flex; flex-direction:column; gap:8px; justify-content:center; align-items:center; text-align:center; transition: background-color 0.3s ease; cursor: pointer; }
-   .provider_card:hover { background-color: #4e6a8c; }
-
-  .provider_card[data-name="new_provider"] { flex-direction: row;  padding: 10px 12px; width:150px; gap:5px; justify-content: center; align-items: center; }
-
+    
    .sidebar a { display: flex;
     width: 100%;
     padding: 12px;
