@@ -12,7 +12,27 @@ const edit_provider_url = document.querySelector('button[name=edit_provider_url]
 const provider_transactions = document.querySelector('.provider_transactions');
 const provider_transactions_body = document.querySelector('.provider_transactions tbody');
 
+// Transaction field dialogs shared with the portfolio module's backend.
+const PORTFOLIO_API = 'portfolio/';
+const tickerModal = document.getElementById('modalTicker');
+const search_in_ticker = document.getElementById('search_in_ticker');
+const longShortModal = document.getElementById('modalLongShort');
+const modalSpotPerpetual = document.getElementById('modalSpotPerpetual');
+const modalNote = document.getElementById('modalNote');
+const modalCurrency = document.getElementById('modalCurrency');
+const modalPrice = document.getElementById('modalPrice');
+const modalPriceInput = document.querySelector('#modalPrice input');
+const modalQuantity = document.getElementById('modalQuantity');
+const modalQuantityInput = document.querySelector('#modalQuantity input');
+const modalManualBot = document.getElementById('modalManualBot');
+const modalLeverage = document.getElementById('modalLeverage');
+const leverageSlider = document.getElementById('leverageSlider');
+const leverageInput = document.getElementById('leverageInput');
+const leverageCancel = document.getElementById('leverageCancel');
+const leverageSave = document.getElementById('saveLeverage');
 
+let modalLongShortMode = null;
+let modalSpotPerpetualMode = null;
 
 if (modalAddNewProviderSave){
     modalAddNewProviderSave.addEventListener('click', () => {
@@ -108,6 +128,39 @@ if (providerDetails) {
                 createTransaction(providerName);
             }
         }
+
+        const transactionRow = e.target.closest('.transaction');
+        const transactionBtn = e.target.closest('button');
+        if (transactionRow && transactionBtn) {
+            const transactionId = transactionRow.dataset.id;
+            sessionStorage.setItem('currentTransactionId', transactionId);
+
+            if (transactionBtn.name === 'ticker') {
+                tickerModal.showModal();
+                GetTickers();
+            } else if (transactionBtn.name === 'currency') {
+                modalCurrency.showModal();
+            } else if (transactionBtn.name === 'long_short') {
+                modalLongShortMode = 'editLongShort';
+                longShortModal.showModal();
+            } else if (transactionBtn.name === 'add_leverage') {
+                modalLeverage.showModal();
+            } else if (transactionBtn.name === 'add_quantity') {
+                modalQuantity.showModal();
+            } else if (transactionBtn.name === 'add_entry_price') {
+                modalPrice.showModal();
+            } else if (transactionBtn.name === 'spot_perpetual') {
+                modalSpotPerpetualMode = 'editSpotPerpetual';
+                modalSpotPerpetual.showModal();
+            } else if (transactionBtn.name === 'manual_bot') {
+                modalManualBot.showModal();
+            } else if (transactionBtn.name === 'add_note' || transactionBtn.name === 'notes') {
+                modalNote.showModal();
+            } else if (transactionBtn.name === 'see_transaction') {
+                window.location.href = PORTFOLIO_API + 'transaction.php?transaction_id=' + transactionId;
+            }
+            // category, take_profit and stop_loss have no matching dialog on this page yet.
+        }
     });
 }
 
@@ -182,6 +235,195 @@ if (modalProviderLogoEditor) {
             modalProviderLogoEditor.style.display = 'none';
         });
     }
+}
+
+if (tickerModal) {
+    tickerModal.addEventListener('click', function (e) {
+        if (e.target.tagName !== 'BUTTON') return;
+        if (e.target.id === 'tickerModalClose') {
+            tickerModal.close();
+            return;
+        }
+        if (e.target.getAttribute('data-letter')) {
+            GetTickers(e.target.getAttribute('data-letter'));
+            return;
+        }
+        if (e.target.getAttribute('data-ticker')) {
+            const ticker = e.target.getAttribute('data-ticker');
+            const transactionId = sessionStorage.getItem('currentTransactionId');
+            document.querySelector("tr[data-id='" + transactionId + "'] button[name='ticker']").innerHTML = ticker;
+            updateTransactionTicker(transactionId, ticker);
+            tickerModal.close();
+        }
+    });
+}
+
+if (search_in_ticker) {
+    search_in_ticker.addEventListener('input', function (e) {
+        FindTicker(e.target.value);
+    });
+}
+
+if (modalCurrency) {
+    modalCurrency.addEventListener('click', function (e) {
+        const btn = e.target.closest('button[data-currency]');
+        if (!btn) return;
+        const currency = btn.getAttribute('data-currency');
+        const transactionId = sessionStorage.getItem('currentTransactionId');
+        document.querySelector("tr[data-id='" + transactionId + "'] button[name='currency']").textContent = currency;
+        updateTransactionCurrency(transactionId, currency);
+        modalCurrency.close();
+    });
+}
+
+if (modalPriceInput) {
+    modalPriceInput.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter') return;
+        e.preventDefault();
+        const price = e.target.value.trim();
+        if (!price) return;
+        const transactionId = sessionStorage.getItem('currentTransactionId');
+        const row = document.querySelector("tr[data-id='" + transactionId + "']");
+        if (row) {
+            const existing = row.querySelector("[data-type='price']");
+            if (existing) {
+                existing.textContent = price;
+            } else {
+                const priceButton = row.querySelector("button[name='add_entry_price']");
+                if (priceButton) {
+                    priceButton.outerHTML = "<div class='price' contenteditable='true'>" + price + "</div>";
+                }
+            }
+        }
+        updateTransactionEntryPrice(transactionId, price);
+        modalPrice.close();
+        modalPriceInput.value = '';
+    });
+}
+
+if (modalQuantityInput) {
+    modalQuantityInput.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter') return;
+        e.preventDefault();
+        const quantity = e.target.value.trim();
+        if (!quantity) return;
+        const transactionId = sessionStorage.getItem('currentTransactionId');
+        const row = document.querySelector("tr[data-id='" + transactionId + "']");
+        if (row) {
+            const existing = row.querySelector("[data-type='quantity']");
+            if (existing) {
+                existing.textContent = quantity;
+            } else {
+                const quantityButton = row.querySelector("button[name='add_quantity']");
+                if (quantityButton) {
+                    quantityButton.outerHTML = "<div class='quantity' contenteditable='true'>" + quantity + "</div>";
+                }
+            }
+        }
+        updateTransactionQuantity(transactionId, quantity);
+        modalQuantity.close();
+        modalQuantityInput.value = '';
+    });
+}
+
+if (longShortModal) {
+    longShortModal.addEventListener('click', function (e) {
+        if (e.target.tagName !== 'BUTTON') return;
+        if (e.target.id === 'longShortModalClose') {
+            longShortModal.close();
+            return;
+        }
+        if (e.target.name !== 'add_long' && e.target.name !== 'add_short') return;
+        const value = e.target.name === 'add_long' ? 'BUY' : 'SELL';
+        const cssClass = e.target.name === 'add_long' ? 'long' : 'short';
+        const transactionId = sessionStorage.getItem('currentTransactionId');
+        const btn = document.querySelector("tr[data-id='" + transactionId + "'] button[name='long_short']");
+        if (btn) {
+            btn.innerHTML = value;
+            btn.className = 'transaction_button ' + cssClass;
+        }
+        updateTransactionLongShort(transactionId, value);
+        longShortModal.close();
+    });
+}
+
+if (modalSpotPerpetual) {
+    modalSpotPerpetual.addEventListener('click', function (e) {
+        if (e.target.tagName !== 'BUTTON') return;
+        if (e.target.id === 'spotPerpetualModalClose') {
+            modalSpotPerpetual.close();
+            return;
+        }
+        if (e.target.name !== 'add_spot' && e.target.name !== 'add_perpetual') return;
+        const value = e.target.name === 'add_spot' ? 'Spot' : 'Perpetual';
+        const transactionId = sessionStorage.getItem('currentTransactionId');
+        const btn = document.querySelector("tr[data-id='" + transactionId + "'] button[name='spot_perpetual']");
+        if (btn) {
+            btn.textContent = value;
+        }
+        updateSpotPerpetual(transactionId, value);
+        modalSpotPerpetual.close();
+    });
+}
+
+if (modalManualBot) {
+    modalManualBot.addEventListener('click', function (e) {
+        if (e.target.tagName !== 'BUTTON') return;
+        if (e.target.id === 'manualBotModalClose') {
+            modalManualBot.close();
+            return;
+        }
+        if (e.target.name !== 'manual_bot_on' && e.target.name !== 'manual_bot_off') return;
+        const manualBot = e.target.innerText;
+        const transactionId = sessionStorage.getItem('currentTransactionId');
+        updateTransactionManualBot(transactionId, manualBot);
+        modalManualBot.close();
+    });
+}
+
+if (leverageCancel && leverageSlider && leverageInput && leverageSave) {
+    leverageCancel.addEventListener('click', function () {
+        modalLeverage.close();
+    });
+
+    leverageSlider.addEventListener('input', function () {
+        leverageInput.value = leverageSlider.value;
+    });
+
+    leverageInput.addEventListener('input', function () {
+        const value = Math.min(Math.max(parseInt(leverageInput.value) || 0, leverageSlider.min), leverageSlider.max);
+        leverageSlider.value = value;
+    });
+
+    leverageSave.addEventListener('click', function () {
+        if (leverageInput.value == 0) {
+            alert('Leverage cannot be 0!');
+            return;
+        }
+        const transactionId = sessionStorage.getItem('currentTransactionId');
+        document.querySelector('tr[data-id="' + transactionId + '"] button[name="add_leverage"]').textContent = leverageInput.value + 'x';
+        updateTransactionLeverage(transactionId, leverageInput.value + 'x');
+        modalLeverage.close();
+    });
+}
+
+if (modalNote) {
+    modalNote.addEventListener('click', function (e) {
+        if (e.target.tagName !== 'BUTTON') return;
+        if (e.target.id === 'noteClose') {
+            modalNote.close();
+            return;
+        }
+        if (e.target.id === 'noteSave') {
+            const noteText = document.getElementById('note_text').value.trim();
+            if (!noteText) {
+                alert('Note cannot be empty!');
+                return;
+            }
+            const transactionId = sessionStorage.getItem('currentTransactionId');
+            updateTransactionNote(transactionId, noteText);
+        }
+    });
 }
 
 function httpRequest(method, url, callback) {
@@ -313,3 +555,116 @@ function loadTransactions(provider_name, filter) {
     //xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send();
 };
+
+
+function GetTickers(letter = '') {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById('tickerDetailsContent').innerHTML = this.responseText;
+        }
+    }
+    xhttp.open('GET', PORTFOLIO_API + 'tickers_get.php?letter=' + letter, true);
+    xhttp.send();
+}
+
+function FindTicker(ticker) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById('tickerDetailsContent').innerHTML = this.responseText;
+        }
+    }
+    xhttp.open('GET', PORTFOLIO_API + 'tickers_get.php?ticker=' + ticker, true);
+    xhttp.send();
+}
+
+function updateTransactionTicker(id, ticker) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', PORTFOLIO_API + 'transaction_update_ticker.php', true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(`transaction_id=${id}&ticker=${ticker}`);
+}
+
+function updateTransactionCurrency(id, currency) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', PORTFOLIO_API + 'transaction_update_currency.php', true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(`transaction_id=${id}&currency=${currency}`);
+}
+
+function updateTransactionLongShort(id, longShort) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', PORTFOLIO_API + 'transaction_update_long_short.php', true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(`transaction_id=${id}&long_short=${longShort}`);
+}
+
+function updateTransactionEntryPrice(id, entryPrice) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', PORTFOLIO_API + 'transaction_update_entry_price.php', true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(`transaction_id=${id}&entry_price=${entryPrice}`);
+}
+
+function updateTransactionQuantity(id, quantity) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', PORTFOLIO_API + 'transaction_update_quantity.php', true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(`transaction_id=${id}&quantity=${quantity}`);
+}
+
+function updateSpotPerpetual(id, value) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', PORTFOLIO_API + 'transaction_update_spot_perpetual.php', true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(`transaction_id=${id}&spot_perpetual=${value}`);
+}
+
+function updateTransactionManualBot(id, manualBot) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const btn = document.querySelector(`tr[data-id="${id}"] button[name="manual_bot"]`);
+            if (btn) {
+                btn.innerText = manualBot;
+            }
+        }
+    }
+    xhttp.open('POST', PORTFOLIO_API + 'transaction_update_manual_bot.php', true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(`transaction_id=${id}&manual_bot=${manualBot}`);
+}
+
+function updateTransactionLeverage(id, leverage) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', PORTFOLIO_API + 'transaction_update_leverage.php', true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(`transaction_id=${id}&leverage=${leverage}`);
+}
+
+function updateTransactionNote(id, note) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const response = JSON.parse(this.responseText);
+            const btn = document.querySelector(`tr[data-id="${id}"] button[name="notes"]`);
+            if (btn) {
+                btn.innerText = String(response.note_count);
+            }
+            document.getElementById('note_text').value = '';
+            modalNote.close();
+        }
+    }
+    xhttp.open('POST', PORTFOLIO_API + 'transaction_update_note.php', true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(`transaction_id=${id}&note=${encodeURIComponent(note)}`);
+}
+
+
+function createDialogModal(purpose) {
+    const dialog = document.createElement('dialog');
+    dialog.id = `dialog-${purpose}`;
+    document.body.appendChild(dialog);
+    return dialog;
+}
