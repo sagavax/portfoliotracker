@@ -90,5 +90,128 @@
             </div>
         </div>
     </dialog>
+
+    <dialog id="modalTicker">
+    <div class="modal-container">
+        <h3>Ticker details</h3>
+        <div class="filter_tickers">
+            <?php foreach (range('A', 'Z') as $letter): ?>
+                <button type="button" class="secondary" data-letter="<?= $letter ?>"><?= $letter ?></button>
+            <?php endforeach; ?>
+        </div>
+        
+        <div class="search_wrapper">
+            <input type="text" name="search_ticker" id="search_in_ticker" placeholder="Hledat v tickeroch...">
+        </div>  
+
+        <div id="tickerDetailsContent"></div>
+        <button id="tickerModalClose" class="secondary">Zatvoriť</button>
+    </div>
+</dialog>
+
+<dialog id="modalLongShort">
+    <div class="modal-container">
+        <h3>Long/Short details</h3>
+        <div id="longShortDetailsContent">
+            <button type="button" name="add_long" class="button small_button green" id="add_long"><i class="fa fa-plus"></i> Add Long</button>
+            <button type="button" name="add_short" class="button small_button red" id="add_short"><i class="fa fa-plus"></i> Add Short</button>
+        </div>
+        
+        <button id="longShortModalClose" class="secondary">Zatvoriť</button>
+    </div>
+</dialog>
+
+<dialog id="modalSpotPerpetual">
+    <div class="modal-container">
+        <h3>Spot/Perpetual details</h3>
+        <div id="spotPerpetualDetailsContent">
+            <button type="button" name="add_spot" class="button small_button green" id="add_spot"><i class="fa fa-plus"></i> Add Spot</button>
+            <button type="button" name="add_perpetual" class="button small_button blue" id="add_perpetual"><i class="fa fa-plus"></i> Add Perpetual</button>
+        </div>
+        
+        <button id="spotPerpetualModalClose" class="secondary">Zatvoriť</button>
+    </div>
+</dialog>
+
+<dialog id="modalNote">
+    <div class="modal-container">
+        <h3>Note details</h3>
+        <div id="noteDetailsContent"><textarea id="note_text"></textarea></div>
+        <div class="modal_note_actions">
+            <button id="noteSave" class="secondary">Uložiť</button>
+            <button id="noteClose" class="secondary">Zatvoriť</button>
+        </div>
+        
+    </div>
+</dialog>
+
+<dialog id="modalNotes">
+    <div class="modal-container">
+         <div id="notesDetailsContent">
+            Loading...
+         </div>
+    </div>
+</dialog>               
+
+<dialog id="modalPrice" class="modal-overlay">
+  <div class="modal-container">
+    <div id="modalPriceContent"><input type="text" placeholder="Cena" autocomplete="off"></div>
+  </div>
+</dialog>
+
+<dialog id="modalQuantity" class="modal-overlay">
+  <div class="modal-container">
+    <div id="modalQuantityContent"><input type="text" placeholder="Quantity" autocomplete="off"></div>
+  </div>
+</dialog>
+
+<dialog id="modalCurrency">
+  <div class="modal-container">
+    <div id="modalCurrencyContent">
+        <button type="button" data-currency="EUR" class="secondary">EUR</button>
+        <button type="button" data-currency="USD" class="secondary">USD</button>
+        <button type="button" data-currency="CZK" class="secondary">CZK</button>
+        <button type="button" data-currency="GBP" class="secondary">GBP</button>
+        <button type="button" data-currency="JPY" class="secondary">JPY</button>
+        <button type="button" data-currency="CHF" class="secondary">CHF</button>
+        <button type="button" data-currency="CAD" class="secondary">CAD</button>
+        <button type="button" data-currency="AUD" class="secondary">AUD</button>
+        <button type="button" data-currency="HKD" class="secondary">HKD</button>
+        <button type="button" data-currency="SEK" class="secondary">SEK</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="modalAddNote">
+  <div class="modal-container">
+    <div id="modalAddNoteContent"><textarea placeholder="Add note" autocomplete="off"></textarea></div>
+    <button id="saveNote" class="secondary">Save</button>
+  </div>
+</dialog>
+
+<dialog id="modalManualBot">
+    <div class="modal-container">
+        <h3>Manual bot</h3>
+        <div id="manualBotDetailsContent">
+            <button type="button" name="manual_bot_on" class="button small_button green" id="manual_bot_on"><i class="fa fa-plus"></i> Manual</button>
+            <button type="button" name="manual_bot_off" class="button small_button red" id="manual_bot_off"><i class="fa fa-plus"></i> Bot</button>
+        </div>
+        <button id="manualBotModalClose" class="secondary">Close</button>
+    </div>
+</dialog>
+
+<dialog id="modalLeverage">
+  <div class="modal-container">
+    <div id="modalLeverageContent">
+        <input type="range" min="0" max="100" step="1" value="0" id="leverageSlider">
+        <input type="text" placeholder="0" autocomplete="off" id="leverageInput">
+    </div>
+    <div class="leverage_actions">
+        <button id="leverageCancel" class="secondary">Cancel</button>
+        <button id="saveLeverage" class="secondary">Save</button>
+    </div>    
+  </div>
+</dialog>  
 </body>
+
 </html>
