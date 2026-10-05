@@ -200,6 +200,33 @@
     </div>
 </dialog>
 
+<dialog id="modalAssetCategory">
+    <div class="modal-container">
+        <h3>Asset category</h3>
+        <div id="assetCategoryDetailsContent">
+            <button type="button" class="button" data-filter="stocks">Akcie</button>
+            <button type="button" class="button" data-filter="crypto">Kryptomeny</button>
+            <button type="button" class="button" data-filter="etf">ETF</button>
+            <button type="button" class="button" data-filter="options">Opcie</button>
+            <button type="button" class="button" data-filter="bonds">Dlhopis(y)</button>
+            <button type="button" class="button" data-filter="forex">Forex</button>
+            <button type="button" class="button" id="assetModalClose">Zatvoriť</button>
+        </div>
+    </div>
+</dialog>
+
+<dialog id="modalTakeProfit">
+  <div class="modal-container">
+    <div id="modalTakeProfitContent"><input type="text" placeholder="Take profit" autocomplete="off"></div>
+  </div>
+</dialog>
+
+<dialog id="modalStopLoss">
+  <div class="modal-container">
+    <div id="modalStopLossContent"><input type="text" placeholder="Stop loss" autocomplete="off"></div>
+  </div>
+</dialog>
+
 <dialog id="modalLeverage">
   <div class="modal-container">
     <div id="modalLeverageContent">
