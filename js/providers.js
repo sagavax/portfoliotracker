@@ -19,6 +19,11 @@ const search_in_ticker = document.getElementById('search_in_ticker');
 const longShortModal = document.getElementById('modalLongShort');
 const modalSpotPerpetual = document.getElementById('modalSpotPerpetual');
 const modalNote = document.getElementById('modalNote');
+const modalAssetCategory = document.getElementById('modalAssetCategory');
+const modalTakeProfit = document.getElementById('modalTakeProfit');
+const modalTakeProfitInput = document.querySelector('#modalTakeProfit input');
+const modalStopLoss = document.getElementById('modalStopLoss');
+const modalStopLossInput = document.querySelector('#modalStopLoss input');
 const modalCurrency = document.getElementById('modalCurrency');
 const modalPrice = document.getElementById('modalPrice');
 const modalPriceInput = document.querySelector('#modalPrice input');
@@ -158,8 +163,17 @@ if (providerDetails) {
                 modalNote.showModal();
             } else if (transactionBtn.name === 'see_transaction') {
                 window.location.href = PORTFOLIO_API + 'transaction.php?transaction_id=' + transactionId;
+            } else if (transactionBtn.name === 'category') {
+                modalAssetCategory.showModal();
+            } else if (transactionBtn.name === 'take_profit') {
+                modalTakeProfitInput.value = '';
+                modalTakeProfit.showModal();
+                modalTakeProfitInput.focus();
+            } else if (transactionBtn.name === 'stop_loss') {
+                modalStopLossInput.value = '';
+                modalStopLoss.showModal();
+                modalStopLossInput.focus();
             }
-            // category, take_profit and stop_loss have no matching dialog on this page yet.
         }
     });
 }
@@ -407,6 +421,57 @@ if (leverageCancel && leverageSlider && leverageInput && leverageSave) {
     });
 }
 
+if (modalAssetCategory) {
+    modalAssetCategory.addEventListener('click', function (e) {
+        if (e.target.id === 'assetModalClose') {
+            modalAssetCategory.close();
+            return;
+        }
+        const btn = e.target.closest('button[data-filter]');
+        if (!btn) return;
+        const category = btn.getAttribute('data-filter');
+        const transactionId = sessionStorage.getItem('currentTransactionId');
+        const categoryBtn = document.querySelector("tr[data-id='" + transactionId + "'] button[name='category']");
+        if (categoryBtn) {
+            categoryBtn.innerHTML = category;
+        }
+        updateTransactionCategory(transactionId, category);
+        modalAssetCategory.close();
+    });
+}
+
+if (modalTakeProfitInput) {
+    modalTakeProfitInput.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter') return;
+        e.preventDefault();
+        const takeProfit = e.target.value.trim();
+        if (!takeProfit) return;
+        const transactionId = sessionStorage.getItem('currentTransactionId');
+        const btn = document.querySelector("tr[data-id='" + transactionId + "'] button[name='take_profit']");
+        if (btn) {
+            btn.textContent = takeProfit;
+        }
+        updateTakeProfit(transactionId, takeProfit);
+        modalTakeProfit.close();
+    });
+}
+
+if (modalStopLossInput) {
+    modalStopLossInput.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter') return;
+        e.preventDefault();
+        const stopLoss = e.target.value.trim();
+        if (!stopLoss) return;
+        const transactionId = sessionStorage.getItem('currentTransactionId');
+        const btn = document.querySelector("tr[data-id='" + transactionId + "'] button[name='stop_loss']");
+        if (btn) {
+            btn.textContent = stopLoss;
+        }
+        updateStopLoss(transactionId, stopLoss);
+        modalStopLoss.close();
+    });
+}
+
 if (modalNote) {
     modalNote.addEventListener('click', function (e) {
         if (e.target.tagName !== 'BUTTON') return;
@@ -591,6 +656,27 @@ function updateTransactionCurrency(id, currency) {
     xhttp.open('POST', PORTFOLIO_API + 'transaction_update_currency.php', true);
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhttp.send(`transaction_id=${id}&currency=${currency}`);
+}
+
+function updateTransactionCategory(id, category) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', PORTFOLIO_API + 'transaction_update_category.php', true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(`transaction_id=${id}&category=${category}`);
+}
+
+function updateTakeProfit(id, takeProfit) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', PORTFOLIO_API + 'transaction_update_take_profit.php', true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(`transaction_id=${id}&take_profit=${takeProfit}`);
+}
+
+function updateStopLoss(id, stopLoss) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', PORTFOLIO_API + 'transaction_update_stop_loss.php', true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(`transaction_id=${id}&stop_loss=${stopLoss}`);
 }
 
 function updateTransactionLongShort(id, longShort) {
