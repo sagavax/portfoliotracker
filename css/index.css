@@ -26,3 +26,43 @@
 .dashboard-item:hover {
     background-color: #253649;
 }
+
+.latest_items {
+    width: 100%;
+    max-width: 700px;
+    margin: 30px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.latest_items h3 {
+    color: white;
+    margin-bottom: 5px;
+}
+
+.latest_item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #253649;
+    border: 1px solid #435B7C;
+    border-radius: 6px;
+    padding: 12px 15px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.latest_item:hover {
+    background-color: #4e6a8c;
+}
+
+.latest_item_label {
+    flex: 1;
+}
+
+.latest_item_time {
+    color: #91d1fe;
+    white-space: nowrap;
+}

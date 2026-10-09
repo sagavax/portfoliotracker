@@ -1,8 +1,7 @@
 <?php
 
-/*   include('includes/dbconnect.php');
-  include('includes/functions.php'); */
-
+  include('includes/dbconnect.php');
+  include('includes/functions.php');
 
   ?>
 
@@ -63,7 +62,11 @@
                     <div class="dashboard-item">Novinky</div>
                     
                     <div class="dashboard-item">Nastavenia</div> -->
-                </div>                    
+                </div>
+                <div class="latest_items">
+                    <h3>Posledných 5 dní</h3>
+                    <?php GetLatestItems(5); ?>
+                </div>
             </div>  
         </div><!--container-->  
   </body>

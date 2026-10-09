@@ -177,6 +177,53 @@
         return 0;
     }
 
+    function GetLatestItems($days = 5) {
+        global $link;
+
+        $items = [];
+
+        $get_transactions = "SELECT symbol, provider, created_at FROM transactions WHERE created_at >= DATE_SUB(NOW(), INTERVAL $days DAY) ORDER BY created_at DESC";
+        $result = mysqli_query($link, $get_transactions) or die("MySQLi ERROR: " . mysqli_error($link));
+        while ($row = mysqli_fetch_assoc($result)) {
+            $label = $row['symbol'] ? 'Transakcia: ' . $row['symbol'] : 'Nová transakcia';
+            if ($row['provider']) {
+                $label .= ' (' . $row['provider'] . ')';
+            }
+            $items[] = ['icon' => 'fa-chart-line', 'label' => $label, 'timestamp' => $row['created_at'], 'link' => 'portfolio/index.php'];
+        }
+
+        $get_providers = "SELECT provider_name, created_date FROM providers WHERE created_date >= DATE_SUB(NOW(), INTERVAL $days DAY) ORDER BY created_date DESC";
+        $result = mysqli_query($link, $get_providers) or die("MySQLi ERROR: " . mysqli_error($link));
+        while ($row = mysqli_fetch_assoc($result)) {
+            $items[] = ['icon' => 'fa-building', 'label' => 'Poskytovateľ: ' . $row['provider_name'], 'timestamp' => $row['created_date'], 'link' => 'providers.php'];
+        }
+
+        $get_notes = "SELECT tn.note_text, tn.created_at, t.symbol FROM transaction_notes tn LEFT JOIN transactions t ON t.id = tn.transaction_id WHERE tn.created_at >= DATE_SUB(NOW(), INTERVAL $days DAY) ORDER BY tn.created_at DESC";
+        $result = mysqli_query($link, $get_notes) or die("MySQLi ERROR: " . mysqli_error($link));
+        while ($row = mysqli_fetch_assoc($result)) {
+            $preview = mb_strimwidth($row['note_text'], 0, 60, '...');
+            $label = 'Poznámka' . ($row['symbol'] ? ' (' . $row['symbol'] . ')' : '') . ': ' . $preview;
+            $items[] = ['icon' => 'fa-sticky-note', 'label' => $label, 'timestamp' => $row['created_at'], 'link' => 'notes.php'];
+        }
+
+        usort($items, function ($a, $b) {
+            return strtotime($b['timestamp']) - strtotime($a['timestamp']);
+        });
+
+        if (empty($items)) {
+            echo "<p>Žiadne nové položky za posledných $days dní.</p>";
+            return;
+        }
+
+        foreach ($items as $item) {
+            echo "<a href='" . $item['link'] . "' class='latest_item'>";
+            echo "<i class='fa " . $item['icon'] . "'></i>";
+            echo "<span class='latest_item_label'>" . htmlspecialchars($item['label']) . "</span>";
+            echo "<small class='latest_item_time'>" . date('d.m.Y H:i', strtotime($item['timestamp'])) . "</small>";
+            echo "</a>";
+        }
+    }
+
 /**
  * Retrieves all influencers from the database and echoes out a button for each one.
  * 
