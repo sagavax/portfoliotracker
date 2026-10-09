@@ -73,7 +73,7 @@
 </html>
 
 <!-- Note modal -->
-<div id="noteModal" class="modal-overlay">
+<dialog id="noteModal" class="modal-overlay">
   <div class="modal-container">
     <h3>Pridať poznámku</h3>
   <!-- <div id="noteExistingList" style="max-height:160px;overflow:auto;margin-bottom:8px;border:1px solid #f0f0f0;padding:8px;border-radius:6px;background:#fafafa;font-size:13px;color:#222"></div> -->
@@ -83,10 +83,10 @@
       <button id="noteSave">Uložiť</button>
     </div>
   </div>
-</div>
+</dialog>
 
 <!-- Notes list modal -->
-<div id="notesListModal" class="modal-overlay">
+<dialog id="notesListModal" class="modal-overlay">
   <div class="modal-container-large">
     <h3>Zoznam poznámok</h3>
     <div id="notesListContent" class="modal-content"></div>
@@ -94,7 +94,7 @@
       <button id="notesListClose" class="secondary">Zatvoriť</button>
     </div>
   </div>
-</div>
+</dialog>
 </html>
  
 
@@ -110,7 +110,7 @@
       <button id="modalModifyPosiotionClose" class="secondary">Zatvoriť</button>
     </div>
   </div>
-</dia>
+</dialog>
 
 
 <dialog id="modalStopLossTakeProfit" class="modal-overlay">
