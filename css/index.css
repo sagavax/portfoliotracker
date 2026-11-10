@@ -1,9 +1,8 @@
 .dashboard {
-    height:100%;
+    margin-top: 40px;
     width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;     
+    flex-wrap: wrap;
 }
 
 
@@ -29,11 +28,13 @@
 
 .latest_items {
     width: 100%;
-    max-width: 700px;
+    /* max-width: 700px; */
     margin: 30px auto 0;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    box-sizing: border-box;
+    padding: 15px;
 }
 
 .latest_items h3 {
