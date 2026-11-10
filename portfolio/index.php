@@ -92,7 +92,7 @@
                         </div>   
                     </div>    
 
-                    <div class="filter_providers">
+                    <div class="filter_providers"><div class="filter_providers_header">Filter by provider:</div>
                         <?php
                             $get_providers = "SELECT provider_name FROM providers ORDER BY provider_name ASC";
                             $result = mysqli_query($link, $get_providers) or die("MySQL ERROR: " . mysqli_error($link));
@@ -160,7 +160,7 @@
                         </div>
                  </div>    
 
-                    <div class="detailed_filters_wrapper">
+                    <div class="detailed_filters_wrapper"><div class="detailed_filters_header">Detailed filters:</div>
                         <div class="filter_tickers">
                             <?php GetActiveTickers(); ?>
                         </div><!-- filter_ticker -->        

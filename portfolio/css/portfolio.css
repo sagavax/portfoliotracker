@@ -170,12 +170,33 @@ button[name="stop_loss"] {
     border-radius: 5px;
     box-sizing: border-box;
     padding: 15px;
-    margin-top:20px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding-top:25px;
+    position: relative;
 }
 
 .filter_providers {
     gap:10px;
 }
+
+
+.filter_providers_header,.detailed_filters_header {
+    font-size: 18px;
+    color: white;
+    top: -30px;
+    left: 10px;
+    height: 30px;
+    background-color: #1a1b1e;
+    border: 1px solid #435B7C;
+    border-radius: 5px; 
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
 
 .create_transaction_wrapper,
 .new_transaction {
@@ -639,6 +660,7 @@ button[name="new_transaction_cancel"]:hover {
     border: 1px solid #435B7C;
     border-radius: 5px;
     padding: 10px;
+    padding-top: 25px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -647,6 +669,8 @@ button[name="new_transaction_cancel"]:hover {
     width:100%;
     flex-direction: row;
     flex-wrap: wrap;
+    margin: 40px 0;
+    position: relative;
   }
 
   .advanced_filters {
