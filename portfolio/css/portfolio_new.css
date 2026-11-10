@@ -1,0 +1,896 @@
+
+/* ── Transaction column buttons ───────────────── */
+button[name="long_short"],
+button[name="currency"],
+button[name="category"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button[name="category"] {
+    font-size: 17px;
+}
+
+
+button[name="provider"],
+button[name="ticker"],
+button[name="asset_category"],
+button[name="long_short"],
+button[name="spot_perpetual"] {
+    width: 160px;
+}
+
+button[name="spot_perpetual"] {
+    font-size: 17px;
+}
+
+button[name="category"] {
+    width: 170px;
+}
+
+button[name="add_entry_price"] {
+    background-color: transparent;
+    border: none;
+    color: #ebdc0d;
+}
+
+button[name="currency"] {
+    width: 140px;
+    font-size: 17px;
+}
+
+[data-leverage] { 
+    cursor: pointer; 
+    font-size: 17px;
+} 
+
+button[name="add_entry_price"] {
+    width: 100%;
+}
+
+button[name="long_short"] {
+    width: 95px;
+    min-width: 95px;
+    justify-content: center;
+    white-space: nowrap;
+    height:100%;
+}
+
+button[name="take_profit"],
+button[name="stop_loss"] {
+    width: 70px;
+    min-width: 70px;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.transaction td[style*="display: flex; gap: 10px;"] {
+    min-width: 170px;
+    justify-content: center;
+}
+
+.create_transaction_action_wrapper  {
+    display: flex;
+     align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    /* border: 1px solid #435B7C; */
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 15px;
+}
+
+
+.create_transaction_wrapper button {
+    min-width: 150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+}
+
+/* ── Flex row base ────────────────────────────── */
+
+/* .filter_ticker {
+    margin-top: 20px;
+    margin-bottom: 10px;
+} */
+
+.transactions_filters {
+    margin-bottom: 12px;
+    width: 100%;
+    /* height: 80px; */
+    /* border: 1px solid #435B7C; */
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.filters h3 {
+    margin: 0;
+    font-size: 18px;
+    color: white;
+    padding: 0;
+}
+
+.filter_manual_bot, .filter_long_short,.filter_spot_perpetual {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* div[class^="filter_"]  {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 15px;
+    width: 100%;
+}
+ */
+
+.filter_active_closed {
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 15px;
+}
+
+.new_wrapper {
+    display: flex;
+    gap:20px;
+}
+
+.filter_tickers {
+    display: flex;    
+    margin-bottom: 5px;
+    margin-top: 5px;
+    width: 100%;
+    gap:10px;
+    flex-wrap: wrap;
+}
+
+
+
+/* ── New transaction card ─────────────────────── */
+.filter_providers {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 15px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding-top:25px;
+    position: relative;
+}
+
+.filter_providers {
+    gap:10px;
+}
+
+
+.filter_providers_header,.detailed_filters_header {
+    font-size: 18px;
+    color: white;
+    top: -30px;
+    left: 10px;
+    height: 30px;
+    background-color: #1a1b1e;
+    border: 1px solid #435B7C;
+    border-radius: 5px; 
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+
+.create_transaction_wrapper,
+.new_transaction {
+    display: none;
+    width: 100%;
+    height: 80px;
+    background-color: #1a1b1e;
+    color: white;
+    font-size: 18px;
+    box-sizing: border-box;
+    padding: 15px;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.new_transaction {
+    flex-wrap: wrap;
+}
+
+.new_transaction_actions_wrapper {
+    margin-right: 120px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ── Transaction list ─────────────────────────── */
+.transactions {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.transactions_header {
+    font-size: 18px;
+    color: white;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    height:45px;
+    width: 100%;
+    flex:1;
+    box-sizing: border-box;
+    gap: 10px;
+}
+
+.transactions_header_title, .transactions_header_actions 
+{
+   flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height:100%
+}
+
+.transactions_header_actions button {
+    height: 100%;
+    font-size: 16px;
+    border-radius: 0px;
+}
+
+
+.transactions_header_actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    height:100%;
+    flex:1;}
+
+
+.transactions_header_actions button:first-child {
+   border-top-left-radius: 6px;
+   border-bottom-left-radius: 6px;
+}
+
+.transactions_header_actions button:last-child {
+   border-top-right-radius: 6px;
+   border-bottom-right-radius: 6px;
+}
+
+.transactions_header_title {
+    font-size: 18px;
+    color: white;
+    width: 100%;
+}
+
+
+.transactions table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+}
+
+.transactions button {
+
+}
+
+.transactions table tr:first-child {
+    border-top: 1px solid #435B7C;
+}
+
+.transaction {
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid #435B7C;
+    height: 60px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+.transaction td {
+    /* flex: 1; */
+    min-width: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* ── Color variants ───────────────────────────── */
+.long,button[name="new_transaction_create"] {
+    /* background-color: #00b070; */
+    color:white;
+    border: 1px solid #00b070;
+    background-color: #00b070;
+        height: 100%;
+        font-size: 16px;
+}
+
+button[name="new_transaction_create"] {
+    border-radius: 6px;
+}
+
+.long:hover {
+    background-color: #00b070;
+    border: 1px solid #00b070;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+button[name="new_transaction_create"]:hover {
+    cursor: pointer;
+}
+
+button[name="add_quantity"], .quantity[contenteditable="true"]{
+    width:180px;
+    font-size: 17px;
+}
+ button[name="add_entry_price"], .price[contenteditable="true"] {
+    width:145px;
+    font-size: 17px;
+ }
+
+button[name="add_leverage"], .leverage[contenteditable="true"] {
+    width:165px;
+}
+
+.transaction_button.add-leverage {
+    font-size: 14px;
+}
+
+.transaction_button.has-leverage {
+    font-size: 18px;
+}
+
+button[name="duplicate_transaction"] {
+    font-size: 18px;
+}
+
+button[name="duplicate_transaction"]:hover {
+    color: #00b070;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+button[name="manual_bot"] {
+    width:160px;
+    font-size: 16px;
+}
+
+.short {
+    /* background-color: #ff7152; */
+    border: 1px solid #ff7152;
+    background-color: #ff7152;
+    color:white;
+    height: 80%;
+    font-size: 16px;
+}
+
+.short:hover {
+    background-color: #ff7152;
+    border: 1px solid #ff7152;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+button[name="close_transaction"]:hover,
+button[name="new_transaction_cancel"]:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+button[name="close_transaction"]:hover,
+button[name="new_transaction_cancel"]:hover {
+    background-color: #ff7152;
+    border: 1px solid #ff7152;
+}
+
+/* ── Modal sizes ──────────────────────────────── */
+#modalPrice, #modalQuantity, #modalLongShort {
+    width: 20%;
+}
+
+#modalCurrency, #modalLeverage {
+    width: 50%;
+}
+
+#modalTakeProfit, #modalStopLoss {
+    width: 15%;
+}
+
+#AssetCategoryModal {
+    left: 10%;
+    width: 30%;
+}
+
+#LongShortModal, #SpotPerpetualModal {
+    width: 350px;
+}
+
+#modalAddNote {
+    left: 10%;
+    width: 50%;
+    height: 50%;
+}
+
+/* ── Modal content containers ─────────────────── */
+#tickerDetailsContent, #providerDetailsContent, #longShortDetailsContent,
+#assetCategoryDetailsContent, #modalPriceContent, #modalCurrencyContent,
+#modalTakeProfitContent, #modalStopLossContent, #modalAddNoteContent,
+#spotPerpetualDetailsContent, #manualBotDetailsContent, #modalLeverageContent {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+    margin-top: 12px;
+}
+
+#modalLeverageContent {
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+#modalLeverageContent input[type="range"] {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#modalLeverageContent input[type="text"] {
+    width: 80px;
+    height: 55px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    color: white;
+    background-color: #253649;
+    font-size: 18px;
+}
+
+.leverage_actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+
+#modalNotes {
+    min-height:200px;
+    top:-20%;
+}
+
+#modalManualBot, #modalSpotPerpetual  {
+    width:30%;
+}
+
+#longShortDetailsContent,
+#spotPerpetualDetailsContent, #manualBotDetailsContent {
+    justify-content: center;
+}
+
+
+#notesDetailsContent {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Modal inputs ─────────────────────────────── */
+#modalPriceContent input, #modalQuantityContent input,
+#modalTakeProfitContent input, #modalStopLossContent input {
+    width: 100%;
+    height: 55px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    color: white;
+    background-color: #253649;
+    font-size: 18px;
+}
+
+#modalAddNoteContent textarea {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    color: white;
+    background-color: #253649;
+    font-size: 18px;
+}
+
+#modalAddNote .modal-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#modalAddNoteContent {
+    flex: 1;
+    min-height: 0;
+}
+
+#modalAddNote button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    margin-top: 10px;
+    width: 100px;
+    height: 50px;
+}
+
+/* ── Search ───────────────────────────────────── */
+.search_wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    height: 60%;
+}
+
+.search_wrapper input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    color: white;
+    background-color: #253649;
+}
+
+.quantity,
+.price,
+.leverage {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity[contenteditable="true"]:hover,
+.price[contenteditable="true"]:hover,
+.leverage[contenteditable="true"]:hover {
+    background-color: #1a1b1e;
+    border:0px;
+    cursor: pointer;
+    outline: none;
+}
+
+.quantity[contenteditable="true"]:focus,
+.price[contenteditable="true"]:focus,
+.leverage[contenteditable="true"]:focus {
+    outline: none;
+}
+
+#currency {
+    width:150px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    color: white;
+    background-color: #253649;
+}
+
+.close_transaction_wrapper {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+ #modalNote {
+    min-height:200px;
+    top:-20%;
+ }   
+
+
+  #modalNote .modal-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}  
+
+  #modalNote textarea {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 8px;
+    padding: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: #0d0d0d;
+    color:#435B7C;
+  }
+
+  .modal_note_actions {
+    height: 50px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .modal_note_actions button {
+    margin-left: 10px;
+  }
+
+  .note {
+    display: flex;
+    min-height:130px;
+    flex-direction: column;
+    background-color: #0d0d0d;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+
+  .notes_header_wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    gap: 10px;
+    height: 50px;
+  }
+
+  .notes_header_wrapper button {
+    border-radius:6px;
+    padding: 10px 14px;    
+    cursor:pointer;
+  }
+
+  .notes_header_wrapper button[name="save_note"] {
+    display: none;
+  }
+
+  button[name="notes"] {
+    font-size: 18px;
+  }
+
+  input[name="new_provider_name"] {
+    height:47px;
+    display: flex;
+    align-items: center;
+    width: 200px;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    color: white;
+    background-color: #253649;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  .detailed_filters_wrapper{
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    padding: 10px;
+    padding-top: 25px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 25px;
+    width:100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 40px 0;
+    position: relative;
+  }
+
+  .advanced_filters {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  } 
+
+  #modalNewTransaction {
+    width: 70%;
+    height: 80%;
+  }
+
+  #transaction-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin-bottom: 20px;
+}
+
+#transaction-details-table th,
+#transaction-details-table td {
+    width: 25%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#transaction-details-table th {
+    font-weight: 600;
+    background-color: #435B7C;
+}
+
+
+#transaction-notes {
+    margin-top: 60px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#transaction-note-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #435B7C;
+    gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#transaction-note-header h2 {
+    width: 87%;
+    margin: 0;
+}
+
+#transaction-notes-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+.transaction-note {
+    display: flex;
+    flex-direction: column;
+    background-color: #1a1b1e;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+.transaction-note-text {
+    word-wrap: break-word;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.transaction-note-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
+    font-size: 12px;
+    margin-bottom: 5px;
+    width: 100%;
+    gap: 10px;
+}
+
+.transaction-note-meta {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.transaction-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    height: 50px;
+}
+
+#add-note-dialog {
+    width: 50%;
+    height:300px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+label[for="note-text"] {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;    
+    color: white;
+    margin-bottom: 10px;
+}
+
+
+
+
+#add-note-dialog input[type="text"],
+#add-note-dialog textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #435B7C;
+    border-radius: 5px;
+    background-color: #253649;
+    color: white;
+}
+
+
+#add-note-dialog textarea {
+    height: 150px;
+    resize: none;
+    margin-top:10px;
+}
+
+#add-note-actions {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#add-note-actions button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 50px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
