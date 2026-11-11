@@ -894,3 +894,8 @@ label[for="note-text"] {
     align-items: center;
     justify-content: center;
 }
+
+.modal-container h3 {
+    padding: 0;
+    margin-top:10px;
+}
