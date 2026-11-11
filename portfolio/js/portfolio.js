@@ -386,21 +386,23 @@ btnAddTransaction.addEventListener('click', function(e) {
 
 if(assetCategoryModal){
     assetCategoryModal.addEventListener('click', function(e) {
+        const btn = e.target.closest('button[data-filter]');
+        if (!btn) return;
         document.getElementById("modalAssetCategory").close();
         console.log(modalCategoryMode);
         if(modalCategoryMode === "insertCategory") {
             const currTransaction = sessionStorage.getItem("currentTransactionId");
-            document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button'>"+e.target.getAttribute("data-filter")+"</div>";
-            updateTransactionCategory(currTransaction,e.target.getAttribute("data-filter"));
+            document.querySelector(".new_transaction").innerHTML += "<button type='button' class='button'>"+btn.getAttribute("data-filter")+"</div>";
+            updateTransactionCategory(currTransaction,btn.getAttribute("data-filter"));
         } else if (modalCategoryMode === "editCategory") {
             const existing = document.querySelector(".new_transaction [data-type='category']");
             if(existing) {
-                existing.textContent = e.target.getAttribute("data-filter");
+                existing.textContent = btn.getAttribute("data-filter");
             } else {
                 const currTransaction = sessionStorage.getItem("currentTransactionId");
                 console.log("current transaction:", currTransaction);
-                document.querySelector("tr[data-id='"+currTransaction+"'] button[name='category']").innerHTML = e.target.getAttribute("data-filter");
-                updateTransactionCategory(currTransaction,e.target.getAttribute("data-filter"));
+                document.querySelector("tr[data-id='"+currTransaction+"'] button[name='category']").innerHTML = btn.getAttribute("data-filter");
+                updateTransactionCategory(currTransaction,btn.getAttribute("data-filter"));
             }
         }
     })}
