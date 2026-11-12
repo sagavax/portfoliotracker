@@ -16,13 +16,14 @@ button[name="category"] {
 button[name="provider"],
 button[name="ticker"],
 button[name="asset_category"],
-button[name="long_short"],
-button[name="spot_perpetual"] {
+button[name="long_short"]
+ {
     width: 160px;
 }
 
 button[name="spot_perpetual"] {
     font-size: 17px;
+    width:200px;
 }
 
 button[name="category"] {
